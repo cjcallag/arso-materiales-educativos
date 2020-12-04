@@ -1,0 +1,227 @@
+---
+title: "<center> Análisis de Redes Sociales</center>"
+output:
+  html_document:
+    theme: paper
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(dplyr)
+library(glue)
+
+build_class_row <- function(.theme, .title, .file, .folder, .presentation, .url,.date) {
+  list(
+    Tema          = .theme,
+    Título        = .title,
+    Lectura       = as.character(glue("<a href='{.file}'> Leer </a>")),
+    Presentation  = as.character(glue("<a href='/arso-materiales-educativos/{.folder}/{.presentation}'> Leer </a>")),
+    Video         = as.character(glue("<a href='{.url}'> Ver </a>")),
+    Date          = .date
+  )
+}
+
+build_lab_row <- function(.title, .file, .folder, .data, .url) {
+  list(
+    Tema          = .title,
+    Instrucciones = as.character(glue("<a href='/arso-materiales-educativos/{.folder}/{.file}'> Leer </a>")),
+    Datos         = as.character(glue("<a href='{.data}'> Descargar </a>")),
+    Video         = as.character(glue("<a href='{.url}'> Ver </a>"))
+  )
+}
+
+
+as_kable <- function(x) {
+  x %>% 
+  knitr::kable(format = "html",
+               escape = FALSE) %>% 
+  kableExtra::kable_styling(bootstrap_options = c("striped",
+                                                  "hover",
+                                                  "responsive")) %>% 
+  kableExtra::collapse_rows(which(names(html_table) == "Tema"))
+}
+```
+
+<br>
+
+<center>
+
+```{r}
+logo_path <- here::here("docs/core-esge.png")
+stopifnot(file.exists(logo_path))
+knitr::include_graphics(path = logo_path)
+```
+
+</center>
+
+<br><br>
+
+### Clases
+```{r}
+materiales <- list(
+  build_class_row(
+    .theme        = "Tecnicas",
+    .title        = "Datos de Redes",
+    .file         = "https://cjcallag.github.io/arso/tipos-de-datos-de-redes-sociales.html",
+    .folder       = "presentations",
+    .presentation = "modo-uno.html",
+    .url          = "",
+    .date         = Sys.Date()
+  ),
+  build_class_row(
+    .theme        = "Tecnicas",
+    .title        = "Grabación y Recopilación",
+    .file         = "https://cjcallag.github.io/arso/grabaci%C3%B3n-y-recopilaci%C3%B3n.html",
+    .folder       = "presentations",
+    .presentation = "modo-uno.html",
+    .url          = "",
+    .date         = Sys.Date()
+  ),
+  build_class_row(
+    .theme        = "Tecnicas",
+    .title        = "Modo-dos a Modo-Uno",
+    .file         = "https://cjcallag.github.io/arso/derivando-datos-modo-uno-de-modo-dos.html",
+    .folder       = "presentations",
+    .presentation = "modo-dos.html",
+    .url          = "",
+    .date         = Sys.Date()
+  ),
+  build_class_row(
+    .theme        = "Tecnicas",
+    .title        = "Multiples Relaciones",
+    .file         = "https://cjcallag.github.io/arso/multiples-relaciones.html",
+    .folder       = "presentations",
+    .presentation = "multiples-relaciones",
+    .url          = "",
+    .date         = Sys.Date()
+  ),
+  build_class_row(
+    .theme        = "Tecnicas",
+    .title        = "Extraer y Simplificar",
+    .file         = "https://cjcallag.github.io/arso/extraer-y-simplificar-redes.html",
+    .folder       = "presentations",
+    .presentation = "multiples-relaciones",
+    .url          = "",
+    .date         = Sys.Date()
+  ),
+  build_class_row(
+    .theme        = "Medidas",
+    .title        = "Topología",
+    .file         = "https://cjcallag.github.io/arso/topolog%C3%ADa-1.html",
+    .folder       = "presentations",
+    .presentation = "topologia",
+    .url          = "",
+    .date         = Sys.Date()
+  ),
+  build_class_row(
+    .theme        = "Medidas",
+    .title        = "Subgrupos Cohesivos",
+    .file         = "https://cjcallag.github.io/arso/subgrupos-cohesivos.html",
+    .folder       = "presentations",
+    .presentation = "subgroups",
+    .url          = "",
+    .date         = Sys.Date()
+  ),
+  build_class_row(
+    .theme        = "Medidas",
+    .title        = "Centralidad",
+    .file         = "https://cjcallag.github.io/arso/centralidad-1.html",
+    .folder       = "presentations",
+    .presentation = "centralidad",
+    .url          = "",
+    .date         = Sys.Date()
+  )#,
+  # build_class_row(
+  #   .theme        = "Medidas",
+  #   .title        = "Puentes y Corredores",
+  #   .file         = "https://cjcallag.github.io/arso/puentes-y-corredores-1.html",
+  #   .folder       = "presentations",
+  #   .presentation = "",
+  #   .url          = "",
+  #   .date         = Sys.Date()
+  # )
+)
+
+html_table <- materiales %>% 
+  bind_rows()
+html_table %>% 
+  as_kable()
+```
+
+
+### Laboratorios
+
+```{r}
+laboratorios <- list(
+  build_lab_row(
+    .title  = "Datos de Modo-Uno",
+    .file   = "Laboratorio_1_Redes_Modo_Uno.pdf",
+    .folder = "labs",
+    .data   = "",
+    .url    = ""
+  ),
+  build_lab_row(
+    .title  = "Datos de Modo-Dos",
+    .file   = "Laboratorio_2_Redes_Modo_Dos.pdf",
+    .folder = "labs",
+    .data   = "",
+    .url    = ""
+  ),
+  build_lab_row(
+    .title  = "Simplificar Redes",
+    .file   = "Laboratorio_3_Simplificar_Redes.pdf",
+    .folder = "labs",
+    .data   = "",
+    .url    = ""
+  ),
+  build_lab_row(
+    .title  = "Multiples Redes",
+    .file   = "Laboratorio_4_Multiples_Redes.pdf",
+    .folder = "labs",
+    .data   = "",
+    .url    = ""
+  ),
+  build_lab_row(
+    .title  = "Topología",
+    .file   = "Laboratorio_5_Topologia.pdf",
+    .folder = "labs",
+    .data   = "",
+    .url    = ""
+  ),
+  build_lab_row(
+    .title  = "Subgrupos",
+    .file   = "Laboratorio_6_Identificando_Subredes.pdf",
+    .folder = "labs",
+    .data   = "",
+    .url    = ""
+  ),
+  build_lab_row(
+    .title  = "Centralidad",
+    .file   = "Laboratorio_7_Centralidad.pdf",
+    .folder = "labs",
+    .data   = "",
+    .url    = ""
+  ) #,
+  # build_lab_row(
+  #   .title  = "Puentes y Corredores",
+  #   .file   = "Laboratorio_.pdf",
+  #   .folder = "labs",
+  #   .data   = "",
+  #   .url    = ""
+  # )
+)
+
+html_table <- laboratorios %>% 
+  bind_rows()
+html_table %>% 
+  as_kable()
+
+```
+
+<br>
+<center>
+<small>
+Todos los recursos y el código utilizados para generar este sitio están disponibles públicamente <a href='https://github.com/cjcallag/arso-materiales-educativos'> aquí </a>.
+</small>
+</center>

@@ -1,0 +1,726 @@
+---
+title: "Centralidad"
+subtitle: "Poder y Prestigio"
+author: "</br><small>  Christopher Callaghan"
+institute: "<img src = 'imgs/corelogo.png' height='60' width='120'>"
+date: "`r Sys.Date()` </small>"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo      = FALSE,
+                      eval      = TRUE,
+                      warning   = FALSE,
+                      message   = FALSE,
+                      fig.align = "center",
+                      comment   = '')
+
+library(xaringanthemer)
+style_mono_light(
+  title_slide_background_color = "#23395b",
+  code_font_family = "Fira Code",
+  code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css",
+  code_font_size   = ".65em",
+  text_font_google = google_font("Work Sans", "300", "300i"),
+  text_font_size   = "25px",
+  background_size  = "20%", 
+  background_posit = "bottom",
+  padding          = "1em 4em 1em 4em",
+  header_h1_font_size = "2.25rem",
+  header_h2_font_size = "2.0rem",
+  header_h3_font_size = "1.75rem",
+  colors = c(
+  red = "#f34213",
+  purple = "#3e2f5b")
+)
+
+here::set_here()
+
+library(igraph)
+library(dplyr)
+```
+
+# ¿Qué es la centralidad?
+
+.pull-left[
+- El enfoque en los actores de la red.
+- Las personas centrales a menudo ocupan posiciones importantes de prestigio y visibilidad, pueden influir en la difusión de ideas y comportarse (Valente, 2010).
+
+.center[**¿Quién es importante?**]
+]
+
+.pull-right[
+```{r, fig.height = 8}
+g <- data.frame(
+  from = c("A","A","A","B","B","B","C","C","D","D","D","E","F","F","G","H","H", "I","I","I","J","J","J","J","J","J","K","K","L","M","N","Q"),
+  to   = c("B","D","F","D","G","E","D","H","F","G","E","G","G","H","H","I","R",
+           "P","J","N","P","M","L","K","O","N","L","P","M","Q","O","S")
+  ) %>%
+  graph_from_data_frame(directed = FALSE)
+
+coords <- layout_with_kk(g)
+
+g %>%
+  plot.igraph(
+    layout = coords,
+    vertex.color = "black",
+    vertex.label.color = "grey",
+    vertex.size = 15
+  )
+```
+] 
+
+
+---
+
+<br/><br/>
+.center[
+# Centralidad
+## Datos no dirigidos
+]
+
+
+---
+
+# Grado de centralidad
+
+.pull-left[
+  - El conteo del número de vínculos de un actor
+  
+$$C_i^{deg} = \sum\limits_{j=1}^n x_{ij}$$
+
+  - Las personas u organizaciones que están "al tanto" son los que están vinculados a muchas otras y por lo tanto, en virtud de su posición tienen acceso a recursos de otros
+  - Pero...
+]
+
+.pull-right[
+```{r, fig.height = 8}
+g %>%
+  plot.igraph(
+    layout = coords,
+    vertex.color = "black",
+    vertex.label.color = "grey",
+    vertex.size = degree(.) *2
+  )
+```
+]
+
+---
+
+# Grado de centralidad
+
+.center[
+```{r}
+g %>%
+  get.adjacency(sparse = FALSE) %>%
+  rbind(., colSums(.)) %>%
+  cbind(., rowSums(.))
+```
+]
+
+---
+
+# Grado de centralidad
+
+.center[
+```{r}
+g %>%
+  get.adjacency(sparse = FALSE) %>%
+  rbind(., rowSums(.)) 
+```
+]
+
+---
+
+# Grado de centralidad
+
+```{r, fig.align='center'}
+g %>%
+  set_vertex_attr(name = "grado",
+                  value = degree(.)) %>%
+  get.data.frame("vertices") %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                height = 510,
+                options = list(dom = 't'))
+```
+
+
+---
+
+# Centralidad de cercanía
+
+.pull-left[
+- Que tan cercano (en promedio) se encuentra un actor de todos los demás actores en la red
+
+$$C_i^{clo} = \frac{1}{\sum\limits_{j = 1}^{n}d_{ij}}$$
+
+- Manifiesta la distancia que viaja la información desde una persona a los demás
+- Pero...
+]
+
+.pull-right[
+```{r, fig.height = 8}
+g %>%
+  plot.igraph(
+    layout = coords,
+    vertex.color = "black",
+    vertex.label.color = "grey",
+    vertex.size = closeness(., normalized = TRUE) * 30
+  )
+```
+]
+
+---
+
+# Centralidad de cercanía
+
+.center[
+```{r}
+g %>%
+  distances()
+```
+]
+
+$$
+C_A^{clo} = \frac{1}{3(1)+4(2)+2(3)+2(4)+4(5)+6+7} = 0.01612903
+$$
+
+---
+
+# Centralidad de cercanía
+
+```{r, fig.align='center'}
+g %>%
+  set_vertex_attr(name = "grado",
+                  value = degree(.)) %>%
+  set_vertex_attr(name = "cercanía",
+                  value = round(closeness(.), digits = 3)) %>%
+  get.data.frame("vertices") %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                height = 510,
+                options = list(dom = 't'))
+```
+
+
+---
+
+# Centralidad de intermediación
+
+.pull-left[
+- Que tan amenudo un actor se encuentra en el camino más corto entre otros actores en la red
+
+$$C_j^{bet} = \sum\limits_{i \neq j \neq k}\frac{\sigma_{ik}(j)}{\sigma_{ik}}$$
+
+- Los actores que son potencialmente influyentes caundo se encuentran entre grupos y pueden actuar como un portero entre estos
+- Pero...
+]
+
+.pull-right[
+```{r, fig.height = 8}
+g %>%
+  plot.igraph(
+    layout = coords,
+    vertex.color = "black",
+    vertex.label.color = "grey",
+    vertex.size = betweenness(., normalized = TRUE) * 30
+  )
+```
+]
+
+---
+
+# Centralidad de intermediación
+
+.center[
+```{r, fig.height = 5}
+igraph::graph_from_data_frame(
+  data.frame(
+    from = c("A", "A"),
+    to   = c("B", "C")
+  ), directed = FALSE) %>%
+  plot.igraph(
+    vertex.color = "black",
+    vertex.label.color = "grey",
+    vertex.size = betweenness(., normalized = TRUE) * 30
+  )
+```
+]
+
+$$C_A^{bet} = \sum\limits_{i \neq j \neq k} \frac{1}{1} = 1$$ 
+
+---
+
+# Centralidad de intermediación
+
+.center[
+```{r, fig.height = 5}
+igraph::graph_from_data_frame(
+  data.frame(
+    from = c("A", "A", "A"),
+    to   = c("B", "C", "D")
+  ), directed = FALSE) %>%
+  plot.igraph(
+    vertex.color = "black",
+    vertex.label.color = "grey",
+    vertex.size = betweenness(., normalized = TRUE) * 30
+  )
+```
+]
+
+$$C_A^{bet} = \frac{1}{1} + \frac{1}{1} + \frac{1}{1} = 3$$ 
+
+
+---
+
+# Centralidad de intermediación
+
+```{r, fig.align='center'}
+g %>%
+  set_vertex_attr(name = "grado",
+                  value = degree(.)) %>%
+  set_vertex_attr(name = "cercanía",
+                  value = round(closeness(.), digits = 3)) %>%
+  set_vertex_attr(name = "intermediación",
+                  value = round(betweenness(.), digits = 3)) %>%
+  get.data.frame("vertices") %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                height = 510,
+                options = list(dom = 't'))
+```
+
+
+---
+
+# Centralidad de eigenvector
+
+.pull-left[
+- Pondera la centralidad de un actor por la centralidad de sus vecinos
+
+$$C_j^{eig} = \frac{1}{\lambda}\sum\limits_{j=1}^nA_{ij}x_j$$
+
+- Actores bien conectados con otros actores bien conectados pueden propagar información mucho más rapido
+- Pero...
+]
+
+.pull-right[
+```{r, fig.height = 8}
+g %>%
+  plot.igraph(
+    layout = coords,
+    vertex.color = "black",
+    vertex.label.color = "grey",
+    vertex.size = evcent(.)$vector * 15
+  )
+```
+]
+
+---
+
+# [Ejemplo: Ronda 1]((http://www.jsums.edu/nmeghanathan/files/2015/08/CSC641-Fall2015-Module-2-Centrality-Measures.pdf?x61976)
+
+.pull-left[
+.center[
+```{r}
+exp <- data.frame(
+  from = c("A", "A", "A", "C", "C", "B"),
+  to   = c("B", "C", "D", "B", "D", "E")
+) %>%
+  graph_from_data_frame(., directed = FALSE)
+mat <- exp %>%
+  igraph::get.adjacency(sparse = FALSE)
+mat
+```
+
+$\times$
+
+```{r}
+unlist(c(1, 1, 1, 1, 1))
+```
+
+$=$
+
+```{r}
+temp <- mat %*% c(1, 1, 1, 1, 1)
+temp[, 1]
+```
+
+$V. Norm = \sqrt{3(9) + 4 + 1} = 5.477226$
+
+```{r}
+round1 <- mat %*% c(1, 1, 1, 1, 1) / 5.477226
+round1[, 1]
+```
+]]
+
+
+.pull-right[
+```{r, fig.height = 6}
+exp %>%
+  plot.igraph(
+    vertex.color = "black",
+    vertex.label.color = "grey",
+    vertex.size =  20
+  )
+```
+]
+
+---
+
+# Ejemplo: Ronda 2
+
+```{r}
+mat
+```
+
+$\times$
+
+```{r}
+unlist(c(0.5477225, 0.5477225, 0.5477225, 0.3651483, 0.1825742))
+```
+
+$=$
+
+```{r}
+temp <- mat %*% c(0.5477225, 0.5477225, 0.5477225, 0.3651483, 0.1825742)
+temp[, 1]
+```
+
+$V. Norm = \sqrt{2(1.461^2) + 1.278^2 + 1.095^2 + 0.548^2} = 2.72$
+
+```{r}
+round2 <- mat %*% c(1, 1, 1, 1, 1) / 2.720294
+round2[, 1]
+```
+
+---
+
+# Ejemplo: Ronda 3
+
+```{r}
+mat
+```
+
+$\times$
+
+```{r}
+round2[, 1]
+```
+
+$=$
+
+```{r}
+temp <- mat %*% round2[, 1]
+temp[, 1]
+```
+
+$V. Norm = \sqrt{2(2.941^2) + 2.573^2 + 2.206^2 + 1.103^2} = 5.477$
+
+```{r}
+round3 <- mat %*% round2[, 1] / 5.477
+round3[, 1]
+```
+
+---
+
+# Ejemplo: Ronda 4
+
+```{r}
+mat
+```
+
+$\times$
+
+```{r}
+round3[, 1]
+```
+
+$=$
+
+```{r}
+temp <- mat %*% round3[, 1]
+temp[, 1]
+```
+
+$V. Norm = \sqrt{2(1.987^2) + 1.626^2 + 1.153^2 + 0.221^2} = 2.641$
+
+```{r}
+round4 <- mat %*% round3[, 1] / 2.640748
+round4[, 1]
+```
+
+---
+
+# Ejemplo: Ronda 5
+
+```{r}
+mat
+```
+
+$\times$
+
+```{r}
+round4[, 1]
+```
+
+$=$
+
+```{r}
+temp <- mat %*% round4[, 1]
+temp[, 1]
+```
+
+$V. Norm = \sqrt{2(1.987^2) + 1.626^2 + 1.153^2 + 0.221^2} = 2.641$
+
+.center[[**converge!**](http://www.jsums.edu/nmeghanathan/files/2015/08/CSC641-Fall2015-Module-2-Centrality-Measures.pdf?x61976)]
+
+---
+
+# Eigenvector 
+
+.center[
+```{r}
+round4[, 1]
+```
+]
+
+```{r, fig.height=6}
+exp %>%
+  plot.igraph(
+    vertex.color = "black",
+    vertex.label.color = "grey",
+    vertex.size =  evcent(.)$vector * 30
+  )
+```
+
+---
+
+# Centralidad de eigenvector
+
+```{r, fig.align='center'}
+g %>%
+  set_vertex_attr(name = "grado",
+                  value = degree(.)) %>%
+  set_vertex_attr(name = "cercanía",
+                  value = round(closeness(.), digits = 3)) %>%
+  set_vertex_attr(name = "intermediación",
+                  value = round(betweenness(.), digits = 3)) %>%
+  set_vertex_attr(name  = "eigenvector",
+                  value = round(evcent(.)$vector, digits = 3)) %>%
+  get.data.frame("vertices") %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                height = 510,
+                options = list(dom = 't'))
+```
+
+
+---
+
+<br/><br/>
+.center[
+# Centralidad
+## Datos dirigidos
+]
+
+
+---
+
+# Red dirigida
+
+```{r, fig.height = 7}
+g <- random.graph.game(10, 0.3, directed = TRUE)
+coords <- layout_with_kk(g)
+g %>%
+  plot.igraph(
+    layout = coords,
+    vertex.color = "black",
+    vertex.label.color = "grey",
+    vertex.size =  20
+  )
+```
+
+
+---
+
+# Sociomatriz dirigida
+
+<br/>
+.center[
+```{r}
+g %>%
+  igraph::get.adjacency(sparse = FALSE)
+```
+]
+
+---
+
+# Centralidad grado de entrada
+
+<br/>
+.center[
+```{r}
+g %>%
+  igraph::get.adjacency(sparse = FALSE) %>%
+  rbind(., colSums(.))
+```
+]
+
+- En las redes dirigidas, personas que reciben enlaces de entrada son generalmente considerados socialmente prestigiosos
+- Más aun si los enlaces no son recíprocos.
+
+---
+
+# Centralidad grado de entrada
+
+```{r, fig.height = 7}
+g %>%
+  plot.igraph(
+    layout = coords,
+    vertex.color = "black",
+    vertex.label.color = "grey",
+    vertex.size = degree(., mode = "in") * 5
+  )
+```
+
+
+---
+
+# Centralidad grado de salida
+
+<br/>
+.center[
+```{r}
+g %>%
+  igraph::get.adjacency(sparse = FALSE) %>%
+  cbind(., rowSums(.))
+```
+]
+
+- Valiosos en ciertos contextos...
+---
+
+# Centralidad grado de salida
+
+```{r, fig.height = 7}
+g %>%
+  plot.igraph(
+    layout = coords,
+    vertex.color = "black",
+    vertex.label.color = "grey",
+    vertex.size = degree(., mode = "out") * 5
+  )
+```
+
+
+---
+
+# Centros de Actividad y Autoridades
+
+.pull-left[
+- Un buen centro de actividad es aquel que apunta a muchas buenas autoridades, y una buena autoridad es aquella a la que apuntan muchos centros de actividad.
+- Similar al la centralidad de eigenvector, pero para redes dirigidas.
+]
+
+.pull-right[
+```{r}
+dir_g <- data.frame(from = c(1, 1, 1, 1, 1, 1, 1, 1, 10, 11, 12, 10, 10, 11, 11, 11),
+           to   = c(2, 3, 4, 5, 6, 7, 8, 9,  9,  9,  9, 13, 14, 15, 16, 17)) %>%
+  graph_from_data_frame()
+coords <- layout_with_kk(dir_g)
+dir_g %>%
+  plot.igraph(
+    layout = coords,
+    vertex.size  = 20,
+    vertex.color = "white",
+    vertex.label.color = "black",
+    edge.arrow.width = 0.5,
+    edge.arrow.size  = 0.5
+  )
+```
+]
+
+
+---
+
+# Centros de Actividad y Autoridades
+
+.pull-left[
+
+Centros de Actividad
+
+```{r}
+dir_g %>%
+  set_vertex_attr(name = "hubs",
+                  value = hub.score(.)$vector) %>%
+  plot.igraph(
+    layout = coords,
+    vertex.size = get.vertex.attribute(., "hubs") * 15,
+    vertex.size  = 20,
+    vertex.color = "white",
+    vertex.label.color = "black",
+    edge.arrow.width = 0.5,
+    edge.arrow.size  = 0.5
+  )
+```
+]
+
+
+.pull-right[
+
+Autoridades
+
+```{r}
+dir_g %>%
+  set_vertex_attr(name = "auth",
+                  value = authority.score(.)$vector) %>%
+  plot.igraph(
+    layout = coords,
+    vertex.size = get.vertex.attribute(., "auth") * 20,
+    vertex.size  = 20,
+    vertex.color = "white",
+    vertex.label.color = "black",
+    edge.arrow.width = 0.5,
+    edge.arrow.size  = 0.5
+  )
+```
+]
+
+
+---
+
+# Centros de Actividad y Autoridades
+
+```{r}
+dir_g %>%
+  set_vertex_attr(name = "entrada",
+                  value = degree(., mode = "in")) %>%
+  set_vertex_attr(name = "salida",
+                  value = degree(., mode = "out")) %>%
+  set_vertex_attr(name = "auth",
+                  value = round(authority.score(.)$vector, digits = 3)) %>%
+  set_vertex_attr(name = "hubs",
+                  value = round(hub.score(.)$vector, digits = 3)) %>%
+  get.data.frame("vertices") %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                height = 510,
+                options = list(dom = 't'))
+```
+
+
+
+---
+<br>
+.center[
+### ¿Preguntas?
+![](imgs/preguntas.jpg)]

@@ -1,0 +1,804 @@
+---
+title: "Multiples Relaciones"
+author: "</br><small>  Christopher Callaghan"
+institute: "<img src = 'imgs/corelogo.png' height='60' width='120'>"
+date: "`r Sys.Date()` </small>"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo      = FALSE,
+                      eval      = TRUE,
+                      warning   = FALSE,
+                      message   = FALSE,
+                      fig.align = "center",
+                      comment   = '')
+
+extra_css <- list(
+  ".smallest" = list("font-size" = "75%"),
+  ".extra-small" = list("font-size" = "25%")
+)
+
+library(xaringanthemer)
+style_mono_light(
+  title_slide_background_color = "#23395b",
+  code_font_family = "Fira Code",
+  code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css",
+  code_font_size   = ".65em",
+  text_font_google = google_font("Work Sans", "300", "300i"),
+  text_font_size   = "25px",
+  background_size  = "20%", 
+  background_posit = "bottom",
+  padding          = "1em 4em 1em 4em",
+  header_h1_font_size = "2.25rem",
+  header_h2_font_size = "2.0rem",
+  header_h3_font_size = "1.75rem",
+  colors = c(
+  red = "#f34213",
+  purple = "#3e2f5b"),
+  extra_css = extra_css
+)
+
+here::set_here()
+
+library(igraph)
+library(dplyr)
+```
+
+
+# Relaciones Multiples
+
+- Los actores suelen estar involucrados en más de un tipo de relación
+- Los diferentes vínculos a menudo empujan y arrastran a los actores en diferentes direcciones (los vínculos pueden ser interrelacionados entre sí)
+- Cuantas más redes podamos mapear, más clara es la imagen que tenemos de la red en general.
+- Cuatro enfoques para trabajar con relaciones múltiples:
+  - Plegado: Bimodal a monomodo `r emo::ji("check")`
+  - Apilar: Agregar relaciones a una red
+  - Extracción: Aislando nodos y enlaces en base a atributos
+
+   
+---
+
+<br><br>
+.center[
+#Apilar
+]
+
+
+---
+<br><br>
+.center[
+# Suponga que tiene los siguientes archivos de una red criminal
+
+<br>
+.small[
+affiliacion.csv | familias.csv | finanzas.csv | amistad.csv | jerarquía.csv
+]
+]
+
+---
+
+# Relaciones: Afiliación Criminal
+
+.pull-left[
+```{r}
+library(readr)
+affiliation <- readr::read_csv("data/Affiliation.csv") %>%
+  graph_from_data_frame(directed = FALSE)
+
+affiliation %>%
+  get.data.frame("edges") %>%
+  dplyr::select(from, to) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 321))
+```
+]
+
+.pull-right[
+```{r}
+affiliation %>%
+  set_vertex_attr(.,
+                  name = "type",
+                  value = bipartite_mapping(.)$type) %>%
+  plot.igraph(layout = layout_with_kk,
+            edge.color = "black",
+            vertex.color = ifelse(V(.)$type, "red", "grey"),
+            vertex.shape = ifelse(V(.)$type, "square", "circle"),
+            vertex.border.color = "black",
+            vertex.label.cex = 0.5,
+            vertex.label.color = "black")
+```
+]
+
+---
+
+# Relaciones: Afiliación Criminal
+
+.pull-left[
+```{r}
+affiliation %>%
+  set_vertex_attr(.,
+                  name = "type",
+                  value = bipartite_mapping(.)$type) %>%
+  bipartite_projection(which = "false") %>%
+  get.data.frame("edges") %>%
+  dplyr::select(from, to) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 321))
+```
+]
+
+.pull-right[
+```{r}
+affiliation %>%
+  set_vertex_attr(.,
+                  name = "type",
+                  value = bipartite_mapping(.)$type) %>%
+  bipartite_projection(which = "false") %>%
+  plot.igraph(layout = layout_with_kk,
+            edge.color = "black",
+            vertex.color = "grey",
+            vertex.shape = "circle",
+            vertex.border.color = "black",
+            vertex.label.cex = 0.5,
+            vertex.label.color = "black")
+```
+]
+
+
+---
+
+# Relaciones: Afiliación Familiar
+
+.pull-left[
+```{r}
+familial <- readr::read_csv("data/Familial.csv") %>%
+  graph_from_data_frame(directed = FALSE)
+
+familial %>%
+  get.data.frame("edges") %>%
+  dplyr::select(from, to) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 321))
+```
+]
+
+.pull-right[
+```{r}
+plot.igraph(familial,
+            layout = layout_with_kk,
+            edge.color = "red",
+            vertex.color = "grey",
+            vertex.border.color = "black",
+            vertex.label.cex = 0.5,
+            vertex.label.color = "black")
+```
+]
+
+
+---
+
+# Relaciones: Afiliación Financiera
+
+.pull-left[
+```{r}
+financial <- readr::read_csv("data/Financial.csv") %>%
+  graph_from_data_frame(directed = FALSE)
+
+financial %>%
+  get.data.frame("edges") %>%
+  dplyr::select(from, to) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 321))
+```
+]
+
+.pull-right[
+```{r}
+plot.igraph(financial,
+            layout = layout_with_kk,
+            edge.color = "green",
+            vertex.color = "grey",
+            vertex.border.color = "black",
+            vertex.label.cex = 0.5,
+            vertex.label.color = "black")
+```
+]
+
+
+---
+
+# Relaciones: Afiliación Amistad
+
+.pull-left[
+```{r}
+friendship <- readr::read_csv("data/Friendship.csv") %>%
+  graph_from_data_frame(directed = FALSE)
+
+friendship %>%
+  get.data.frame("edges") %>%
+  dplyr::select(from, to) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 321))
+```
+]
+
+.pull-right[
+```{r}
+plot.igraph(friendship,
+            layout = layout_with_kk,
+            edge.color = "purple",
+            vertex.color = "grey",
+            vertex.border.color = "black",
+            vertex.label.cex = 0.5,
+            vertex.label.color = "black")
+```
+]
+
+
+---
+
+# Relaciones: Afiliación Jerarquía
+
+.pull-left[
+```{r}
+hierarchy <- readr::read_csv("data/Hierarchy.csv") %>%
+  graph_from_data_frame(directed = FALSE)
+
+hierarchy %>%
+  get.data.frame("edges") %>%
+  dplyr::select(from, to) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 321))
+```
+]
+
+.pull-right[
+```{r}
+plot.igraph(friendship,
+            layout = layout_with_kk,
+            edge.color = "grey",
+            vertex.color = "grey",
+            vertex.border.color = "black",
+            vertex.label.cex = 0.5,
+            vertex.label.color = "black")
+```
+]
+
+
+---
+
+# Libro de Codigos
+
+.smallest[
+- **Afiliación con organizaciones ilegítimas** (persona-a-organización): definida como la propiedad, el empleo y / o la membresía de una persona en una organización ilegítima. Una organización ilegítima se define como un grupo u organización cuyos objetivos son de naturaleza nefasta (es decir, criminal) o que voluntariamente obtiene recursos materiales y / o no materiales a través de actividades ilegales.
+- **Amistad** (persona-a-persona): definida como dos personas que se declaran explícitamente como amigos, o que se conocen explícitamente como confidentes de confianza, en informes o en documentación de inteligencia. 
+- **Familiares** (persona-a-persona): dos actores relacionados por sangre, matrimonio o adopción.
+- **Financieras** (persona-a-persona): definido como dos actores, en informes o inteligencia, que se declaran explícitamente como transfiriendo fondos entre sí para cualquier propósito, legal o ilegal.
+- **Jerarquía** (persona-a-persona): definido como relaciones entre superiores inmediatos y subordinados en una organización. 
+]
+
+
+---
+<br><br>
+.center[
+# ¿Qué relaciones unen la red formal\*? ¿Qué relaciones conforman la red informal\*\*?
+]
+
+<br><br>
+.smallest[
+\* Formal: Esto quiere decir explícitamente criminal
+
+\*\* Informal: Es decir, todas las relaciones no son criminales.
+]
+
+
+---
+<br><br>
+.center[
+# Red Formal
+
+Afiliación + Financieras + Jerarquía
+]
+
+
+---
+
+# Relaciones Apiladas: Red Formal
+
+```{r, fig.height = 6}
+affiliation <- affiliation %>%
+  set_vertex_attr(.,
+                  name = "type",
+                  value = bipartite_mapping(.)$type) %>%
+  bipartite_projection(which = "false")
+igraph::union(affiliation, financial, hierarchy) %>%
+  set_edge_attr(name  = "color", 
+                value = "grey") %>%
+  plot.igraph(layout = layout_with_fr,
+              edge.curved = TRUE,
+              vertex.color = "grey",
+              vertex.border.color = "black",
+              vertex.label.cex = 0.5,
+              vertex.label.color = "black",
+              vertex.size = 10)
+```
+
+---
+<br><br>
+.center[
+# ¿Qué actor tiene mas enlaces?
+]
+
+
+---
+
+# Número de enlaces
+
+```{r}
+igraph::union(affiliation, financial, hierarchy) %>%
+  set_vertex_attr(name = "grado",
+                  value = degree(.)) %>%
+  get.data.frame("vertices") %>%
+  arrange(desc(grado)) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 321))
+```
+
+
+---
+<br><br>
+.center[
+# Red Informal
+
+Amistad + Familiares
+]
+
+---
+
+# Relaciones Apiladas: Red Formal
+
+```{r, fig.height = 6}
+igraph::union(friendship, familial) %>%
+  set_edge_attr(name  = "color", 
+                value = "grey") %>%
+  plot.igraph(layout = layout_with_fr,
+              edge.curved = TRUE,
+              vertex.color = "grey",
+              vertex.border.color = "black",
+              vertex.label.cex = 0.5,
+              vertex.label.color = "black",
+              vertex.size = 10)
+```
+
+---
+<br><br>
+.center[
+# ¿Qué actor tiene mas enlaces?
+]
+
+---
+
+# Número de enlaces
+
+```{r}
+igraph::union(friendship, familial) %>%
+  set_vertex_attr(name = "grado",
+                  value = degree(.)) %>%
+  get.data.frame("vertices") %>%
+  arrange(desc(grado)) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 321))
+```
+
+---
+<br><br>
+.center[
+# Red informal + formal
+]
+
+---
+
+# Relaciones Apiladas: Red Formal + Informal
+
+```{r, fig.height = 6}
+igraph::union(affiliation, friendship, familial, financial, hierarchy) %>%
+  set_edge_attr(name  = "color", 
+                value = "black") %>%
+  plot.igraph(layout = layout_with_fr,
+              edge.curved = TRUE,
+              vertex.color = "grey",
+              vertex.border.color = "black",
+              vertex.label.cex = 0.5,
+              vertex.label.color = "black",
+              vertex.size = 10)
+```
+
+
+---
+<br><br>
+.center[
+# ¿Qué actor tiene mas enlaces?
+]
+
+---
+
+# Número de enlaces
+
+```{r}
+igraph::union(affiliation, friendship, familial, financial, hierarchy) %>%
+  set_vertex_attr(name = "grado",
+                  value = degree(.)) %>%
+  get.data.frame("vertices") %>%
+  arrange(desc(grado)) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 321))
+```
+
+
+---
+
+<br><br>
+.center[
+# Extraer
+]
+
+
+---
+# Extraer: Enlaces
+
+```{r}
+E(affiliation)$Relationship <- "Affiliation"
+edgelist <- rbind(get.data.frame(affiliation, what = "edges")[,c("from", "to", "Relationship")],
+                  get.data.frame(friendship, what = "edges"),
+                  get.data.frame(familial, what = "edges"),
+                  get.data.frame(financial, what = "edges"),
+                  get.data.frame(hierarchy, what = "edges")
+                  )
+edgelist %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 321))
+```
+
+---
+# Extraer: Enlaces
+
+```{r, fig.height = 6}
+g <- graph_from_data_frame(d = edgelist,
+                           directed = FALSE)
+g %>%
+  plot.igraph(layout = layout_with_fr,
+              edge.curved = TRUE,
+              edge.color = case_when(
+                E(.)$Relationship == "Affiliation" ~ "black",
+                E(.)$Relationship == "Familial" ~ "red",
+                E(.)$Relationship == "Financial" ~ "green",
+                E(.)$Relationship == "Friendship" ~ "blue",
+                E(.)$Relationship == "Superior-Subordinate" ~ "grey"
+              ),
+              edge.width = 2,
+              vertex.color = "grey",
+              vertex.border.color = "black",
+              vertex.label.cex = 0.5,
+              vertex.label.color = "black",
+              vertex.size = 10)
+```
+
+.small[
+Afiliación = Negro | Financieras = Verde | Jerarquía = Gris | Famliliar = Rojo | Amistad = Azul
+]
+
+
+---
+
+<br><br>
+.center[
+# ¿Quién es la persona central en la red financiera?
+]
+
+
+---
+
+# Extraer: Enlaces
+
+```{r}
+g %>%
+  subgraph.edges(.,
+                 eids = E(.)[E(.)$Relationship == "Financial"],
+                 delete.vertices = FALSE) %>%
+  plot.igraph(layout = layout_with_kk,
+              edge.curved = TRUE,
+              edge.color = "green",
+              edge.width = 2,
+              vertex.color = "grey",
+              vertex.border.color = "black",
+              vertex.label.cex = 0.5,
+              vertex.label.color = "black",
+              vertex.size = 10)
+  
+```
+
+
+---
+
+# Extraer: Enlaces
+
+```{r}
+g %>%
+  subgraph.edges(.,
+                 eids = E(.)[E(.)$Relationship == "Financial"],
+                 delete.vertices = TRUE) %>%
+  plot.igraph(layout = layout_with_kk,
+              edge.curved = TRUE,
+              edge.color = "green",
+              edge.width = 2,
+              vertex.color = "grey",
+              vertex.border.color = "black",
+              vertex.label.cex = 0.5,
+              vertex.label.color = "black",
+              vertex.size = 10)
+  
+```
+
+---
+
+# Extraer: Enlaces
+
+.pull-left[
+```{r, fig.height=6}
+g %>%
+  subgraph.edges(.,
+                 eids = E(.)[E(.)$Relationship == "Financial"],
+                 delete.vertices = TRUE) %>%
+  plot.igraph(layout = layout_with_kk,
+              edge.curved = TRUE,
+              edge.color = "green",
+              edge.width = 2,
+              vertex.color = "grey",
+              vertex.border.color = "black",
+              vertex.label.cex = 0.5,
+              vertex.label.color = "black",
+              vertex.size = 10)
+  
+```
+]
+
+.pull-right[
+```{r}
+g %>%
+  subgraph.edges(.,
+                 eids = E(.)[E(.)$Relationship == "Financial"],
+                 delete.vertices = TRUE) %>%
+  set_vertex_attr(name = "grado",
+                  value = degree(.)) %>%
+  get.data.frame("vertices") %>%
+  arrange(desc(grado)) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 321))
+```
+]
+
+---
+
+# Extraer: Attibutos
+
+```{r, fig.height = 6}
+anabaptists <- COREnets::get_data("anabaptists")
+g <- graph_from_data_frame(d = anabaptists$network$edges_table,
+                      directed = FALSE,
+                      vertices = anabaptists$network$nodes_table)
+coords <- layout_with_kk(g)
+plot.igraph(g, 
+            layout = coords,
+            edge.curved = FALSE,
+            vertex.color = "grey",
+            vertex.border.color = "black",
+            vertex.label.cex = 1,
+            vertex.label.color = "black")
+```
+
+<center><small> Anabautistas <small/><center/>
+
+
+---
+# Objetivos
+
+1. Crear una visualización eficaz de la sub-red de alemanes 
+2. Determinar aquellos involucrados en el movimiento Anabautista
+3. Calcular medidas de centralidad
+4. Presentar un gráfico de los mas importantes 
+
+
+---
+# Datos Relacionales
+
+```{r}
+anabaptists$network$edges_table %>%
+    DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 400))
+```
+
+
+---
+# Datos de Atributos
+
+```{r}
+anabaptists$network$nodes_table %>%
+    DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 400,
+                               scrollX = TRUE))
+```
+
+---
+
+# Extraer
+
+```{r, fig.height = 6}
+plot.igraph(g, 
+            layout = coords,
+            edge.curved = FALSE,
+            vertex.color.border = "black",
+            vertex.color = case_when(V(g)$hr_origin == "Austria" ~ "#e41a1c",
+                                     V(g)$hr_origin == "France" ~ "#377eb8",
+                                     V(g)$hr_origin == "Germany" ~ "#4daf4a",
+                                     V(g)$hr_origin == "Italy" ~ "#984ea3",
+                                     V(g)$hr_origin == "Moravia" ~ "#ff7f00",
+                                     V(g)$hr_origin == "Netherlands" ~ "#ffff33",
+                                     V(g)$hr_origin == "Poland" ~ "#a65628",
+                                     V(g)$hr_origin == "Switzerland" ~ "#f781bf"),
+            vertex.label = NA,
+            vertex.label.cex = 1,
+            vertex.label.color = "black",
+            vertex.size = 7.5)
+```
+
+<center><small> Anabautistas, nodos por nación <small/><center/>
+
+
+---
+
+# Extraer
+
+```{r, fig.height = 6}
+plot.igraph(g, 
+            layout = coords,
+            edge.curved = FALSE,
+            vertex.color.border = "black",
+            vertex.color = ifelse(V(g)$hr_origin == "Germany", "black", "white"),
+            vertex.label = NA,
+            vertex.label.cex = 1,
+            vertex.label.color = "black",
+            vertex.size = 7.5)
+```
+
+<center><small> Anabautistas, alemanes negro <small/><center/>
+
+
+---
+
+# Extraer: Alemanes
+
+```{r}
+sub <- induced.subgraph(g, which(V(g)$hr_origin == "Germany"), impl = "copy_and_delete")
+coords <- layout_with_fr(sub)
+plot.igraph(sub, 
+            layout = coords,
+            edge.curved = FALSE,
+            vertex.color.border = "black",
+            vertex.color = "black",
+            vertex.label = NA,
+            vertex.label.cex = 1,
+            vertex.label.color = "black",
+            vertex.size = 7.5)
+```
+
+---
+
+# Extraer: Alemanes
+
+```{r}
+plot.igraph(sub, 
+            layout = coords,
+            edge.curved = FALSE,
+            vertex.color.border = "black",
+            vertex.label = NA,
+            vertex.label.cex = 1,
+            vertex.color = ifelse(V(sub)$is_anabaptist==TRUE, "black", "white"),
+            vertex.size = 7.5)
+```
+
+
+---
+
+# Extraer: Alemanes
+
+```{r}
+plot.igraph(sub, 
+            layout = coords,
+            edge.curved = FALSE,
+            vertex.color.border = "black",
+            vertex.label = NA,
+            vertex.label.cex = 1,
+            vertex.color = ifelse(V(sub)$is_anabaptist==TRUE, "black", "white"),
+            vertex.size = degree(sub),
+            vertex.size = 7.5)
+```
+
+
+---
+
+# Extraer: Alemanes
+
+```{r, fig.height=7}
+plot.igraph(sub, 
+            layout = coords,
+            edge.curved = FALSE,
+            vertex.color.border = "black",
+            vertex.label = ifelse(degree(sub) > 6, V(sub)$name, NA),
+            vertex.label.cex = 2.5,
+            vertex.label.color = "slategrey",
+            vertex.color = ifelse(V(sub)$is_anabaptist==TRUE, "black", "white"),
+            vertex.size = degree(sub),
+            vertex.size = 7.5)
+```
+
+---
+
+# Resumen
+
+|Técnica | Ventaja (s) | Desventaja (s)  |
+|--------|-------------| ----------------|
+|**Apilar** | Visuales (es decir, color por tipo de relación) y gestión de datos. | No se pueden ejecutar métricas para más de una red a la vez. |
+|**Extraer** | Centrarse en la red de actores con un atributo específico, o relaciones específicas. | Manejo de datos. |
+
+---
+<br>
+.center[
+### ¿Preguntas?
+![](imgs/preguntas.jpg)]

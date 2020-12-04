@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Multiples Relaciones</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=" Christopher Callaghan" />
+    <meta name="date" content="2020-08-18" />
+    <script src="libs/header-attrs-2.3/header-attrs.js"></script>
+    <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+    <script src="libs/jquery-1.12.4/jquery.min.js"></script>
+    <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding-0.14/datatables.js"></script>
+    <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Multiples Relaciones
+### </br><small> Christopher Callaghan
+### <img src = 'imgs/corelogo.png' height='60' width='120'>
+### 2020-08-18 </small>
+
+---
+
+
+
+
+
+# Relaciones Multiples
+
+- Los actores suelen estar involucrados en más de un tipo de relación
+- Los diferentes vínculos a menudo empujan y arrastran a los actores en diferentes direcciones (los vínculos pueden ser interrelacionados entre sí)
+- Cuantas más redes podamos mapear, más clara es la imagen que tenemos de la red en general.
+- Cuatro enfoques para trabajar con relaciones múltiples:
+  - Plegado: Bimodal a monomodo ✅
+  - Apilar: Agregar relaciones a una red
+  - Extracción: Aislando nodos y enlaces en base a atributos
+
+   
+---
+
+&lt;br&gt;&lt;br&gt;
+.center[
+#Apilar
+]
+
+
+---
+&lt;br&gt;&lt;br&gt;
+.center[
+# Suponga que tiene los siguientes archivos de una red criminal
+
+&lt;br&gt;
+.small[
+affiliacion.csv | familias.csv | finanzas.csv | amistad.csv | jerarquía.csv
+]
+]
+
+---
+
+# Relaciones: Afiliación Criminal
+
+.pull-left[
+<div id="htmlwidget-863a7e417cb72a659e4c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-863a7e417cb72a659e4c">{"x":{"filter":"none","data":[["All City","All City","Blood Messiah","Baby Face","Bananas","Bat G.","Big G.","Blaze","Bugs","Book Collector","Bloodhound","Blue Eyes","Brains","Brains","Clown","Cranky","Dapper Don","The Dentist","Droopy","Droopy","Enforcer","Fast Trigger","Fat Boy","Slingshot","Goldie","Goldie","O.G.","Ha-Ha","Jelly","Scratch","Shadow","Smiley","Smiley","Smoke","Snake","Sonny Black","Sharpie","Sharpie"],["County Boys","Blood Army","County Boys","Blood Army","Blood Army","County Boys","County Boys","County Boys","Almighty Angels","Blood Army","County Boys","Blood Army","County Boys","Blood Army","County Boys","Almighty Angels","21st Street","Blood Army","County Boys","21st Street","21st Street","County Boys","Almighty Angels","Blood Army","County Boys","Blood Army","County Boys","Guerrilla Posse","Guerrilla Posse","Blood Army","Blood Army","County Boys","Blood Army","Blood Army","Blood Army","Almighty Angels","County Boys","Blood Army"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>from<\/th>\n      <th>to<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":321,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+]
+
+.pull-right[
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Relaciones: Afiliación Criminal
+
+.pull-left[
+<div id="htmlwidget-cc3528f3385e8bb31ca4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cc3528f3385e8bb31ca4">{"x":{"filter":"none","data":[["All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Big G.","Big G.","Big G.","Big G.","Big G.","Big G.","Big G.","Big G.","Big G.","Big G.","Blaze","Blaze","Blaze","Blaze","Blaze","Blaze","Blaze","Blaze","Blaze","Bugs","Bugs","Bugs","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Bloodhound","Bloodhound","Bloodhound","Bloodhound","Bloodhound","Bloodhound","Bloodhound","Bloodhound","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Clown","Clown","Clown","Clown","Clown","Clown","Cranky","Cranky","Dapper Don","Dapper Don","The Dentist","The Dentist","The Dentist","The Dentist","The Dentist","The Dentist","The Dentist","The Dentist","Droopy","Droopy","Droopy","Droopy","Droopy","Droopy","Fast Trigger","Fast Trigger","Fast Trigger","Fast Trigger","Fat Boy","Slingshot","Slingshot","Slingshot","Slingshot","Slingshot","Slingshot","Slingshot","Goldie","Goldie","Goldie","Goldie","Goldie","Goldie","Goldie","O.G.","O.G.","Ha-Ha","Scratch","Scratch","Scratch","Scratch","Scratch","Shadow","Shadow","Shadow","Shadow","Smiley","Smiley","Smiley","Smoke","Smoke","Snake"],["Blood Messiah","Bat G.","Big G.","Blaze","Bloodhound","Brains","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Baby Face","Bananas","Book Collector","Blue Eyes","The Dentist","Slingshot","Scratch","Shadow","Smoke","Snake","Bat G.","Big G.","Blaze","Bloodhound","Brains","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Bananas","Book Collector","Blue Eyes","Brains","The Dentist","Slingshot","Goldie","Scratch","Shadow","Smiley","Smoke","Snake","Sharpie","Book Collector","Blue Eyes","Brains","The Dentist","Slingshot","Goldie","Scratch","Shadow","Smiley","Smoke","Snake","Sharpie","Big G.","Blaze","Bloodhound","Brains","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Blaze","Bloodhound","Brains","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Bloodhound","Brains","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Cranky","Fat Boy","Sonny Black","Blue Eyes","Brains","The Dentist","Slingshot","Goldie","Scratch","Shadow","Smiley","Smoke","Snake","Sharpie","Brains","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Brains","The Dentist","Slingshot","Goldie","Scratch","Shadow","Smiley","Smoke","Snake","Sharpie","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","The Dentist","Slingshot","Scratch","Shadow","Smoke","Snake","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Fat Boy","Sonny Black","Droopy","Enforcer","Slingshot","Goldie","Scratch","Shadow","Smiley","Smoke","Snake","Sharpie","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Enforcer","Goldie","O.G.","Smiley","Sharpie","Sonny Black","Goldie","Scratch","Shadow","Smiley","Smoke","Snake","Sharpie","O.G.","Smiley","Sharpie","Scratch","Shadow","Smoke","Snake","Smiley","Sharpie","Jelly","Shadow","Smiley","Smoke","Snake","Sharpie","Smiley","Smoke","Snake","Sharpie","Sharpie","Smoke","Snake","Snake","Sharpie","Sharpie"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>from<\/th>\n      <th>to<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":321,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+]
+
+.pull-right[
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+# Relaciones: Afiliación Familiar
+
+.pull-left[
+<div id="htmlwidget-12306bd10278dabeeb44" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-12306bd10278dabeeb44">{"x":{"filter":"none","data":[["Adonis","Adonis","Adonis","Bananas","Bananas","Bananas","Bananas","Bat G.","Bat G.","Big G.","Boots","Boots","Boots","Boots","Boxcar","Boxcar","Brains","Brains","Fat Boy","Fat Boy","Fat Boy","Slingshot","Freckles","Freckles","Ghost","Goldie","Goldie","Pookey","Icepick","Snake"],["Boxcar","Ghost","Jelly","Blue Eyes","Brains","Slingshot","Gremlin","Big G.","Blaze","Blaze","Fat Boy","Freckles","Icepick","Repo Girl","Ghost","Jelly","Slingshot","Gremlin","Freckles","Icepick","Repo Girl","Gremlin","Icepick","Repo Girl","Jelly","Pookey","O.G.","O.G.","Repo Girl","Sonny Black"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>from<\/th>\n      <th>to<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":321,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+]
+
+.pull-right[
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+# Relaciones: Afiliación Financiera
+
+.pull-left[
+<div id="htmlwidget-57f5aeb10b3e81e67e25" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-57f5aeb10b3e81e67e25">{"x":{"filter":"none","data":[["Animal","Animal","Animal","Ant","Bugs","Bloodhound","Bloodhound","Cranky","Enforcer","Fat Boy","Fat Boy","Slingshot","O.G.","O.G.","O.G."],["Shadow","Snake","Crusier","Little Red","Blue Eyes","Cranky","Ha-Ha","O.G.","Freckles","O.G.","Crusier","Ha-Ha","Ha-Ha","Snake","Crusier"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>from<\/th>\n      <th>to<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":321,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+]
+
+.pull-right[
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+# Relaciones: Afiliación Amistad
+
+.pull-left[
+<div id="htmlwidget-21cd64b8d1dd9c837ee8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-21cd64b8d1dd9c837ee8">{"x":{"filter":"none","data":[["4 Stroke","Adonis","Adonis","Adonis","Bananas","Bananas","Bananas","Bananas","The Barber","Bat G.","Bat G.","Big G.","Boots","Boots","Boots","Boots","Bloodhound","Bloodhound","Bloodhound","Bow Wow","Boxcar","Boxcar","Brains","Brains","Cranky","The Dentist","Fat Boy","Fat Boy","Fat Boy","Slingshot","Freckles","Freckles","Frosty","Ghost","Goldie","Goldie","Pookey","O.G.","Icepick","Snake"],["Frosty","Boxcar","Ghost","Jelly","Blue Eyes","Brains","Slingshot","Gremlin","O.G.","Big G.","Blaze","Blaze","Fat Boy","Freckles","Icepick","Repo Girl","Bow Wow","The Dentist","Slingshot","O.G.","Ghost","Jelly","Slingshot","Gremlin","Fat Boy","O.G.","Freckles","Icepick","Repo Girl","Gremlin","Icepick","Repo Girl","O.G.","Jelly","Pookey","O.G.","O.G.","Ha-Ha","Repo Girl","Sonny Black"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>from<\/th>\n      <th>to<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":321,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+]
+
+.pull-right[
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+# Relaciones: Afiliación Jerarquía
+
+.pull-left[
+<div id="htmlwidget-b10692410998b3b439c9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b10692410998b3b439c9">{"x":{"filter":"none","data":[["4 Stroke","4 Stroke","Blood Messiah","Animal","Animal","Animal","Ant","Ant","Baby Face","Baby Face","Bananas","The Barber","Bat G.","Bat G.","Bat G.","Bat G.","Book Collector","Boots","Bloodhound","Bloodhound","Bloodhound","Bloodhound","Blue Eyes","Bow Wow","Dapper Don","The Dentist","The Dentist","Enforcer","Fast Trigger","Slingshot","Frosty","Goldie","O.G.","O.G.","O.G.","O.G.","Scratch","Shadow"],["Frosty","O.G.","Shadow","Shadow","Snake","Crusier","O.G.","Little Red","Clown","The Dentist","O.G.","Bloodhound","Bloodhound","Goldie","O.G.","Smiley","O.G.","Freckles","The Dentist","Fast Trigger","Frosty","O.G.","O.G.","O.G.","Freckles","O.G.","Little Red","Freckles","O.G.","O.G.","O.G.","O.G.","Smiley","Smoke","Snake","Crusier","Little Red","Crusier"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>from<\/th>\n      <th>to<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":321,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+]
+
+.pull-right[
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+# Libro de Codigos
+
+.smallest[
+- **Afiliación con organizaciones ilegítimas** (persona-a-organización): definida como la propiedad, el empleo y / o la membresía de una persona en una organización ilegítima. Una organización ilegítima se define como un grupo u organización cuyos objetivos son de naturaleza nefasta (es decir, criminal) o que voluntariamente obtiene recursos materiales y / o no materiales a través de actividades ilegales.
+- **Amistad** (persona-a-persona): definida como dos personas que se declaran explícitamente como amigos, o que se conocen explícitamente como confidentes de confianza, en informes o en documentación de inteligencia. 
+- **Familiares** (persona-a-persona): dos actores relacionados por sangre, matrimonio o adopción.
+- **Financieras** (persona-a-persona): definido como dos actores, en informes o inteligencia, que se declaran explícitamente como transfiriendo fondos entre sí para cualquier propósito, legal o ilegal.
+- **Jerarquía** (persona-a-persona): definido como relaciones entre superiores inmediatos y subordinados en una organización. 
+]
+
+
+---
+&lt;br&gt;&lt;br&gt;
+.center[
+# ¿Qué relaciones unen la red formal\*? ¿Qué relaciones conforman la red informal\*\*?
+]
+
+&lt;br&gt;&lt;br&gt;
+.smallest[
+\* Formal: Esto quiere decir explícitamente criminal
+
+\*\* Informal: Es decir, todas las relaciones no son criminales.
+]
+
+
+---
+&lt;br&gt;&lt;br&gt;
+.center[
+# Red Formal
+
+Afiliación + Financieras + Jerarquía
+]
+
+
+---
+
+# Relaciones Apiladas: Red Formal
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;
+.center[
+# ¿Qué actor tiene mas enlaces?
+]
+
+
+---
+
+# Número de enlaces
+
+<div id="htmlwidget-39bd6835c6611f684065" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-39bd6835c6611f684065">{"x":{"filter":"none","data":[["O.G.","All City","Brains","Goldie","Smiley","Sharpie","Bloodhound","The Dentist","Shadow","Blue Eyes","Slingshot","Snake","Baby Face","Bananas","Book Collector","Droopy","Scratch","Smoke","Blood Messiah","Clown","Bat G.","Big G.","Blaze","Fast Trigger","Cranky","Fat Boy","Bugs","Ha-Ha","Crusier","Dapper Don","Enforcer","Sonny Black","Animal","Little Red","Freckles","Frosty","Ant","4 Stroke","Jelly","The Barber","Boots","Bow Wow"],[28,23,23,23,23,23,18,17,17,16,16,16,15,15,15,15,15,15,14,14,13,13,13,13,5,5,4,4,4,3,3,3,3,3,3,3,2,2,1,1,1,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>grado<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":321,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+&lt;br&gt;&lt;br&gt;
+.center[
+# Red Informal
+
+Amistad + Familiares
+]
+
+---
+
+# Relaciones Apiladas: Red Formal
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;
+.center[
+# ¿Qué actor tiene mas enlaces?
+]
+
+---
+
+# Número de enlaces
+
+<div id="htmlwidget-384e14d67161976a4239" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-384e14d67161976a4239">{"x":{"filter":"none","data":[["O.G.","Fat Boy","Bananas","Boots","Slingshot","Freckles","Icepick","Repo Girl","Adonis","Bloodhound","Boxcar","Brains","Ghost","Jelly","Gremlin","Bat G.","Big G.","Bow Wow","The Dentist","Frosty","Goldie","Pookey","Blaze","4 Stroke","The Barber","Cranky","Snake","Blue Eyes","Ha-Ha","Sonny Black"],[7,5,4,4,4,4,4,4,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>grado<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":321,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+---
+&lt;br&gt;&lt;br&gt;
+.center[
+# Red informal + formal
+]
+
+---
+
+# Relaciones Apiladas: Red Formal + Informal
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+&lt;br&gt;&lt;br&gt;
+.center[
+# ¿Qué actor tiene mas enlaces?
+]
+
+---
+
+# Número de enlaces
+
+<div id="htmlwidget-885ea9129ad631ccf725" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-885ea9129ad631ccf725">{"x":{"filter":"none","data":[["O.G.","Brains","Goldie","All City","Smiley","Sharpie","Bloodhound","Slingshot","The Dentist","Shadow","Snake","Bananas","Blue Eyes","Baby Face","Book Collector","Droopy","Scratch","Smoke","Blood Messiah","Clown","Bat G.","Big G.","Blaze","Fast Trigger","Fat Boy","Freckles","Cranky","Bugs","Ha-Ha","Jelly","Sonny Black","Boots","Icepick","Repo Girl","Crusier","Dapper Don","Enforcer","Adonis","Boxcar","Frosty","Ghost","Gremlin","Animal","Little Red","4 Stroke","The Barber","Bow Wow","Pookey","Ant"],[30,24,24,23,23,23,20,18,17,17,17,16,16,15,15,15,15,15,14,14,13,13,13,13,9,6,5,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,2,2,2,2,2]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>grado<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":321,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+.center[
+# Extraer
+]
+
+
+---
+# Extraer: Enlaces
+
+<div id="htmlwidget-8c0b917ae2d800e140ea" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8c0b917ae2d800e140ea">{"x":{"filter":"none","data":[["All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","All City","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Blood Messiah","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Baby Face","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bananas","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Bat G.","Big G.","Big G.","Big G.","Big G.","Big G.","Big G.","Big G.","Big G.","Big G.","Big G.","Blaze","Blaze","Blaze","Blaze","Blaze","Blaze","Blaze","Blaze","Blaze","Bugs","Bugs","Bugs","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Book Collector","Bloodhound","Bloodhound","Bloodhound","Bloodhound","Bloodhound","Bloodhound","Bloodhound","Bloodhound","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Blue Eyes","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Brains","Clown","Clown","Clown","Clown","Clown","Clown","Cranky","Cranky","Dapper Don","Dapper Don","The Dentist","The Dentist","The Dentist","The Dentist","The Dentist","The Dentist","The Dentist","The Dentist","Droopy","Droopy","Droopy","Droopy","Droopy","Droopy","Fast Trigger","Fast Trigger","Fast Trigger","Fast Trigger","Fat Boy","Slingshot","Slingshot","Slingshot","Slingshot","Slingshot","Slingshot","Slingshot","Goldie","Goldie","Goldie","Goldie","Goldie","Goldie","Goldie","O.G.","O.G.","Ha-Ha","Scratch","Scratch","Scratch","Scratch","Scratch","Shadow","Shadow","Shadow","Shadow","Smiley","Smiley","Smiley","Smoke","Smoke","Snake","4 Stroke","Adonis","Adonis","Adonis","Bananas","Bananas","Bananas","Bananas","The Barber","Bat G.","Bat G.","Big G.","Boots","Boots","Boots","Boots","Bloodhound","Bloodhound","Bloodhound","Bow Wow","Boxcar","Boxcar","Brains","Brains","Cranky","The Dentist","Fat Boy","Fat Boy","Fat Boy","Slingshot","Freckles","Freckles","Frosty","Ghost","Goldie","Goldie","Pookey","O.G.","Icepick","Snake","Adonis","Adonis","Adonis","Bananas","Bananas","Bananas","Bananas","Bat G.","Bat G.","Big G.","Boots","Boots","Boots","Boots","Boxcar","Boxcar","Brains","Brains","Fat Boy","Fat Boy","Fat Boy","Slingshot","Freckles","Freckles","Ghost","Goldie","Goldie","Pookey","Icepick","Snake","Animal","Animal","Animal","Ant","Bugs","Bloodhound","Bloodhound","Cranky","Enforcer","Fat Boy","Fat Boy","Slingshot","O.G.","O.G.","O.G.","4 Stroke","4 Stroke","Blood Messiah","Animal","Animal","Animal","Ant","Ant","Baby Face","Baby Face","Bananas","The Barber","Bat G.","Bat G.","Bat G.","Bat G.","Book Collector","Boots","Bloodhound","Bloodhound","Bloodhound","Bloodhound","Blue Eyes","Bow Wow","Dapper Don","The Dentist","The Dentist","Enforcer","Fast Trigger","Slingshot","Frosty","Goldie","O.G.","O.G.","O.G.","O.G.","Scratch","Shadow"],["Blood Messiah","Bat G.","Big G.","Blaze","Bloodhound","Brains","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Baby Face","Bananas","Book Collector","Blue Eyes","The Dentist","Slingshot","Scratch","Shadow","Smoke","Snake","Bat G.","Big G.","Blaze","Bloodhound","Brains","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Bananas","Book Collector","Blue Eyes","Brains","The Dentist","Slingshot","Goldie","Scratch","Shadow","Smiley","Smoke","Snake","Sharpie","Book Collector","Blue Eyes","Brains","The Dentist","Slingshot","Goldie","Scratch","Shadow","Smiley","Smoke","Snake","Sharpie","Big G.","Blaze","Bloodhound","Brains","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Blaze","Bloodhound","Brains","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Bloodhound","Brains","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Cranky","Fat Boy","Sonny Black","Blue Eyes","Brains","The Dentist","Slingshot","Goldie","Scratch","Shadow","Smiley","Smoke","Snake","Sharpie","Brains","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Brains","The Dentist","Slingshot","Goldie","Scratch","Shadow","Smiley","Smoke","Snake","Sharpie","Clown","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","The Dentist","Slingshot","Scratch","Shadow","Smoke","Snake","Droopy","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Fat Boy","Sonny Black","Droopy","Enforcer","Slingshot","Goldie","Scratch","Shadow","Smiley","Smoke","Snake","Sharpie","Fast Trigger","Goldie","O.G.","Smiley","Sharpie","Enforcer","Goldie","O.G.","Smiley","Sharpie","Sonny Black","Goldie","Scratch","Shadow","Smiley","Smoke","Snake","Sharpie","O.G.","Smiley","Sharpie","Scratch","Shadow","Smoke","Snake","Smiley","Sharpie","Jelly","Shadow","Smiley","Smoke","Snake","Sharpie","Smiley","Smoke","Snake","Sharpie","Sharpie","Smoke","Snake","Snake","Sharpie","Sharpie","Frosty","Boxcar","Ghost","Jelly","Blue Eyes","Brains","Slingshot","Gremlin","O.G.","Big G.","Blaze","Blaze","Fat Boy","Freckles","Icepick","Repo Girl","Bow Wow","The Dentist","Slingshot","O.G.","Ghost","Jelly","Slingshot","Gremlin","Fat Boy","O.G.","Freckles","Icepick","Repo Girl","Gremlin","Icepick","Repo Girl","O.G.","Jelly","Pookey","O.G.","O.G.","Ha-Ha","Repo Girl","Sonny Black","Boxcar","Ghost","Jelly","Blue Eyes","Brains","Slingshot","Gremlin","Big G.","Blaze","Blaze","Fat Boy","Freckles","Icepick","Repo Girl","Ghost","Jelly","Slingshot","Gremlin","Freckles","Icepick","Repo Girl","Gremlin","Icepick","Repo Girl","Jelly","Pookey","O.G.","O.G.","Repo Girl","Sonny Black","Shadow","Snake","Crusier","Little Red","Blue Eyes","Cranky","Ha-Ha","O.G.","Freckles","O.G.","Crusier","Ha-Ha","Ha-Ha","Snake","Crusier","Frosty","O.G.","Shadow","Shadow","Snake","Crusier","O.G.","Little Red","Clown","The Dentist","O.G.","Bloodhound","Bloodhound","Goldie","O.G.","Smiley","O.G.","Freckles","The Dentist","Fast Trigger","Frosty","O.G.","O.G.","O.G.","Freckles","O.G.","Little Red","Freckles","O.G.","O.G.","O.G.","O.G.","Smiley","Smoke","Snake","Crusier","Little Red","Crusier"],["Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Affiliation","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Friendship","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Familial","Financial","Financial","Financial","Financial","Financial","Financial","Financial","Financial","Financial","Financial","Financial","Financial","Financial","Financial","Financial","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate","Superior-Subordinate"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>from<\/th>\n      <th>to<\/th>\n      <th>Relationship<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":321,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+---
+# Extraer: Enlaces
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+
+.small[
+Afiliación = Negro | Financieras = Verde | Jerarquía = Gris | Famliliar = Rojo | Amistad = Azul
+]
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+.center[
+# ¿Quién es la persona central en la red financiera?
+]
+
+
+---
+
+# Extraer: Enlaces
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Extraer: Enlaces
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Extraer: Enlaces
+
+.pull-left[
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+<div id="htmlwidget-932ed8ef47185e2d007d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-932ed8ef47185e2d007d">{"x":{"filter":"none","data":[["O.G.","Ha-Ha","Animal","Crusier","Bloodhound","Cranky","Fat Boy","Snake","Bugs","Blue Eyes","Slingshot","Shadow","Freckles","Ant","Enforcer","Little Red"],[5,3,3,3,2,2,2,2,1,1,1,1,1,1,1,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>grado<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":321,"columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+]
+
+---
+
+# Extraer: Attibutos
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+
+&lt;center&gt;&lt;small&gt; Anabautistas &lt;small/&gt;&lt;center/&gt;
+
+
+---
+# Objetivos
+
+1. Crear una visualización eficaz de la sub-red de alemanes 
+2. Determinar aquellos involucrados en el movimiento Anabautista
+3. Calcular medidas de centralidad
+4. Presentar un gráfico de los mas importantes 
+
+
+---
+# Datos Relacionales
+
+<div id="htmlwidget-9ee2471f2a9bbf9b7da0" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9ee2471f2a9bbf9b7da0">{"x":{"filter":"none","data":[["Martin Luther","Martin Luther","Martin Luther","Martin Luther","Martin Luther","Martin Luther","Martin Luther","John Calvin","John Calvin","Ulrich Zwingli","Ulrich Zwingli","Ulrich Zwingli","Ulrich Zwingli","Ulrich Zwingli","Ulrich Zwingli","Ulrich Zwingli","Ulrich Zwingli","Ulrich Zwingli","Ulrich Zwingli","Ulrich Zwingli","Ulrich Zwingli","Joachim Vadian","Joachim Vadian","Conrad Grebel","Conrad Grebel","Conrad Grebel","Conrad Grebel","Conrad Grebel","Conrad Grebel","Conrad Grebel","Conrad Grebel","Conrad Grebel","Felix Manz","Felix Manz","Felix Manz","Felix Manz","George Blaurock","George Blaurock","George Blaurock","George Blaurock","George Blaurock","Wilhelm Reublin","Wilhelm Reublin","Wilhelm Reublin","Wilhelm Reublin","Wilhelm Reublin","Wilhelm Reublin","Wilhelm Reublin","Wilhelm Reublin","Wilhelm Reublin","Wilhelm Reublin","Wilhelm Reublin","Johannes Brotli","Johannes Brotli","Louis Haetzer","Louis Haetzer","Louis Haetzer","Leo Jud","Wolfgang Ulimann","Wolfgang Ulimann","Andrew Castelberger","Andrew Castelberger","John Denck","John Denck","John Denck","John Denck","John Denck","John Denck","John Denck","Thomas Muntzer","Thomas Muntzer","Thomas Muntzer","Thomas Muntzer","Andreas Carlstadt","Balthasar Hubmaier","Balthasar Hubmaier","Balthasar Hubmaier","Balthasar Hubmaier","Balthasar Hubmaier","Balthasar Hubmaier","Balthasar Hubmaier","John Hut","John Hut","John Hut","John Hut","John Hut","John Hut","John Hut","John Hut","John Hut","John Hut","John Hut","John Hut","John Hut","Michael Sattler","Michael Sattler","Michael Sattler","Jacob Hutter","Jacob Hutter","Jacob Hutter","Jacob Hutter","Jacob Hutter","Jacob Hutter","Jacob Hutter","Pilgrim Marpeck","Pilgrim Marpeck","Pilgrim Marpeck","Pilgrim Marpeck","Oswald Glait","Oswald Glait","Oswald Glait","Oswald Glait","Oswald Glait","Oswald Glait","Oswald Glait","Andreas Fischer","Andreas Fischer","Caspar Schwenckfeld","Caspar Schwenckfeld","Caspar Schwenckfeld","Caspar Schwenckfeld","Caspar Schwenckfeld","Leonhard von Lichtenstein","Melchior Hofmann","Melchior Hofmann","Melchior Hofmann","Melchior Hofmann","Melchior Hofmann","John Matthijs","John Matthijs","John Matthijs","John Matthijs","John Matthijs","John Matthijs","John Layden","John Layden","John Layden","John Layden","John Layden","Bernard Rothmann","Bernard Rothmann","Bernard Rothmann","Bernard Rothmann","Jacob Gross","Jacob Gross","Jacob Gross","Leonard Schiemer","Leonard Schiemer","Leonard Schiemer","Leonard Schiemer","John Schlaffer","John Schlaffer","Ambrose Spittelmaier","Ambrose Spittelmaier","Peter Riedemann","Peter Riedemann","Peter Riedemann","Peter Riedemann","Peter Riedemann","Peter Riedemann","George Zaunring","John Amon","John Amon","Leonard Lanzenstiel","Leonard Lanzenstiel","Peter Walpot","Jan Batenburg","Jan Batenburg","Heinrich Kretching","Jacob Dachser","Hippolytus (Bolt) Eberli","Menno Simons","Menno Simons","Menno Simons","Menno Simons","Obbe Philips","Obbe Philips","Obbe Philips","Dirk Philips","Jan Trypmaker","Jacob Van Campen","Philipp Melanchthon","Wolfgang Capito"],["Ulrich Zwingli","Thomas Muntzer","Andreas Carlstadt","Caspar Schwenckfeld","Melchior Hofmann","Philipp Melanchthon","Martin Bucer","Wolfgang Capito","Martin Bucer","Joachim Vadian","Conrad Grebel","Felix Manz","George Blaurock","Wilhelm Reublin","Johannes Brotli","Louis Haetzer","Leo Jud","Henry Bullinger","Balthasar Hubmaier","Wolfgang Capito","Martin Bucer","Conrad Grebel","John Denck","Felix Manz","George Blaurock","Wilhelm Reublin","Johannes Brotli","Louis Haetzer","Wolfgang Ulimann","Andrew Castelberger","Hippolytus (Bolt) Eberli","George Schad","Wilhelm Reublin","Louis Haetzer","Hippolytus (Bolt) Eberli","George Schad","Jacob Dachser","Hippolytus (Bolt) Eberli","Sigmund Salminger","George Schad","Ulrich Stadler","John Denck","Balthasar Hubmaier","Michael Sattler","Jacob Hutter","Pilgrim Marpeck","Jacob Wiedemann","Jacob Kautz","Hippolytus (Bolt) Eberli","George Schad","Wolfgang Capito","Martin Bucer","Hippolytus (Bolt) Eberli","George Schad","John Denck","Balthasar Hubmaier","Jacob Kautz","Henry Bullinger","Hippolytus (Bolt) Eberli","George Schad","Hippolytus (Bolt) Eberli","George Schad","Thomas Muntzer","Andreas Carlstadt","Balthasar Hubmaier","John Hut","Jacob Kautz","Wolfgang Capito","Martin Bucer","Andreas Carlstadt","John Hut","Hans Romer","Philipp Melanchthon","Melchior Hofmann","John Hut","Oswald Glait","Leonard Schiemer","John Schlaffer","Hippolytus (Bolt) Eberli","George Schad","John Spittelmaier","Oswald Glait","Leonhard von Lichtenstein","Hans Schlaffer","Jacob Gross","Leonard Schiemer","John Schlaffer","Ambrose Spittelmaier","Peter Riedemann","Gabriel Ascherham","Hans Romer","Jacob Dachser","Sigmund Salminger","John Spittelmaier","Ulrich Stadler","Wolfgang Capito","Martin Bucer","Peter Riedemann","George Zaunring","Simon Schutzinger","John Amon","Jacob Dachser","Sigmund Salminger","Ulrich Stadler","Caspar Schwenckfeld","Jacob Kautz","Wolfgang Capito","Martin Bucer","Andreas Fischer","Caspar Schwenckfeld","Hans Schlaffer","Leonard Schiemer","Ambrose Spittelmaier","Jacob Dachser","Sigmund Salminger","Caspar Schwenckfeld","Leonhard von Lichtenstein","Melchior Hofmann","Bernard Rothmann","Jacob Kautz","Wolfgang Capito","Martin Bucer","John Spittelmaier","John Matthijs","John Layden","Bernard Rothmann","Bernard Knipperdolling","Jan Trypmaker","John Layden","Bernard Rothmann","Heinrich Kretching","Bernard Knipperdolling","Gerrit Boekbinder","Jacob Van Campen","Bernard Rothmann","Heinrich Kretching","Bernard Knipperdolling","Gerrit Boekbinder","Jan Van Geelen","Bernard Knipperdolling","Gerrit Boekbinder","Philipp Melanchthon","Wolfgang Capito","Jacob Dachser","Sigmund Salminger","Martin Bucer","John Schlaffer","Ambrose Spittelmaier","Jacob Dachser","Sigmund Salminger","Ambrose Spittelmaier","Jacob Dachser","Jacob Dachser","Sigmund Salminger","John Amon","Leonard Lanzenstiel","Jacob Dachser","Philip Plener","Sigmund Salminger","Ulrich Stadler","Jacob Wiedemann","Leonard Lanzenstiel","Ulrich Stadler","Ulrich Stadler","John Spittelmaier","Ulrich Stadler","Heinrich Kretching","Cornelis Appleman","David Joris","Sigmund Salminger","George Schad","Obbe Philips","Dirk Philips","David Joris","Jan Van Geelen","Dirk Philips","David Joris","Gerrit Boekbinder","David Joris","Gerrit Boekbinder","Jan Van Geelen","Wolfgang Capito","Martin Bucer"],["people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people"],["people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people"],["Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting","Face-to-Face Meeting"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>from<\/th>\n      <th>to<\/th>\n      <th>from_class<\/th>\n      <th>to_class<\/th>\n      <th>edge_class<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":400,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+# Datos de Atributos
+
+<div id="htmlwidget-47d2eb8d12a603a05a7a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-47d2eb8d12a603a05a7a">{"x":{"filter":"none","data":[["Martin Luther","John Calvin","Ulrich Zwingli","Joachim Vadian","Conrad Grebel","Felix Manz","George Blaurock","Wilhelm Reublin","Johannes Brotli","Louis Haetzer","Leo Jud","Henry Bullinger","Wolfgang Ulimann","Andrew Castelberger","John Denck","Thomas Muntzer","Andreas Carlstadt","Balthasar Hubmaier","John Hut","Michael Sattler","Jacob Hutter","Pilgrim Marpeck","Oswald Glait","Andreas Fischer","Caspar Schwenckfeld","Leonhard von Lichtenstein","Hans Schlaffer","Melchior Hofmann","John Matthijs","John Layden","Bernard Rothmann","Jacob Gross","Leonard Schiemer","John Schlaffer","Ambrose Spittelmaier","Peter Riedemann","Gabriel Ascherham","George Zaunring","Jacob Wiedemann","Simon Schutzinger","John Amon","Leonard Lanzenstiel","Peter Walpot","Jacob Kautz","Hans Romer","Jan Batenburg","Heinrich Kretching","Jacob Dachser","Hippolytus (Bolt) Eberli","Bernard Knipperdolling","Philip Plener","Sigmund Salminger","George Schad","Menno Simons","Ulrich Stadler","Obbe Philips","Dirk Philips","John Spittelmaier","David Joris","Jan Trypmaker","Gerrit Boekbinder","Jacob Van Campen","Philipp Melanchthon","Wolfgang Capito","Martin Bucer","Cornelis Appleman","Jan Van Geelen"],["people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people","people"],[0,0,0,0,1,1,1,1,1,1,0,0,1,1,1,0,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1],[1,1,1,1,0,0,0,0,0,0,1,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1],[0,0,0,0,1,1,1,1,1,1,0,0,1,1,1,0,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,1,0,1,1,0,1,1,1,1,0,0,0,1,1],[0,0,0,0,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,0,1,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],[0,1,1,1,0,0,0,0,0,0,1,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[7,8,8,8,2,2,2,2,2,3,8,8,2,8,3,9,8,6,4,6,6,6,4,6,9,4,6,1,1,1,1,4,4,6,4,5,6,5,5,5,5,5,5,6,6,1,1,4,2,1,6,4,2,1,5,1,1,6,1,1,1,1,7,8,8,1,1],[3,2,8,8,8,8,8,3,8,8,2,8,8,8,3,3,3,3,3,3,4,1,3,5,7,5,1,3,6,6,3,8,1,1,1,3,1,5,5,1,3,5,4,3,3,6,3,3,8,3,3,3,8,6,1,6,6,5,6,6,6,6,3,3,3,6,6],[2,5,5,5,5,5,5,5,5,5,5,5,5,5,2,2,2,3,2,2,1,5,3,3,2,3,1,2,4,4,2,2,1,1,1,3,2,3,3,3,3,3,3,2,2,4,2,2,5,2,2,2,5,4,3,4,4,3,4,4,4,4,2,2,2,4,4],["Germany","France","Switzerland","Switzerland","Switzerland","Switzerland","Switzerland","Germany","Switzerland","Switzerland","France","Switzerland","Switzerland","Switzerland","Germany","Germany","Germany","Germany","Germany","Germany","Italy","Austria","Germany","Moravia","Poland","Moravia","Austria","Germany","Netherlands","Netherlands","Germany","Switzerland","Austria","Austria","Austria","Germany","Austria","Moravia","Moravia","Austria","Germany","Moravia","Italy","Germany","Germany","Netherlands","Germany","Germany","Switzerland","Germany","Germany","Germany","Switzerland","Netherlands","Austria","Netherlands","Netherlands","Moravia","Netherlands","Netherlands","Netherlands","Netherlands","Germany","Germany","Germany","Netherlands","Netherlands"],["Germany","Switzerland","Switzerland","Switzerland","Switzerland","Switzerland","Switzerland","Switzerland","Switzerland","Switzerland","Switzerland","Switzerland","Switzerland","Switzerland","Germany","Germany","Germany","Moravia","Germany","Germany","Austria","Switzerland","Moravia","Moravia","Germany","Moravia","Austria","Germany","Netherlands","Netherlands","Germany","Germany","Austria","Austria","Austria","Moravia","Germany","Moravia","Moravia","Moravia","Moravia","Moravia","Moravia","Germany","Germany","Netherlands","Germany","Germany","Switzerland","Germany","Germany","Germany","Switzerland","Netherlands","Moravia","Netherlands","Netherlands","Moravia","Netherlands","Netherlands","Netherlands","Netherlands","Germany","Germany","Germany","Netherlands","Netherlands"],["Lutheran","Reformed","Reformed","Reformed","Swiss Brethren","Swiss Brethren","Swiss Brethren","Swiss Brethren","Swiss Brethren","Denck","Reformed","Reformed","Swiss Brethren","Reformed","Denck","Other Protestant","Reformed","Other Anabaptist","Hut","Other Anabaptist","Other Anabaptist","Other Anabaptist","Hut","Other Anabaptist","Other Protestant","Hut","Other Anabaptist","Melchiorite","Melchiorite","Melchiorite","Melchiorite","Hut","Hut","Other Anabaptist","Hut","Hutterite","Other Anabaptist","Hutterite","Hutterite","Hutterite","Hutterite","Hutterite","Hutterite","Other Anabaptist","Other Anabaptist","Melchiorite","Melchiorite","Hut","Swiss Brethren","Melchiorite","Other Anabaptist","Hut","Swiss Brethren","Melchiorite","Hutterite","Melchiorite","Melchiorite","Other Anabaptist","Melchiorite","Melchiorite","Melchiorite","Melchiorite","Lutheran","Reformed","Reformed","Melchiorite","Melchiorite"],[true,true,true,true,false,false,false,false,false,false,true,true,false,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,false,false,true,false,false,false,false,false,false,false,false,false,false,true,false,true,false,false,true,true],[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,true,false,false,false,false,false,false,false,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,false,false,true,false,false,false,false,false,false,false,false,false,true,true,true,false,false,false,true,true],[false,false,false,false,true,true,true,true,true,true,false,false,true,true,true,false,false,true,true,true,true,true,true,true,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,true,true],[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,true,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,true],[false,false,false,false,true,true,true,true,true,true,false,false,true,true,true,false,false,true,true,true,true,true,true,true,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,true,true]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>node_class<\/th>\n      <th>believer_baptist<\/th>\n      <th>violence_sanctioning<\/th>\n      <th>munster_rebel<\/th>\n      <th>apocalyptic<\/th>\n      <th>Anabaptist<\/th>\n      <th>Melchiorite<\/th>\n      <th>Swiss Brethren<\/th>\n      <th>Denck<\/th>\n      <th>Hut<\/th>\n      <th>Hutterite<\/th>\n      <th>Other Anabaptist<\/th>\n      <th>Lutheran<\/th>\n      <th>Reformed<\/th>\n      <th>Other Protestant<\/th>\n      <th>Tradition<\/th>\n      <th>origin<\/th>\n      <th>based_in<\/th>\n      <th>hr_origin<\/th>\n      <th>hr_based_in<\/th>\n      <th>hr_group<\/th>\n      <th>is_violence_sanctioning<\/th>\n      <th>is_apocalyptic<\/th>\n      <th>is_believer_baptist<\/th>\n      <th>is_munster_rebel<\/th>\n      <th>is_anabaptist<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":400,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+# Extraer
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+
+&lt;center&gt;&lt;small&gt; Anabautistas, nodos por nación &lt;small/&gt;&lt;center/&gt;
+
+
+---
+
+# Extraer
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+
+&lt;center&gt;&lt;small&gt; Anabautistas, alemanes negro &lt;small/&gt;&lt;center/&gt;
+
+
+---
+
+# Extraer: Alemanes
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Extraer: Alemanes
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Extraer: Alemanes
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Extraer: Alemanes
+
+&lt;img src="multiples-relaciones_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Resumen
+
+|Técnica | Ventaja (s) | Desventaja (s)  |
+|--------|-------------| ----------------|
+|**Apilar** | Visuales (es decir, color por tipo de relación) y gestión de datos. | No se pueden ejecutar métricas para más de una red a la vez. |
+|**Extraer** | Centrarse en la red de actores con un atributo específico, o relaciones específicas. | Manejo de datos. |
+
+---
+&lt;br&gt;
+.center[
+### ¿Preguntas?
+![](imgs/preguntas.jpg)]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

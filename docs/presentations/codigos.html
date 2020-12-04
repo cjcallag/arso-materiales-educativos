@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Codificar Datos</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=" Christopher Callaghan" />
+    <meta name="date" content="2020-09-30" />
+    <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+    <script src="libs/jquery-1.12.4/jquery.min.js"></script>
+    <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding-0.13/datatables.js"></script>
+    <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Codificar Datos
+## 🔨
+### </br><small> Christopher Callaghan
+### <img src = 'imgs/corelogo.png' height='60' width='120'>
+### 2020-09-30 </small>
+
+---
+
+
+
+
+# Repaso: ¿Qué tipo de datos?
+
+.center[
+
+```
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+[1,]    0    0    0    0    0    0    0    0
+[2,]    1    0    0    0    0    0    0    0
+[3,]    1    0    0    0    0    0    0    0
+[4,]    1    0    0    0    0    0    0    0
+[5,]    0    0    1    0    0    0    0    0
+[6,]    0    0    0    0    1    0    0    0
+[7,]    0    0    0    0    1    0    0    0
+[8,]    0    1    0    0    0    0    0    0
+```
+]
+
+&lt;br&gt;
+
+.pull-left[
+
+Opciones:     &lt;br&gt;
+  A. Modo-Uno &lt;br&gt;
+  B. Modo-Dos &lt;br&gt;
+  C. Atributos
+
+]
+
+--
+.pull-right[
+  &lt;br&gt;
+  **A. Modo-Uno**
+  &lt;br&gt;
+  
+  Persona a persona y cada relación es asimétrica (arcos).
+]
+
+
+---
+
+# Repaso: ¿Qué tipo de datos?
+
+.center[
+
+```
+  5 6 7 8 9 10 11 12
+1 0 0 0 0 0  1  0  0
+2 0 0 0 0 0  0  0  0
+3 1 1 0 1 1  1  1  1
+4 0 0 1 1 1  0  1  1
+```
+]
+
+&lt;br&gt;
+
+.pull-left[
+
+Opciones:     &lt;br&gt;
+  A. Modo-Uno &lt;br&gt;
+  B. Modo-Dos &lt;br&gt;
+  C. Attributos
+
+]
+
+--
+.pull-right[
+  &lt;br&gt;
+  &lt;br&gt;
+  **B. Modo-Dos**
+  
+  Persona a organización.
+]
+
+
+---
+
+# Repaso: ¿Qué tipo de datos?
+
+.center[
+&lt;img src="codigos_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-left[
+
+Opciones:     &lt;br&gt;
+  A. Modo-Uno &lt;br&gt;
+  B. Modo-Dos &lt;br&gt;
+  C. Attributos
+
+]
+
+--
+.pull-right[
+  &lt;br&gt;
+  &lt;br&gt;
+  **B. Modo-Dos**
+  
+  Persona a organización.
+]
+
+
+---
+
+# Repaso: ¿Qué tipo de datos?
+
+.center[
+&lt;img src="codigos_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-left[
+
+Opciones:     &lt;br&gt;
+  A. Modo-Uno &lt;br&gt;
+  B. Modo-Dos &lt;br&gt;
+  C. Atributos
+
+]
+
+--
+.pull-right[
+  &lt;br&gt;
+  **A. Modo-Uno**
+  &lt;br&gt;
+  
+  Persona a persona y cada relación es asimétrica (arcos).
+]
+
+
+---
+
+&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;center&gt;
+
+# Codificar
+
+&lt;center/&gt;
+
+---
+# ¿Por qué ARSo?
+
+&lt;/br&gt;&lt;/br&gt;
+&lt;center&gt;
+
+&lt;img src="imgs/coding.png" width="1280" style="display: block; margin: auto;" /&gt;
+
+&lt;center/&gt;
+
+
+---
+
+# Un Ejercicio
+
+*El actor F se comunica regularmente con el actor P, y con poca frecuencia envía mensajes de texto con el actor Z. Se sabe que pasa tiempo con los actores B, L y N (N es un hombre de 19 años, miembro de grupo Y). El está involucrada románticamente con el actor H y se ha reunido con el actor B en una ocasión. Finalmente, fue arrestada con el actor D hace unos 3 meses.*
+
+&lt;center&gt;
+¿Qué tipo de relaciones?
+&lt;/center&gt;
+ 
+ 
+---
+
+# Codificación 
+
+- La codificación es esencialmente el proceso de identificar e interpretar la información y, posteriormente, categorizar esa información para facilitar el análisis de datos.
+
+- No necesariamente lo mismo que la estructuración de datos.
+
+---
+
+# Por ejemplo
+
+*A menudo se ve a __Mike__ con __Glenn__. __El primero__ es un miembro conocido del __grupo criminal X__, __el segundo__ se identifica con el __grupo criminal Y__.*
+
+--
+- ¿Qué podemos hacer?
+  - Identificar (Mike -miembro-&gt; Grupo X)
+  - Interpretar (Glenn -miembro-&gt; Grup Y)
+  - Categorizar (Mike &lt;-conocido-&gt; Glenn)
+
+
+---
+
+*El actor F se comunica regularmente con el actor P, y con poca frecuencia envía mensajes de texto con el actor Z. Se sabe que pasa tiempo con los actores B, L y N (N es un hombre de 19 años, miembro de grupo Y). El está involucrada románticamente con el actor H y se ha reunido con el actor B en una ocasión. Finalmente, fue arrestada con el actor D hace unos 3 meses.*
+
+&lt;small&gt;
+
+**Comunicación:** transmisión directa de mensajes o información entre individuos o mediante algún tipo de medio, como un teléfono celular o un correo electrónico.
+
+**Amistad:** definida como dos personas que se declaran explícitamente como amigos, o que se conocen explícitamente como confidentes de confianza, en informes o en documentación de inteligencia.
+
+**Romance:** dos personas que están saliendo o están involucradas en una relación cariñosa y romántica.
+
+**Asociado criminal:** definido como dos individuos que colaboran, ayudan o participan directamente en actividades ilícitas
+
+&lt;/small&gt;
+
+
+---
+
+# Grabar
+
+*El __actor__ F se __comunica__ regularmente con el __actor P__, y con poca frecuencia envía mensajes de texto con el actor Z. Se sabe que pasa tiempo con los actores B, L y N (N es un hombre de 19 años, miembro de grupo Y). El está involucrada románticamente con el actor H y se ha reunido con el actor B en una ocasión. Finalmente, fue arrestada con el actor D hace unos 3 meses.*
+
+&lt;/br&gt;&lt;center&gt; **Lista de bordes** &lt;/center&gt;
+
+<div id="htmlwidget-a4be564172dddd49a76d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a4be564172dddd49a76d">{"x":{"filter":"none","data":[["A"],["P"],["Comunicación"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>De<\/th>\n      <th>A<\/th>\n      <th>Relacion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+
+# Grabar
+
+*El __actor__ F se comunica regularmente con el actor P, y con poca frecuencia __envía mensajes de texto__ con el __actor Z__. Se sabe que pasa tiempo con los actores B, L y N (N es un hombre de 19 años, miembro de grupo Y). El está involucrada románticamente con el actor H y se ha reunido con el actor B en una ocasión. Finalmente, fue arrestada con el actor D hace unos 3 meses.*
+
+<div id="htmlwidget-04c8327f3986b33f13a2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-04c8327f3986b33f13a2">{"x":{"filter":"none","data":[["F","F"],["P","Z"],["Comunicación","Comunicación"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>De<\/th>\n      <th>A<\/th>\n      <th>Relacion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+&lt;/br&gt;&lt;/br&gt;&lt;center&gt; **~15 minutos** ⏳ &lt;/center&gt;
+
+---
+
+# Grabar
+
+*El __actor__ F se comunica regularmente con el __actor P__, y con poca frecuencia envía mensajes de texto con el __actor Z__. Se sabe que pasa tiempo con los __actores B, L y N__ (N es un hombre de 19 años, miembro de grupo Y). Ella está involucrada románticamente con el __actor H__ y se ha reunido con el __actor B__ en una ocasión. Finalmente, fue arrestada con el __actor D__ hace unos 3 meses.*
+
+<div id="htmlwidget-cbe47a0fcd96b4d2d3d2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cbe47a0fcd96b4d2d3d2">{"x":{"filter":"none","data":[["F","F","F","F","F","F","F","F"],["P","Z","B","L","N","H","B","D"],["Comunicación","Comunicación","Amistad","Amistad","Amistad","Romance","Amistad","Asociado criminal"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>De<\/th>\n      <th>A<\/th>\n      <th>Relacion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scroller":true,"scrollY":200,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+
+# Demostración
+
+&lt;/br&gt;
+
+&lt;img src="imgs/gephi.png" width="675" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+&lt;/br&gt;&lt;/br&gt;&lt;center&gt;
+
+# Libro de Código
+
+&lt;/br&gt;&lt;/br&gt;
+
+⏳ + sitio web.
+
+&lt;center/&gt;
+
+
+---
+&lt;br&gt;
+.center[
+### ¿Preguntas?
+![](imgs/preguntas.jpg)]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Centralidad</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=" Christopher Callaghan" />
+    <meta name="date" content="2020-10-01" />
+    <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+    <script src="libs/jquery-1.12.4/jquery.min.js"></script>
+    <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding-0.13/datatables.js"></script>
+    <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Centralidad
+## Poder y Prestigio
+### </br><small> Christopher Callaghan
+### <img src = 'imgs/corelogo.png' height='60' width='120'>
+### 2020-10-01 </small>
+
+---
+
+
+
+
+# ¿Qué es la centralidad?
+
+.pull-left[
+- El enfoque en los actores de la red.
+- Las personas centrales a menudo ocupan posiciones importantes de prestigio y visibilidad, pueden influir en la difusión de ideas y comportarse (Valente, 2010).
+
+.center[**¿Quién es importante?**]
+]
+
+.pull-right[
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
+] 
+
+
+---
+
+&lt;br/&gt;&lt;br/&gt;
+.center[
+# Centralidad
+## Datos no dirigidos
+]
+
+
+---
+
+# Grado de centralidad
+
+.pull-left[
+  - El conteo del número de vínculos de un actor
+  
+`$$C_i^{deg} = \sum\limits_{j=1}^n x_{ij}$$`
+
+  - Las personas u organizaciones que están "al tanto" son los que están vinculados a muchas otras y por lo tanto, en virtud de su posición tienen acceso a recursos de otros
+  - Pero...
+]
+
+.pull-right[
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Grado de centralidad
+
+.center[
+
+```
+  A B C D E F G H I J K L M N Q R P O S   
+A 0 1 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0  3
+B 1 0 0 1 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0  4
+C 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0  2
+D 1 1 1 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0  6
+E 0 1 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0  3
+F 1 0 0 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0  4
+G 0 1 0 1 1 1 0 1 0 0 0 0 0 0 0 0 0 0 0  5
+H 0 0 1 0 0 1 1 0 1 0 0 0 0 0 0 1 0 0 0  5
+I 0 0 0 0 0 0 0 1 0 1 0 0 0 1 0 0 1 0 0  4
+J 0 0 0 0 0 0 0 0 1 0 1 1 1 1 0 0 1 1 0  7
+K 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 1 0 0  3
+L 0 0 0 0 0 0 0 0 0 1 1 0 1 0 0 0 0 0 0  3
+M 0 0 0 0 0 0 0 0 0 1 0 1 0 0 1 0 0 0 0  3
+N 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0  3
+Q 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1  2
+R 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0  1
+P 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0  3
+O 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0  2
+S 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0  1
+  3 4 2 6 3 4 5 5 4 7 3 3 3 3 2 1 3 2 1 64
+```
+]
+
+---
+
+# Grado de centralidad
+
+.center[
+
+```
+  A B C D E F G H I J K L M N Q R P O S
+A 0 1 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+B 1 0 0 1 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+C 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+D 1 1 1 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0
+E 0 1 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+F 1 0 0 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0
+G 0 1 0 1 1 1 0 1 0 0 0 0 0 0 0 0 0 0 0
+H 0 0 1 0 0 1 1 0 1 0 0 0 0 0 0 1 0 0 0
+I 0 0 0 0 0 0 0 1 0 1 0 0 0 1 0 0 1 0 0
+J 0 0 0 0 0 0 0 0 1 0 1 1 1 1 0 0 1 1 0
+K 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 1 0 0
+L 0 0 0 0 0 0 0 0 0 1 1 0 1 0 0 0 0 0 0
+M 0 0 0 0 0 0 0 0 0 1 0 1 0 0 1 0 0 0 0
+N 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0
+Q 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1
+R 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+P 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0
+O 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0
+S 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+  3 4 2 6 3 4 5 5 4 7 3 3 3 3 2 1 3 2 1
+```
+]
+
+---
+
+# Grado de centralidad
+
+<div id="htmlwidget-17662ac16b4adc9a48d9" style="width:100%;height:510px;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-17662ac16b4adc9a48d9">{"x":{"filter":"none","data":[["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Q","R","P","O","S"],[3,4,2,6,3,4,5,5,4,7,3,3,3,3,2,1,3,2,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>grado<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+
+# Centralidad de cercanía
+
+.pull-left[
+- Que tan cercano (en promedio) se encuentra un actor de todos los demás actores en la red
+
+`$$C_i^{clo} = \frac{1}{\sum\limits_{j = 1}^{n}d_{ij}}$$`
+
+- Manifiesta la distancia que viaja la información desde una persona a los demás
+- Pero...
+]
+
+.pull-right[
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Centralidad de cercanía
+
+.center[
+
+```
+  A B C D E F G H I J K L M N Q R P O S
+A 0 1 2 1 2 1 2 2 3 4 5 5 5 4 6 3 4 5 7
+B 1 0 2 1 1 2 1 2 3 4 5 5 5 4 6 3 4 5 7
+C 2 2 0 1 2 2 2 1 2 3 4 4 4 3 5 2 3 4 6
+D 1 1 1 0 1 1 1 2 3 4 5 5 5 4 6 3 4 5 7
+E 2 1 2 1 0 2 1 2 3 4 5 5 5 4 6 3 4 5 7
+F 1 2 2 1 2 0 1 1 2 3 4 4 4 3 5 2 3 4 6
+G 2 1 2 1 1 1 0 1 2 3 4 4 4 3 5 2 3 4 6
+H 2 2 1 2 2 1 1 0 1 2 3 3 3 2 4 1 2 3 5
+I 3 3 2 3 3 2 2 1 0 1 2 2 2 1 3 2 1 2 4
+J 4 4 3 4 4 3 3 2 1 0 1 1 1 1 2 3 1 1 3
+K 5 5 4 5 5 4 4 3 2 1 0 1 2 2 3 4 1 2 4
+L 5 5 4 5 5 4 4 3 2 1 1 0 1 2 2 4 2 2 3
+M 5 5 4 5 5 4 4 3 2 1 2 1 0 2 1 4 2 2 2
+N 4 4 3 4 4 3 3 2 1 1 2 2 2 0 3 3 2 1 4
+Q 6 6 5 6 6 5 5 4 3 2 3 2 1 3 0 5 3 3 1
+R 3 3 2 3 3 2 2 1 2 3 4 4 4 3 5 0 3 4 6
+P 4 4 3 4 4 3 3 2 1 1 1 2 2 2 3 3 0 2 4
+O 5 5 4 5 5 4 4 3 2 1 2 2 2 1 3 4 2 0 4
+S 7 7 6 7 7 6 6 5 4 3 4 3 2 4 1 6 4 4 0
+```
+]
+
+$$
+C_A^{clo} = \frac{1}{3(1)+4(2)+2(3)+2(4)+4(5)+6+7} = 0.01612903
+$$
+
+---
+
+# Centralidad de cercanía
+
+<div id="htmlwidget-0eda67b29cab7ab5042a" style="width:100%;height:510px;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0eda67b29cab7ab5042a">{"x":{"filter":"none","data":[["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Q","R","P","O","S"],[3,4,2,6,3,4,5,5,4,7,3,3,3,3,2,1,3,2,1],[0.016,0.016,0.019,0.017,0.016,0.02,0.02,0.025,0.026,0.024,0.018,0.018,0.019,0.021,0.014,0.018,0.021,0.017,0.012]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>grado<\/th>\n      <th>cercanía<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+
+# Centralidad de intermediación
+
+.pull-left[
+- Que tan amenudo un actor se encuentra en el camino más corto entre otros actores en la red
+
+`$$C_j^{bet} = \sum\limits_{i \neq j \neq k}\frac{\sigma_{ik}(j)}{\sigma_{ik}}$$`
+
+- Los actores que son potencialmente influyentes caundo se encuentran entre grupos y pueden actuar como un portero entre estos
+- Pero...
+]
+
+.pull-right[
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Centralidad de intermediación
+
+.center[
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+`$$C_A^{bet} = \sum\limits_{i \neq j \neq k} \frac{1}{1} = 1$$` 
+
+---
+
+# Centralidad de intermediación
+
+.center[
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+`$$C_A^{bet} = \frac{1}{1} + \frac{1}{1} + \frac{1}{1} = 3$$` 
+
+
+---
+
+# Centralidad de intermediación
+
+<div id="htmlwidget-92caa1efc7f5c49776f6" style="width:100%;height:510px;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-92caa1efc7f5c49776f6">{"x":{"filter":"none","data":[["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Q","R","P","O","S"],[3,4,2,6,3,4,5,5,4,7,3,3,3,3,2,1,3,2,1],[0.016,0.016,0.019,0.017,0.016,0.02,0.02,0.025,0.026,0.024,0.018,0.018,0.019,0.021,0.014,0.018,0.021,0.017,0.012],[0.333,0.833,4,5.667,0,16.333,28.833,88,81.5,66.5,0.5,1.5,32,5,17,0,5,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>grado<\/th>\n      <th>cercanía<\/th>\n      <th>intermediación<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+
+# Centralidad de eigenvector
+
+.pull-left[
+- Pondera la centralidad de un actor por la centralidad de sus vecinos
+
+`$$C_j^{eig} = \frac{1}{\lambda}\sum\limits_{j=1}^nA_{ij}x_j$$`
+
+- Actores bien conectados con otros actores bien conectados pueden propagar información mucho más rapido
+- Pero...
+]
+
+.pull-right[
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# [Ejemplo: Ronda 1]((http://www.jsums.edu/nmeghanathan/files/2015/08/CSC641-Fall2015-Module-2-Centrality-Measures.pdf?x61976)
+
+.pull-left[
+.center[
+
+```
+  A C B D E
+A 0 1 1 1 0
+C 1 0 1 1 0
+B 1 1 0 0 1
+D 1 1 0 0 0
+E 0 0 1 0 0
+```
+
+`\(\times\)`
+
+
+```
+[1] 1 1 1 1 1
+```
+
+`\(=\)`
+
+
+```
+A C B D E 
+3 3 3 2 1 
+```
+
+`\(V. Norm = \sqrt{3(9) + 4 + 1} = 5.477226\)`
+
+
+```
+        A         C         B         D         E 
+0.5477225 0.5477225 0.5477225 0.3651483 0.1825742 
+```
+]]
+
+
+.pull-right[
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Ejemplo: Ronda 2
+
+
+```
+  A C B D E
+A 0 1 1 1 0
+C 1 0 1 1 0
+B 1 1 0 0 1
+D 1 1 0 0 0
+E 0 0 1 0 0
+```
+
+`\(\times\)`
+
+
+```
+[1] 0.5477225 0.5477225 0.5477225 0.3651483 0.1825742
+```
+
+`\(=\)`
+
+
+```
+        A         C         B         D         E 
+1.4605933 1.4605933 1.2780192 1.0954450 0.5477225 
+```
+
+`\(V. Norm = \sqrt{2(1.461^2) + 1.278^2 + 1.095^2 + 0.548^2} = 2.72\)`
+
+
+```
+        A         C         B         D         E 
+1.1028220 1.1028220 1.1028220 0.7352146 0.3676073 
+```
+
+---
+
+# Ejemplo: Ronda 3
+
+
+```
+  A C B D E
+A 0 1 1 1 0
+C 1 0 1 1 0
+B 1 1 0 0 1
+D 1 1 0 0 0
+E 0 0 1 0 0
+```
+
+`\(\times\)`
+
+
+```
+        A         C         B         D         E 
+1.1028220 1.1028220 1.1028220 0.7352146 0.3676073 
+```
+
+`\(=\)`
+
+
+```
+       A        C        B        D        E 
+2.940859 2.940859 2.573251 2.205644 1.102822 
+```
+
+`\(V. Norm = \sqrt{2(2.941^2) + 2.573^2 + 2.206^2 + 1.103^2} = 5.477\)`
+
+
+```
+        A         C         B         D         E 
+0.5369470 0.5369470 0.4698286 0.4027102 0.2013551 
+```
+
+---
+
+# Ejemplo: Ronda 4
+
+
+```
+  A C B D E
+A 0 1 1 1 0
+C 1 0 1 1 0
+B 1 1 0 0 1
+D 1 1 0 0 0
+E 0 0 1 0 0
+```
+
+`\(\times\)`
+
+
+```
+        A         C         B         D         E 
+0.5369470 0.5369470 0.4698286 0.4027102 0.2013551 
+```
+
+`\(=\)`
+
+
+```
+        A         C         B         D         E 
+1.4094858 1.4094858 1.2752491 1.0738940 0.4698286 
+```
+
+`\(V. Norm = \sqrt{2(1.987^2) + 1.626^2 + 1.153^2 + 0.221^2} = 2.641\)`
+
+
+```
+        A         C         B         D         E 
+0.5337449 0.5337449 0.4829121 0.4066628 0.1779150 
+```
+
+---
+
+# Ejemplo: Ronda 5
+
+
+```
+  A C B D E
+A 0 1 1 1 0
+C 1 0 1 1 0
+B 1 1 0 0 1
+D 1 1 0 0 0
+E 0 0 1 0 0
+```
+
+`\(\times\)`
+
+
+```
+        A         C         B         D         E 
+0.5337449 0.5337449 0.4829121 0.4066628 0.1779150 
+```
+
+`\(=\)`
+
+
+```
+        A         C         B         D         E 
+1.4233198 1.4233198 1.2454048 1.0674898 0.4829121 
+```
+
+`\(V. Norm = \sqrt{2(1.987^2) + 1.626^2 + 1.153^2 + 0.221^2} = 2.641\)`
+
+.center[[**converge!**](http://www.jsums.edu/nmeghanathan/files/2015/08/CSC641-Fall2015-Module-2-Centrality-Measures.pdf?x61976)]
+
+---
+
+# Eigenvector 
+
+.center[
+
+```
+        A         C         B         D         E 
+0.5337449 0.5337449 0.4829121 0.4066628 0.1779150 
+```
+]
+
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Centralidad de eigenvector
+
+<div id="htmlwidget-fc935c7060ee4c4e2e83" style="width:100%;height:510px;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fc935c7060ee4c4e2e83">{"x":{"filter":"none","data":[["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Q","R","P","O","S"],[3,4,2,6,3,4,5,5,4,7,3,3,3,3,2,1,3,2,1],[0.016,0.016,0.019,0.017,0.016,0.02,0.02,0.025,0.026,0.024,0.018,0.018,0.019,0.021,0.014,0.018,0.021,0.017,0.012],[0.333,0.833,4,5.667,0,16.333,28.833,88,81.5,66.5,0.5,1.5,32,5,17,0,5,0,0],[0.616,0.775,0.39,1,0.654,0.764,0.922,0.609,0.286,0.252,0.128,0.115,0.095,0.154,0.025,0.148,0.162,0.099,0.006]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>grado<\/th>\n      <th>cercanía<\/th>\n      <th>intermediación<\/th>\n      <th>eigenvector<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+
+&lt;br/&gt;&lt;br/&gt;
+.center[
+# Centralidad
+## Datos dirigidos
+]
+
+
+---
+
+# Red dirigida
+
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Sociomatriz dirigida
+
+&lt;br/&gt;
+.center[
+
+```
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    0    0    0    1    0    0    0    1    0     0
+ [2,]    0    0    0    0    0    0    0    1    1     0
+ [3,]    0    0    0    0    0    0    0    0    0     1
+ [4,]    0    1    0    0    1    0    0    0    0     0
+ [5,]    1    0    1    1    0    1    0    0    0     0
+ [6,]    1    0    0    1    0    0    1    1    1     1
+ [7,]    0    0    1    1    1    1    0    0    0     0
+ [8,]    1    1    0    0    0    0    1    0    0     1
+ [9,]    0    0    1    0    0    0    1    0    0     0
+[10,]    0    0    0    0    0    0    0    0    1     0
+```
+]
+
+---
+
+# Centralidad grado de entrada
+
+&lt;br/&gt;
+.center[
+
+```
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    0    0    0    1    0    0    0    1    0     0
+ [2,]    0    0    0    0    0    0    0    1    1     0
+ [3,]    0    0    0    0    0    0    0    0    0     1
+ [4,]    0    1    0    0    1    0    0    0    0     0
+ [5,]    1    0    1    1    0    1    0    0    0     0
+ [6,]    1    0    0    1    0    0    1    1    1     1
+ [7,]    0    0    1    1    1    1    0    0    0     0
+ [8,]    1    1    0    0    0    0    1    0    0     1
+ [9,]    0    0    1    0    0    0    1    0    0     0
+[10,]    0    0    0    0    0    0    0    0    1     0
+[11,]    3    2    3    4    2    2    3    3    3     3
+```
+]
+
+- En las redes dirigidas, personas que reciben enlaces de entrada son generalmente considerados socialmente prestigiosos
+- Más aun si los enlaces no son recíprocos.
+
+---
+
+# Centralidad grado de entrada
+
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Centralidad grado de salida
+
+&lt;br/&gt;
+.center[
+
+```
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11]
+ [1,]    0    0    0    1    0    0    0    1    0     0     2
+ [2,]    0    0    0    0    0    0    0    1    1     0     2
+ [3,]    0    0    0    0    0    0    0    0    0     1     1
+ [4,]    0    1    0    0    1    0    0    0    0     0     2
+ [5,]    1    0    1    1    0    1    0    0    0     0     4
+ [6,]    1    0    0    1    0    0    1    1    1     1     6
+ [7,]    0    0    1    1    1    1    0    0    0     0     4
+ [8,]    1    1    0    0    0    0    1    0    0     1     4
+ [9,]    0    0    1    0    0    0    1    0    0     0     2
+[10,]    0    0    0    0    0    0    0    0    1     0     1
+```
+]
+
+- Valiosos en ciertos contextos...
+---
+
+# Centralidad grado de salida
+
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Centros de Actividad y Autoridades
+
+.pull-left[
+- Un buen centro de actividad es aquel que apunta a muchas buenas autoridades, y una buena autoridad es aquella a la que apuntan muchos centros de actividad.
+- Similar al la centralidad de eigenvector, pero para redes dirigidas.
+]
+
+.pull-right[
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+# Centros de Actividad y Autoridades
+
+.pull-left[
+
+Centros de Actividad
+
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-44-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+.pull-right[
+
+Autoridades
+
+&lt;img src="centralidad_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+# Centros de Actividad y Autoridades
+
+<div id="htmlwidget-c26a23e9286fe610c181" style="width:100%;height:510px;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c26a23e9286fe610c181">{"x":{"filter":"none","data":[["1","10","11","12","2","3","4","5","6","7","8","9","13","14","15","16","17"],[0,0,0,0,1,1,1,1,1,1,1,4,1,1,1,1,1],[8,3,4,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,-0,0,0,0.565,0.565,0.565,0.565,0.565,0.565,0.565,1,0.148,0.148,0.173,0.173,0.173],[1,0.261,0.307,0.202,0,0,0,0,0,0,0,0,0,0,0,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>entrada<\/th>\n      <th>salida<\/th>\n      <th>auth<\/th>\n      <th>hubs<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+
+---
+&lt;br&gt;
+.center[
+### ¿Preguntas?
+![](imgs/preguntas.jpg)]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

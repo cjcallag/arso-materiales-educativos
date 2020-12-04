@@ -1,0 +1,66 @@
+id,Name,LATITUDE,LONGITUDE,Nationality,Current Status,Role,Tribe,Entered Network,Group
+X0,Sirajuddin Haqqani,29.8405476,68.3820419,Afghan,Active,Strategist,Sultan Khel Zadran,Pre-Taliban,4
+X1,Badruddin Haqqani,33.9223747,65.0162659,Afghan,Active,Intelligence,Sultan Khel Zadran,Post-9/11,4
+X2,Jalaluddin Haqqani,30.9280968,68.4913254,Afghan,Inactive,Strategist,Sultan Khel Zadran,Pre-Taliban,1
+X3,Abdullah Azzam,26.2995567,70.3256531,Dual Afghan-Pakistani,Inactive,Strategist,Generic Pashtun,Pre-Taliban,2
+X4,Ibrahim Haqqani (Omari),33.749218,75.6572952,Afghan,Deceased,Strategist,Sultan Khel Zadran,Pre-Taliban,3
+X5,Burhanuddin Haqqani,24.960371,62.9157639,Afghan,Deceased,Commander,Sultan Khel Zadran,Pre-Taliban,3
+X6,Ghazi Khan,27.9122791,70.4899597,Dual Afghan-Pakistani,Unknown,Unknown,Generic Pashtun,Pre-Taliban,4
+X7,Khalil Haqqani,29.3904743,72.909729,Afghan,Active,Financier,Sultan Khel Zadran,Pre-Taliban,1
+X8,Muhammad Ismail,24.1400337,67.815918,Dual Afghan-Pakistani,Unknown,Unknown,Generic Pashtun,Pre-Taliban,1
+X9,Nizamuddin Haqqani,34.1514854,68.5747528,Afghan,Unknown,Commander,Sultan Khel Zadran,Pre-Taliban,4
+X10,Fathullah Haqqani,33.1660957,68.2946701,Afghan,Unknown,Commander,Sultan Khel Zadran,Pre-Taliban,1
+X11,Hanif Shah,25.9063206,66.7515793,Afghan,Defected,Financier,Generic Pashtun,Pre-Taliban,2
+X12,Aziz Khan,27.839777,72.6050262,Dual Afghan-Pakistani,Unknown,Religious Leader,Generic Pashtun,Pre-Taliban,1
+X13,Ahmad Gul,35.0813332,71.1485901,Afghan,Deceased,Commander,Generic Pashtun,Pre-Taliban,2
+X14,Sher Muhammad,29.9081345,66.4550018,Afghan,Unknown,Commander,Generic Pashtun,Pre-Taliban,3
+X15,Muhammad Amin Waqad,33.2067528,75.5635223,Afghan,Unknown,Strategist,Generic Pashtun,Pre-Taliban,4
+X16,Haji Din Mohammed,28.1637535,65.38311,Afghan,Unknown,Strategist,Generic Pashtun,Pre-Taliban,1
+X17,Abd Al-Rahman al-Masri,30.2983818,66.5286179,Egyptian,Unknown,Bomber/Fighter,Non-Tribal/Foreign,Pre-Taliban,1
+X18,Rashid Abd Al-Rahman,30.2920399,74.4705887,Egyptian,Unknown,Bomber/Fighter,Non-Tribal/Foreign,Pre-Taliban,2
+X19,Abdul Walid al-Masri,34.8763046,66.8666458,Egyptian,Unknown,Unknown,Non-Tribal/Foreign,Pre-Taliban,2
+X20,Shuhrat Nangyal,33.1959572,72.4376373,Dual Afghan-Pakistani,Defected,Unknown,Non-Tribal/Foreign,Taliban Era,3
+X21,Nasirrudin Haqqani 1,33.9311256,67.7690811,Afghan,Deceased,Financier,Sultan Khel Zadran,Taliban Era,3
+X22,Sami ul-Haq,30.5834579,69.3709793,Afghan,Unknown,Religious Leader,Generic Pashtun,Taliban Era,2
+X23,Mir Ahmed Gul,31.3466225,67.1903992,Afghan,Unknown,Bomber/Fighter,Generic Pashtun,Taliban Era,3
+X24,Mullah Toor (Abdullah),33.4186897,68.1263275,Afghan,Unknown,Bomber/Fighter,Generic Pashtun,Taliban Era,4
+X25,Haji Mali Khan,26.5728893,57.8132782,Afghan,Incarcerated,Commander,Mangal,Post-9/11,4
+X26,Derim Sedgai,26.5335045,62.3767395,Unknown,Deceased,Bomber/Fighter,Unknown,Post-9/11,1
+X27,Mullah Sangeen,32.5387077,74.1844254,Afghan,Deceased,Commander,Sultan Khel Zadran,Post-9/11,1
+X28,Qari Amil,25.0820179,67.8614731,Pakistani,Deceased,Religious Leader,Generic Pashtun,Post-9/11,3
+X29,Bakhta Jan,35.6679764,68.2294083,Afghan,Deceased,Commander,Generic Pashtun,Post-9/11,2
+X30,Fazl-e-Haqqani,33.7045212,73.0414658,Afghan,Unknown,Commander,Generic Pashtun,Taliban Era,3
+X31,Hamza Shahkoor,27.1408997,68.0547333,Pakistani,Deceased,Suicide Bomber,Non-Tribal/Foreign,Post-9/11,3
+X32,Jan Baz Zadran,36.8418312,69.3831406,Afghan,Deceased,Religious Leader,Zadran,Post-9/11,4
+X33,Nasirrudin Haqqani 2,31.45237,71.87376,Afghan,Incarcerated,Commander,Sultan Khel Zadran,Post-9/11,4
+X34,Muhammad Haqqani,29.0224571,73.4795837,Afghan,Deceased,Unknown,Sultan Khel Zadran,Pre-Taliban,4
+X35,Muhammad Omar Haqqani,32.2413216,73.7773895,Afghan,Deceased,Commander,Sultan Khel Zadran,Post-9/11,1
+X36,Cunyet Ciftci,26.6283627,61.6614838,German,Deceased,Suicide Bomber,Non-Tribal/Foreign,Post-9/11,4
+X37,Abdullah Tanai,35.0332947,69.2870483,Afghan,Unknown,Financier,Tanai,Post-9/11,4
+X38,Hafez Abdullah,36.8485107,68.7860794,Afghan,Deceased,Suicide Bomber,Generic Pashtun,Post-9/11,1
+X39,Farooq Zadran,31.9752464,75.2427292,Afghan,Incarcerated,Commander,Zadran,Post-9/11,2
+X40,Anas Haqqani,33.0945854,65.3677902,Afghan,Incarcerated,Commander,Sultan Khel Zadran,Post-9/11,3
+X41,Aziz Haqqani,33.8891869,71.0183868,Afghan,Active,Religious Leader,Sultan Khel Zadran,Post-9/11,1
+X42,Yahya Haqqani,34.2153587,76.8183823,Pakistani,Active,Strategist,Sultan Khel Zadran,Post-9/11,2
+X43,Abdul Rauf Zakir,25.6762447,61.6303711,Unknown,Active,Commander,Unknown,Post-9/11,4
+X44,Najibullah,34.7822495,67.7625351,Unknown,Unknown,Unknown,Unknown,Unknown,1
+X45,Abdul Aziz Abbasin,31.2995605,68.4570541,Unknown,Unknown,Unknown,Unknown,Unknown,2
+X46,Jabir al Turkistani,32.2599373,71.5353394,Uighur,Deceased,Suicide Bomber,Non-Tribal/Foreign,Post-9/11,2
+X47,Fadhil Shaheen,28.391573,70.1009216,Afghan,Deceased,Suicide Bomber,Non-Tribal/Foreign,Post-9/11,3
+X48,Fazl Rabi,36.118145,70.5554504,Afghan,Unknown,Financier,Generic Pashtun,Post-9/11,1
+X49,Ahmed Jan Wazir,25.9367924,69.6144485,Afghan,Incarcerated,Commander,Generic Pashtun,Post-9/11,1
+X50,Bakht Gul,29.913269,70.0836639,Pakistani,Active,Religious Leader,Zadran,Post-9/11,2
+X51,Abdullah Haqqani,26.7022324,70.5357285,Afghan,Deceased,Commander,Sultan Khel Zadran,Post-9/11,2
+X52,Hafez Rashid,26.2450886,63.3256111,Pakistani,Incarcerated,Commander,Generic Pashtun,Post-9/11,3
+X53,Ishaq Haqqani,33.729599,74.891983,Afghan,Active,Unknown,Sultan Khel Zadran,Post-9/11,3
+X54,Nasir Ahmed Haqqani,34.2008133,66.2845001,Afghan,Active,Unknown,Sultan Khel Zadran,Post-9/11,4
+X55,Ismail Haqqani,30.9278431,64.4705276,Afghan,Deceased,Unknown,Sultan Khel Zadran,Pre-Taliban,1
+X56,Haji Khalil Zadran,32.0921135,71.7853851,Afghan,Unknown,Financier,Generic Pashtun,Post-9/11,2
+X57,Saifullah Haqqani,30.0648422,72.0626984,Afghan,Deceased,Commander,Sultan Khel Zadran,Post-9/11,4
+X58,Mohammed Jan,26.363821,63.5707779,Pakistani,Active,Financier,Generic Pashtun,Post-9/11,3
+X59,Ismail Jan,31.7134438,73.8593063,Afghan,Deceased,Bomber/Fighter,Generic Pashtun,Post-9/11,2
+X60,Dilawar,27.1916485,70.2219238,Afghan,Deceased,Religious Leader,Generic Pashtun,Post-9/11,3
+X61,Taj Mir Jawad,32.7823524,65.7331085,Afghan,Deceased,Commander,Generic Pashtun,Post-9/11,1
+X62,Qari Mansur,31.0118332,67.2948456,Afghan,Deceased,Commander,Generic Pashtun,Post-9/11,2
+X63,Qari Younus,32.9311905,71.3201218,Afghan,Unknown,Commander,Generic Pashtun,Post-9/11,3
+X64,Habibullah Rahman,31.6260548,64.1968994,Afghan,Deceased,Commander,Generic Pashtun,Post-9/11,4

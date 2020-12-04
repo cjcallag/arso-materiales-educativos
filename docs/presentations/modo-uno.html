@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Datos Relacionales de Modo Uno</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=" Christopher Callaghan" />
+    <meta name="date" content="2020-09-28" />
+    <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+    <script src="libs/jquery-1.12.4/jquery.min.js"></script>
+    <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding-0.13/datatables.js"></script>
+    <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Datos Relacionales de Modo Uno
+## 📝
+### </br><small> Christopher Callaghan
+### <img src = 'imgs/corelogo.png' height='60' width='120'>
+### 2020-09-28 </small>
+
+---
+
+
+
+
+
+&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;center&gt;
+
+# Un repaso breve
+
+&lt;center/&gt;
+
+---
+
+# ¿Qué es ARSo?
+
+
+*"... es una colección de teorías y métodos que suponen que el comportamiento de los actores (por ejemplo, individuos, grupos u organizaciones) se ve profundamente afectado por sus vínculos con otros y las redes en las que están incrustados"*
+
+.pull-right[
+-Cunningham, Everton, y Murphy, 2016
+]
+
+&lt;br&gt;
+
+--
+.center[
+**No es software!** Pero lo utilizamos.
+]
+
+---
+
+# ¿Qué no es ARSo?
+
+- Medios sociales (ejemplo, Twitter, Facebook, VK, TikTok, etc.)
+
+
+---
+
+# Medios Sociales, ¿qué son?
+
+
+
+- Diferentes tipos de plataformas de medios sociales:
+    - Sitios de microblogs: Twitter, Weibo, etc.
+    - Sitios de comunidad: Facebook, RenRen, VK, etc.
+    
+- ¿Qué tipo de información se puede encontrar en las redes sociales?
+    - Datos estructurados: Relaciones y atributos, pertenencia a grupos, hashtags, etc.
+    - Datos no estructurados: Noticias (texto), sentimientos (palabras), emojis, imágenes, videos, etc.
+  
+---
+
+# Ejemplo: Twitter
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;center&gt;
+[Haga clic aquí](https://twitter.com/search?q=sendero%20luminoso&amp;src=typed_query)
+&lt;center/&gt;
+
+---
+
+# Actividad: Twitter
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Usuarios Activos: Twitter
+
+&lt;table&gt;
+&lt;caption&gt;10 usuarios más activos&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Cuenta &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; # de Tweets &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Minarte4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Carlonchoperu1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Juan_Cerna_2020 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 1QueCuenta &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 1Jdies &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; mujerx324324 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; airedemisojos &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; SanpabloCarlos &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; twkiedisqueen &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; soy1single &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+
+# Ubicación: Twitter
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Extracción de textos: Twitter
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Relaciones: Twitter
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+
+&lt;center&gt;
+Respuestas + Menciones
+&lt;center/&gt;
+
+---
+
+# Tipos de Relaciones: Twitter
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+&lt;center&gt;
+Menciones
+&lt;center/&gt;
+
+---
+
+# Tipos de Relaciones: Twitter
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+
+&lt;center&gt;
+Respuestas
+&lt;center/&gt;
+
+---
+
+# ¿Qué no es ARSo?
+
+- Medios sociales (ejemplo, Twitter, Facebook, VK, TikTok, etc.)
+- Análisis de enlaces
+
+
+---
+
+# Análisis de enlaces
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;center&gt;
+# Demo!
+&lt;center/&gt;
+
+---
+
+# ¿Qué no es ARSo?
+
+- Medios sociales (ejemplo, Twitter, Facebook, VK, TikTok, etc.)
+- Análisis de enlaces
+- Enfoques estándar
+
+---
+
+# Enfoques estándar
+
+.pull-left[
+**Estándar**
+
+  1. ¿Qué miembros de un grupo se adscriben a una doctrina? ¿Cuántos hay en comparación con los que no se adscriben?
+  2. ¿Cómo caracterizamos a un grupo? ¿Utilizando estadística descriptiva?
+
+
+]
+
+.pull-right[
+**Relacional**
+  1. ¿En qué parte del grupo se encuentran los miembros que se adscriben a una doctrina? ¿Son los centrales a el grupo?
+  2. ¿Cuáles son las características estructurales de un grupo? Descripción desde la perspectiva:
+    - Macro
+    - Meso
+    - Micro
+]
+
+---
+
+# Terminos Clave
+
+1. Actores:
+  - Personas 👨
+  - Groupos 👥
+  - Organizaciones 🏨
+
+2. Enlaces:
+  - Bordes (--)
+  - Arcos/Aristas (&lt;- | -&gt; | &lt;-&gt;)
+  
+3. Redes
+  - Sociogramas 📈
+  
+  
+---
+
+&lt;/br&gt;&lt;/br&gt;&lt;center&gt;
+
+# Hola
+
+&lt;br/&gt;
+&lt;img src="imgs/gephi.png" width="675" style="display: block; margin: auto;" /&gt;
+
+&lt;center/&gt;
+
+
+---
+
+&lt;/br&gt;&lt;/br&gt;&lt;center&gt;
+
+# Hola [snExplorer](https://corelab.nps.edu/apps/sn_explorer/)!
+
+&lt;img src="imgs/corelogo.png" width="393" style="display: block; margin: auto;" /&gt;
+
+&lt;center/&gt;
+
+
+---
+
+&lt;/br&gt;&lt;/br&gt;&lt;center&gt;
+
+# Datos Relacionales
+
+&lt;center/&gt;
+
+---
+
+# Preguntas Clave
+
+  1. ¿Cuáles son las diferencias entre los datos de modo uno y modo dos?
+  2. ¿Qué son los atributos? ¿Cómo se usan estos en visualizaciones descriptivas de red?
+  3. ¿Qué es una lista de bordes y cómo se compara esta estructura con una sociomatriz?
+  
+---
+
+# Análisis de redes: Datos
+
+¿Qué clase de datos relacionales utilizamos?
+
+--
+
+Datos relacionales de **modo-uno**:
+  - Constan de un único conjunto de actores: 😄 &lt;-&gt; 😄
+  - Relación persona a persona o cuenta de usuario a usuario: 👨‍🎤 &lt;-&gt; 👩‍🎤
+  - Parentesco, redes de amistad (online y offline)
+  - Dirigidos (&lt;- | -&gt; | &lt;-&gt;) y/o no dirigidos (--)
+
+
+---
+
+# Ejemplo
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+#  Análisis de redes: Datos
+
+¿Qué clase de datos relacionales utilizamos?
+
+--
+
+Datos relacionales de **modo-dos**:
+  - Consiste en dos grupos de actores 😄 &lt;-&gt; 🏠
+  - Persona a organización (👨‍🎤 &lt;-&gt; 🏠), persona a evento (👨‍🎤 &lt;-&gt; ⏳), persona a prueba (👩‍🎤 &lt;-&gt; 📈), persona a ubicación 👩‍🎤 &lt;-&gt; 🇹🇷
+  - Una red de modo-dos se puede transformar en una red de modo-uno
+
+---
+
+# Ejemplo
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Análisis de redes: Datos
+
+Además de los datos relacionales, ¿qué otra clase de datos podemos usar?
+
+--
+
+**Atributos**:
+  - Estas son características no relacionales de los actores individuales en la red
+  - Atributos individuales: género, raza, etnia, años de educación, nivel de ingresos, edad, región / país de nacimiento
+  - Atributos de la organización: ventas totales, ingresos netos, edad de la corporación, número de empleados / miembros
+  
+---
+
+# Ejemplo
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+&lt;br&gt;&lt;br&gt;
+
+&lt;center&gt;
+# Ejercicio de Calentamiento
+
+**Instrucciones:** Lea los siguientes datos, dígame: ¿Quiénes son los tres actores más importantes y por qué?
+&lt;center/&gt;
+
+---
+
+# ¿Quién es importante?
+
+.smallest[
+- Actor A (23 años, hombre, miembro del grupo X, arrestado por cargos de narcotrafico en el pasado, vive en la ciudad 1)
+    - Ha admitido a la venta de narcoticos a dos traficantes que residen en la ciudad 1. Estos son el actor D (hombre) y la actriz E (mujer). El actor A es el hermano del actor C y tiene dos hermanas, actrices F y G (ambas viven en la ciudad 2, y ambas han sido arrestados en dos ocasiones por posesión de drogas). Finalmente, el actor A fue arrestado en el pasado con dos individuos, los actores H (hombre) y I (mujer).
+
+- Actor B (Edad 19, Mujer, afiliación de grupo desconocida, sin registro de arresto, vive en la ciudad 3)
+    - Actriz B se comunica regularmente con los actores F, G y J. Es amiga del actor C, el actor J (25 años, hombre, anteriormente miembro del grupo X) y el actor L. Se sospecha que le ha mentido a las autoridades sobre el paradero del actor C en la noche de una manifestación civil el año pasado sobre la cual se cree que el actor C tiene información importante.
+
+- Actor C (24 años, hombre, miembro del grupo X, arrestado por posesión de armas, vive en la ciudad 2)
+    - El actor H, que es de cuidad 2, admira al actor C. Es amigo cercano del Actor I (de cuidad 2). Esta saliendo con la actriz G. El actor C se comunica regularmente con el actor J (de cuidad 3).
+
+- Actor D (22 años, hombre, posesión de narcoticos, vive en la ciudad 1)
+    - El actor D se comunica regularmente con los actores K (miembro masculino de organización paramilitar Z) y L (estudiante universitaria local).
+
+- Actor E (22 años, mujer, afiliación desconocida, arrestado en el pasado por participación en protestas violentas)
+    - Amiga cercana del actor K de la ciudad 1. Se sospecha que es traficante de drogas. Ha sido vista con el actor K y el actor A. Se le ve regularmente con el actor L (afiliación desconocida) y el actor M (hombre) ambos de la ciudad 1.
+
+- Actor F (20 años, mujer, afiliación desconocida)
+    - La afiliación del actor F no está clara, pero se sabe que se comunica con los actores B, L y N (N es un hombre de 19 años, miembro del grupo Y y reside en la ciudad 2). Ella está involucrada románticamente con el actor H y solía salir con el actor C.
+]
+
+---
+
+&lt;/br&gt;&lt;/br&gt;&lt;center&gt;
+
+# ¿Quién es importante?
+
+&lt;/br&gt;&lt;/br&gt;
+
+⏳ + sitio web.
+
+&lt;center/&gt;
+
+---
+
+# ¿Quién es importante?
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ¿Quién es importante?
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ¿Quién es importante?
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+
+&lt;center&gt; Pandillas &lt;center/&gt;
+
+---
+
+# ¿Quién es importante?
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
+
+&lt;center&gt; Locaciones &lt;center/&gt;&lt;br/&gt;
+
+
+---
+
+&lt;/br&gt;&lt;/br&gt;&lt;center&gt;
+
+# ¿Cómo almacenamos los datos?
+
+&lt;center/&gt;
+
+
+---
+
+# Grabar Datos
+
+.pull-left[
+
+Sociomatriz de bordes:
+
+
+```
+     [,1] [,2] [,3] [,4]
+[1,]    0    1    1    1
+[2,]    1    0    0    0
+[3,]    1    0    0    0
+[4,]    1    0    0    0
+```
+
+- ¿Observaciones?
+- ¿Simétrica?
+- ¿Binaria?
+- ¿Ventajas? Desventajas?
+]
+
+.pull-right[
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Grabar Datos
+
+.pull-left[
+
+Sociomatriz de arcos/aristas:
+
+
+```
+     [,1] [,2] [,3] [,4]
+[1,]    0    0    0    0
+[2,]    1    0    0    0
+[3,]    1    0    0    0
+[4,]    1    0    0    0
+```
+
+- ¿Observaciones?
+- ¿Simétrica?
+- ¿Binaria?
+- ¿Ventajas? Desventajas?
+]
+
+.pull-right[
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Sociomatriz de modo-dos:
+
+.pull-left[
+
+Sociomatriz de modo-dos:
+
+
+```
+  4 5 6 7
+1 0 0 1 0
+2 0 0 1 0
+3 1 0 0 0
+```
+
+- ¿Observaciones?
+- ¿Simétrica?
+- ¿Binaria?
+- ¿Ventajas? Desventajas?
+]
+
+.pull-right[
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+&lt;/br&gt;&lt;/br&gt;&lt;center&gt;
+# Almacenar datos de modo uno en matriz
+&lt;center/&gt;
+**Instrucciones:** Con una sola matriz, capture todas las relaciones en el siguiente corpus. Su trabajo por ahora es capturar las relaciones, no preocuparse por categorizarlas (lo haremos más adelante). Además, no se preocupe por los pesos de los bordes. Finalmente, suponga que todas las relaciones son recíprocas.
+
+
+---
+
+# Datos no estructurados
+
+.smallest[
+- Actor A (23 años, hombre, miembro del grupo X, arrestado por cargos de narcotrafico en el pasado, vive en la ciudad 1)
+    - Ha admitido a la venta de narcoticos a dos traficantes que residen en la ciudad 1. Estos son el actor D (hombre) y la actriz E (mujer). El actor A es el hermano del actor C y tiene dos hermanas, actrices F y G (ambas viven en la ciudad 2, y ambas han sido arrestados en dos ocasiones por posesión de drogas). Finalmente, el actor A fue arrestado en el pasado con dos individuos, los actores H (hombre) y I (mujer).
+
+- Actor B (Edad 19, Mujer, afiliación de grupo desconocida, sin registro de arresto, vive en la ciudad 3)
+    - Actriz B se comunica regularmente con los actores F, G y J. Es amiga del actor C, el actor J (25 años, hombre, anteriormente miembro del grupo X) y el actor L. Se sospecha que le ha mentido a las autoridades sobre el paradero del actor C en la noche de una manifestación civil el año pasado sobre la cual se cree que el actor C tiene información importante.
+]
+
+
+---
+
+&lt;center&gt;
+
+# Importar
+
+&lt;br/&gt;
+
+&lt;img src="imgs/gephi.png" width="675" style="display: block; margin: auto;" /&gt;
+
+&lt;center/&gt;
+
+---
+
+# Considere
+
+.pull-left[
+
+- ¿Qué tipo de relaciones?
+- ¿Costo de mantenimiento?
+- ¿Costo de almacenamiento?
+
+
+
+```
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    0    0    0    0    0
+[2,]    1    0    0    0    0
+[3,]    1    0    0    0    0
+[4,]    1    0    0    0    0
+[5,]    1    0    0    0    0
+```
+]
+
+.pull-right[
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+# Considere
+
+.pull-left[
+Rojo:
+
+```
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    0    0    0    0    0
+[2,]    0    0    0    0    0
+[3,]    1    0    0    0    0
+[4,]    0    0    0    0    0
+[5,]    1    0    0    0    0
+```
+
+&lt;/br&gt;
+
+Azul:
+
+```
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    0    0    0    0    0
+[2,]    1    0    0    0    0
+[3,]    0    0    0    0    0
+[4,]    1    0    0    0    0
+[5,]    0    0    0    0    0
+```
+]
+
+.pull-right[
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+
+&lt;center&gt;
+¿Cúantas matrices? ¿Cúantos bordes? 🤷
+&lt;/center&gt;
+
+---
+
+# Lista de bordes
+
+- ¿Qué?
+
+*Una estructura de datos utilizada para representar un gráfico. Un borde se define por su vértice inicial y final, por lo que cada borde puede estar representado por dos puntos.*
+
+- ¿Cúales son las ventajas?
+  - Multiples relaciones
+  - Pesos
+  - Multiples clases
+  - Legible
+
+- ¿Cómo?
+  
+
+---
+
+# Ejemplos
+
+<div id="htmlwidget-01241520ed94a29e9944" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-01241520ed94a29e9944">{"x":{"filter":"none","data":[["A"],["P"],["Comunicación"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>De<\/th>\n      <th>A<\/th>\n      <th>Relacion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+&lt;/br&gt;
+
+<div id="htmlwidget-9a2a91351e363abd8aab" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9a2a91351e363abd8aab">{"x":{"filter":"none","data":[["Persona"],["A"],["Persona"],["P"],["Comunicación"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Tipo_De<\/th>\n      <th>De<\/th>\n      <th>Tipo_A<\/th>\n      <th>A<\/th>\n      <th>Relacion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+&lt;/br&gt;
+
+<div id="htmlwidget-688b9ae1982a17130660" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-688b9ae1982a17130660">{"x":{"filter":"none","data":[["A","A"],["P","1"],["Comunicación","Afiliación"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>De<\/th>\n      <th>A<\/th>\n      <th>Relacion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+
+&lt;/br&gt;&lt;/br&gt;&lt;center&gt;
+# Almacenar datos de modo uno en lista de bordes
+&lt;center/&gt;
+**Instrucciones:** En una lista de bordes, capture todas las relaciones en el siguiente corpus. Su trabajo por ahora es capturar todas las relaciones, no preocuparse por categorizarlas (lo haremos más adelante). Además, no se preocupe por los pesos de los bordes o en corresponder los enlaces. Finalmente, recuerde que Gephi espera una columna "Source" y "Target".
+
+
+---
+# Datos no estructurados
+
+.smallest[
+- Actor C (24 años, hombre, miembro del grupo X, arrestado por posesión de armas, vive en la ciudad 2)
+    - El actor H, que es de cuidad 2, admira al actor C. Es amigo cercano del Actor I (de cuidad 2). Esta saliendo con la actriz G. El actor C se comunica regularmente con el actor J (de cuidad 3).
+
+- Actor D (22 años, hombre, posesión de narcoticos, vive en la ciudad 1)
+    - El actor D se comunica regularmente con los actores K (miembro masculino de organización paramilitar Z) y L (estudiante universitaria local).
+
+- Actor E (22 años, mujer, afiliación desconocida, arrestado en el pasado por participación en protestas violentas)
+    - Amiga cercana del actor K de la ciudad 1. Se sospecha que es traficante de drogas. Ha sido vista con el actor K y el actor A. Se le ve regularmente con el actor L (afiliación desconocida) y el actor M (hombre) ambos de la ciudad 1.
+
+- Actor F (20 años, mujer, afiliación desconocida)
+    - La afiliación del actor F no está clara, pero se sabe que se comunica con los actores B, L y N (N es un hombre de 19 años, miembro del grupo Y y reside en la ciudad 2). Ella está involucrada románticamente con el actor H y solía salir con el actor C.
+]
+
+
+---
+
+&lt;center&gt;
+
+# Importar
+
+&lt;br/&gt;
+
+&lt;img src="imgs/gephi.png" width="675" style="display: block; margin: auto;" /&gt;
+
+&lt;center/&gt;
+
+
+---
+
+# Lista de Nodos
+
+.pull-left[
+<div id="htmlwidget-902ec2f7dfe8ff1f54fb" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-902ec2f7dfe8ff1f54fb">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10],["peru","peru","peru","peru","peru","mexico","mexico","mexico","usa","usa"],[1,1,4,1,3,1,3,5,5,4]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>nombre<\/th>\n      <th>nacion<\/th>\n      <th>bordes<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","autoWidth":false,"columnDefs":[{"className":"dt-right","targets":[0,2]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+]
+
+.pull-right[
+&lt;img src="modo-uno_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+&lt;/br&gt;&lt;/br&gt;&lt;center&gt;
+# Almacenar datos de atributo
+&lt;center/&gt;
+**Instrucciones:** En una lista de nodos, capture el género, edad, recidencia y grupo associado de cada nodo. Recuerde que Gephi espera una columna "ID" como identificador para cada nodo.
+
+---
+# Datos no estructurados
+
+.smallest[
+- Actor A (23 años, hombre, miembro del grupo X, arrestado por cargos de narcotrafico en el pasado, vive en la ciudad 1)
+    - Ha admitido a la venta de narcoticos a dos traficantes que residen en la ciudad 1. Estos son el actor D (hombre) y la actriz E (mujer). El actor A es el hermano del actor C y tiene dos hermanas, actrices F y G (ambas viven en la ciudad 2, y ambas han sido arrestados en dos ocasiones por posesión de drogas). Finalmente, el actor A fue arrestado en el pasado con dos individuos, los actores H (hombre) y I (mujer).
+
+- Actor B (Edad 19, Mujer, afiliación de grupo desconocida, sin registro de arresto, vive en la ciudad 3)
+    - Actriz B se comunica regularmente con los actores F, G y J. Es amiga del actor C, el actor J (25 años, hombre, anteriormente miembro del grupo X) y el actor L. Se sospecha que le ha mentido a las autoridades sobre el paradero del actor C en la noche de una manifestación civil el año pasado sobre la cual se cree que el actor C tiene información importante.
+
+- Actor C (24 años, hombre, miembro del grupo X, arrestado por posesión de armas, vive en la ciudad 2)
+    - El actor H, que es de cuidad 2, admira al actor C. Es amigo cercano del Actor I (de cuidad 2). Esta saliendo con la actriz G. El actor C se comunica regularmente con el actor J (de cuidad 3).
+
+- Actor D (22 años, hombre, posesión de narcoticos, vive en la ciudad 1)
+    - El actor D se comunica regularmente con los actores K (miembro masculino de organización paramilitar Z) y L (estudiante universitaria local).
+
+- Actor E (22 años, mujer, afiliación desconocida, arrestado en el pasado por participación en protestas violentas)
+    - Amiga cercana del actor K de la ciudad 1. Se sospecha que es traficante de drogas. Ha sido vista con el actor K y el actor A. Se le ve regularmente con el actor L (afiliación desconocida) y el actor M (hombre) ambos de la ciudad 1.
+
+- Actor F (20 años, mujer, afiliación desconocida)
+    - La afiliación del actor F no está clara, pero se sabe que se comunica con los actores B, L y N (N es un hombre de 19 años, miembro del grupo Y y reside en la ciudad 2). Ella está involucrada románticamente con el actor H y solía salir con el actor C.
+]
+
+---
+
+&lt;center&gt;
+
+# Importar
+
+&lt;br/&gt;
+
+&lt;img src="imgs/gephi.png" width="675" style="display: block; margin: auto;" /&gt;
+
+&lt;center/&gt;
+
+
+---
+
+# Repaso
+
+  1. ¿Cuáles son las diferencias entre los datos de mode uno y modo dos?
+*Modo uno contienen unicamente un tipo de actores. Modo dos contiene dos tipos de actores. Ambas se pueden codificar en sociomatrices o listas de borde.*
+
+  2. ¿Qué son los atributos? ¿Cómo se usan estos en visualizaciones descriptivas de red?
+*Characteristicas no relacionales de los nodos/vértices, estas se codifican en una lista de nodos.*
+
+  3. ¿Qué es una lista de bordes y cómo se compara esta estructura con una sociomatriz?
+*La lista de bordes es un formato utilizado para representar un gráfico donde un borde se define por su vértice inicial y final. Ambas estructuras se utilizan para registrar información. Una lista de borde proporciona flexibilidad en la grabación, pero a menudo se transforma a matriz para calcular las medidas de la red.*
+
+
+---
+
+&lt;/br&gt;&lt;/br&gt;&lt;center&gt;
+# Laboratorio 1
+&lt;center/&gt;
+
+---
+
+# ¿Preguntas?
+
+&lt;/br&gt;&lt;/br&gt;
+&lt;center&gt;
+Christopher Callaghan | cjcallag@nps.edu
+&lt;/center&gt;
+
+&lt;img src="imgs/logo.png" width="863" style="display: block; margin: auto;" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

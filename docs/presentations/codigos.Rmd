@@ -1,0 +1,361 @@
+---
+title: "Codificar Datos"
+subtitle: "`r emo::ji('hammer')`"
+author: "</br><small>  Christopher Callaghan"
+institute: "<img src = 'imgs/corelogo.png' height='60' width='120'>"
+date: "`r Sys.Date()` </small>"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo      = FALSE,
+                      eval      = TRUE,
+                      warning   = FALSE,
+                      message   = FALSE,
+                      fig.align = "center",
+                      comment   = '')
+
+library(xaringanthemer)
+style_mono_light(
+  title_slide_background_color = "#23395b",
+  code_font_family = "Fira Code",
+  code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css",
+  code_font_size   = ".65em",
+  text_font_google = google_font("Work Sans", "300", "300i"),
+  text_font_size   = "25px",
+  background_size  = "20%", 
+  background_posit = "bottom",
+  padding          = "1em 4em 1em 4em",
+  header_h1_font_size = "2.25rem",
+  header_h2_font_size = "2.0rem",
+  header_h3_font_size = "1.75rem",
+  colors = c(
+  red = "#f34213",
+  purple = "#3e2f5b")
+)
+
+here::set_here()
+
+library(igraph)
+library(dplyr)
+```
+
+# Repaso: ¿Qué tipo de datos?
+
+.center[
+```{r}
+barabasi.game(n = 8, 0.3) %>%
+  get.adjacency(sparse = FALSE) 
+```
+]
+
+<br>
+
+.pull-left[
+
+Opciones:     <br>
+  A. Modo-Uno <br>
+  B. Modo-Dos <br>
+  C. Atributos
+
+]
+
+--
+.pull-right[
+  <br>
+  **A. Modo-Uno**
+  <br>
+  
+  Persona a persona y cada relación es asimétrica (arcos).
+]
+
+
+---
+
+# Repaso: ¿Qué tipo de datos?
+
+.center[
+```{r}
+bipartite.random.game(n1 = 4, n2 = 8, p = 0.3) %>%
+  get.incidence(sparse = FALSE)
+```
+]
+
+<br>
+
+.pull-left[
+
+Opciones:     <br>
+  A. Modo-Uno <br>
+  B. Modo-Dos <br>
+  C. Attributos
+
+]
+
+--
+.pull-right[
+  <br>
+  <br>
+  **B. Modo-Dos**
+  
+  Persona a organización.
+]
+
+
+---
+
+# Repaso: ¿Qué tipo de datos?
+
+.center[
+```{r, fig.height=4, fig.width=10}
+bipartite.random.game(n1 = 4, n2 = 8, p = 0.3) %>%
+  set_vertex_attr(.,
+                  name  = "color",
+                  value = ifelse(V(.)$type == FALSE, "red", "lightblue")) %>%
+  set_vertex_attr(.,
+                  name  = "shape",
+                  value = ifelse(V(.)$type == FALSE, "square", "circle")) %>%
+  plot.igraph(
+    layout = layout_as_bipartite,
+    vertex.label = NA
+  )
+```
+]
+
+.pull-left[
+
+Opciones:     <br>
+  A. Modo-Uno <br>
+  B. Modo-Dos <br>
+  C. Attributos
+
+]
+
+--
+.pull-right[
+  <br>
+  <br>
+  **B. Modo-Dos**
+  
+  Persona a organización.
+]
+
+
+---
+
+# Repaso: ¿Qué tipo de datos?
+
+.center[
+```{r, fig.height=4, fig.width=10}
+barabasi.game(n = 8, 0.3) %>%
+  plot.igraph(
+    layout       = layout_in_circle,
+    vertex.label = NA,
+    vertex.color = "grey",
+    edge.color   = "black"
+  )
+```
+]
+
+.pull-left[
+
+Opciones:     <br>
+  A. Modo-Uno <br>
+  B. Modo-Dos <br>
+  C. Atributos
+
+]
+
+--
+.pull-right[
+  <br>
+  **A. Modo-Uno**
+  <br>
+  
+  Persona a persona y cada relación es asimétrica (arcos).
+]
+
+
+---
+
+</br></br></br></br><center>
+
+# Codificar
+
+<center/>
+
+---
+# ¿Por qué ARSo?
+
+</br></br>
+<center>
+
+```{r}
+knitr::include_graphics(path = "imgs/coding.png")
+```
+
+<center/>
+
+
+---
+
+# Un Ejercicio
+
+*El actor F se comunica regularmente con el actor P, y con poca frecuencia envía mensajes de texto con el actor Z. Se sabe que pasa tiempo con los actores B, L y N (N es un hombre de 19 años, miembro de grupo Y). El está involucrada románticamente con el actor H y se ha reunido con el actor B en una ocasión. Finalmente, fue arrestada con el actor D hace unos 3 meses.*
+
+<center>
+¿Qué tipo de relaciones?
+</center>
+ 
+ 
+---
+
+# Codificación 
+
+- La codificación es esencialmente el proceso de identificar e interpretar la información y, posteriormente, categorizar esa información para facilitar el análisis de datos.
+
+- No necesariamente lo mismo que la estructuración de datos.
+
+---
+
+# Por ejemplo
+
+*A menudo se ve a __Mike__ con __Glenn__. __El primero__ es un miembro conocido del __grupo criminal X__, __el segundo__ se identifica con el __grupo criminal Y__.*
+
+--
+- ¿Qué podemos hacer?
+  - Identificar (Mike -miembro-> Grupo X)
+  - Interpretar (Glenn -miembro-> Grup Y)
+  - Categorizar (Mike <-conocido-> Glenn)
+
+
+---
+
+*El actor F se comunica regularmente con el actor P, y con poca frecuencia envía mensajes de texto con el actor Z. Se sabe que pasa tiempo con los actores B, L y N (N es un hombre de 19 años, miembro de grupo Y). El está involucrada románticamente con el actor H y se ha reunido con el actor B en una ocasión. Finalmente, fue arrestada con el actor D hace unos 3 meses.*
+
+<small>
+
+**Comunicación:** transmisión directa de mensajes o información entre individuos o mediante algún tipo de medio, como un teléfono celular o un correo electrónico.
+
+**Amistad:** definida como dos personas que se declaran explícitamente como amigos, o que se conocen explícitamente como confidentes de confianza, en informes o en documentación de inteligencia.
+
+**Romance:** dos personas que están saliendo o están involucradas en una relación cariñosa y romántica.
+
+**Asociado criminal:** definido como dos individuos que colaboran, ayudan o participan directamente en actividades ilícitas
+
+</small>
+
+
+---
+
+# Grabar
+
+*El __actor__ F se __comunica__ regularmente con el __actor P__, y con poca frecuencia envía mensajes de texto con el actor Z. Se sabe que pasa tiempo con los actores B, L y N (N es un hombre de 19 años, miembro de grupo Y). El está involucrada románticamente con el actor H y se ha reunido con el actor B en una ocasión. Finalmente, fue arrestada con el actor D hace unos 3 meses.*
+
+</br><center> **Lista de bordes** </center>
+
+```{r}
+data.frame("De"       = c("A"),
+           "A"        = c("P"),
+           "Relacion" = c("Comunicación")) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom = 't'))
+```
+
+
+---
+
+# Grabar
+
+*El __actor__ F se comunica regularmente con el actor P, y con poca frecuencia __envía mensajes de texto__ con el __actor Z__. Se sabe que pasa tiempo con los actores B, L y N (N es un hombre de 19 años, miembro de grupo Y). El está involucrada románticamente con el actor H y se ha reunido con el actor B en una ocasión. Finalmente, fue arrestada con el actor D hace unos 3 meses.*
+
+```{r}
+data.frame("De"       = c("F",
+                          "F"),
+           "A"        = c("P",
+                          "Z"),
+           "Relacion" = c("Comunicación",
+                          "Comunicación")) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom = 't'))
+```
+
+</br></br><center> **~15 minutos** `r emo::ji("time")` </center>
+
+---
+
+# Grabar
+
+*El __actor__ F se comunica regularmente con el __actor P__, y con poca frecuencia envía mensajes de texto con el __actor Z__. Se sabe que pasa tiempo con los __actores B, L y N__ (N es un hombre de 19 años, miembro de grupo Y). Ella está involucrada románticamente con el __actor H__ y se ha reunido con el __actor B__ en una ocasión. Finalmente, fue arrestada con el __actor D__ hace unos 3 meses.*
+
+```{r}
+data.frame("De"       = c("F",
+                          "F",
+                          "F",
+                          "F",
+                          "F",
+                          "F",
+                          "F",
+                          "F"),
+           "A"        = c("P",
+                          "Z",
+                          "B",
+                          "L",
+                          "N",
+                          "H",
+                          "B",
+                          "D"),
+           "Relacion" = c("Comunicación",
+                          "Comunicación",
+                          "Amistad",
+                          "Amistad",
+                          "Amistad",
+                          "Romance",
+                          "Amistad",
+                          "Asociado criminal")) %>%
+  DT::datatable(class = 'cell-border stripe',
+                rownames = FALSE,
+                options = list(dom      = 't',
+                               scroller = TRUE,
+                               scrollY  = 200))
+```
+
+
+---
+
+# Demostración
+
+</br>
+
+```{r}
+knitr::include_graphics(path = "imgs/gephi.png")
+```
+
+
+---
+
+</br></br><center>
+
+# Libro de Código
+
+</br></br>
+
+`r emo::ji("time")` + sitio web.
+
+<center/>
+
+
+---
+<br>
+.center[
+### ¿Preguntas?
+![](imgs/preguntas.jpg)]
