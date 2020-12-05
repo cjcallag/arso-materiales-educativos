@@ -22,10 +22,10 @@ build_class_row <- function(.theme, .title, .file, .folder, .presentation, .url,
   )
 }
 
-build_software_row <- function(.title, .link, .url) {
+build_software_row <- function(.title, .link, .content, .url) {
   list(
     Tema   = .title,
-    Enlace = as.character(glue("<a href='{.link}'> Accesar </a>")),
+    Enlace = as.character(glue("<a href='{.link}'> {.content} </a>")),
     Video  = as.character(glue("<a href='{.url}'> Ver </a>"))
   )
 }
@@ -64,6 +64,8 @@ knitr::include_graphics(path = logo_path)
 </center>
 
 <br><br>
+
+Este sitio es un complemento del curso de análisis de redes sociales diseñado para la [Escuela Superior de Guerra del Ejército, Escuela de Postgrado (ESGE-EPG)](http://esge.edu.pe/) por el [CORE Lab](https://nps.edu/web/core). Cada sección incluye los materiales necesarios para guiar el curso. Cualquier duda o sugerencia, comuníquese con el [autor](https://github.com/cjcallag).
 
 ### Clases
 ```{r}
@@ -226,24 +228,28 @@ html_table %>%
   as_kable()
 ```
 
+
 ### Gephi
 
 ```{r}
 software <- list(
   build_software_row(
-    .title = "Descargar Gephi",
-    .link  = "https://gephi.org/",
-    .url   = ""
+    .title   = "Descargar Gephi",
+    .link    = "https://gephi.org/",
+    .content = "Ir",
+    .url     = ""
     ),
   build_software_row(
-    .title = "¿Qué es gephi?",
-    .link  = "https://cjcallag.github.io/arso/trabajando-con-gephi.html#gephi",
-    .url   = ""
+    .title   = "¿Qué es gephi?",
+    .link    = "https://cjcallag.github.io/arso/trabajando-con-gephi.html#gephi",
+    .content = "Leer",
+    .url     = ""
     ),
   build_software_row(
-    .title = "Agregar plugin",
-    .link  = "https://cjcallag.github.io/arso/derivando-datos-modo-uno-de-modo-dos.html#antes-de-empezar-1",
-    .url   = ""
+    .title   = "Agregar plugin",
+    .link    = "https://cjcallag.github.io/arso/derivando-datos-modo-uno-de-modo-dos.html#antes-de-empezar-1",
+    .content = "Leer",
+    .url     = ""
     )
 )
 
