@@ -22,6 +22,14 @@ build_class_row <- function(.theme, .title, .file, .folder, .presentation, .url,
   )
 }
 
+build_software_row <- function(.title, .link, .url) {
+  list(
+    Tema   = .title,
+    Enlace = as.character(glue("<a href='{.link}'> Accesar </a>")),
+    Video  = as.character(glue("<a href='{.url}'> Ver </a>"))
+  )
+}
+
 build_lab_row <- function(.title, .file, .folder, .data, .url) {
   list(
     Tema          = .title,
@@ -158,49 +166,49 @@ laboratorios <- list(
     .title  = "Datos de Modo-Uno",
     .file   = "Laboratorio_1_Redes_Modo_Uno.pdf",
     .folder = "labs",
-    .data   = "",
+    .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/recording_data.zip?raw=true",
     .url    = ""
   ),
   build_lab_row(
     .title  = "Datos de Modo-Dos",
     .file   = "Laboratorio_2_Redes_Modo_Dos.pdf",
     .folder = "labs",
-    .data   = "",
+    .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/two_mode.zip?raw=true",
     .url    = ""
   ),
   build_lab_row(
     .title  = "Simplificar Redes",
     .file   = "Laboratorio_3_Simplificar_Redes.pdf",
     .folder = "labs",
-    .data   = "",
+    .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/simplifying.zip?raw=true",
     .url    = ""
   ),
   build_lab_row(
     .title  = "Multiples Redes",
     .file   = "Laboratorio_4_Multiples_Redes.pdf",
     .folder = "labs",
-    .data   = "",
+    .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/multiple_networks.zip?raw=true",
     .url    = ""
   ),
   build_lab_row(
     .title  = "Topología",
     .file   = "Laboratorio_5_Topologia.pdf",
     .folder = "labs",
-    .data   = "",
+    .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/topology.zip?raw=true",
     .url    = ""
   ),
   build_lab_row(
     .title  = "Subgrupos",
     .file   = "Laboratorio_6_Identificando_Subredes.pdf",
     .folder = "labs",
-    .data   = "",
+    .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/subgroups.zip?raw=true",
     .url    = ""
   ),
   build_lab_row(
     .title  = "Centralidad",
     .file   = "Laboratorio_7_Centralidad.pdf",
     .folder = "labs",
-    .data   = "",
+    .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/centrality.zip?raw=true",
     .url    = ""
   ) #,
   # build_lab_row(
@@ -216,7 +224,33 @@ html_table <- laboratorios %>%
   bind_rows()
 html_table %>% 
   as_kable()
+```
 
+### Gephi
+
+```{r}
+software <- list(
+  build_software_row(
+    .title = "Descargar Gephi",
+    .link  = "https://gephi.org/",
+    .url   = ""
+    ),
+  build_software_row(
+    .title = "¿Qué es gephi?",
+    .link  = "https://cjcallag.github.io/arso/trabajando-con-gephi.html#gephi",
+    .url   = ""
+    ),
+  build_software_row(
+    .title = "Agregar plugin",
+    .link  = "https://cjcallag.github.io/arso/derivando-datos-modo-uno-de-modo-dos.html#antes-de-empezar-1",
+    .url   = ""
+    )
+)
+
+html_table <- software %>% 
+  bind_rows()
+html_table %>% 
+  as_kable()
 ```
 
 <br>
