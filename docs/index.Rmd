@@ -237,19 +237,19 @@ software <- list(
     .title   = "Descargar Gephi",
     .link    = "https://gephi.org/",
     .content = "Ir",
-    .url     = ""
+    .url     = "https://www.youtube.com/watch?v=qlVq6FaC9CA"
     ),
   build_software_row(
     .title   = "¿Qué es gephi?",
     .link    = "https://cjcallag.github.io/arso/trabajando-con-gephi.html#gephi",
     .content = "Leer",
-    .url     = ""
+    .url     = "https://www.youtube.com/watch?v=PwMmd-ITqgo"
     ),
   build_software_row(
     .title   = "Agregar plugin",
     .link    = "https://cjcallag.github.io/arso/derivando-datos-modo-uno-de-modo-dos.html#antes-de-empezar-1",
     .content = "Leer",
-    .url     = ""
+    .url     = "https://www.youtube.com/watch?v=kV0za613zX0"
     )
 )
 
