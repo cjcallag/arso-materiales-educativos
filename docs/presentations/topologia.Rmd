@@ -121,7 +121,7 @@ Topología de Redes: Dimensión Provincial-Cosmopolita
   3. Eficacia de Redes 
   4. Medidas: Densidad, Grado medio, y Coeficiente de agrupación
 
-Topología de Redes: Dimensión Jerárquica de Heterarquía 
+Topología de Redes: Dimensión Jerárquica y Heterarquía 
 
   1. Centralización
   2. Medidas Alternativas
@@ -457,7 +457,7 @@ Medidas
   2. Eficacia de Redes 
   3. Medidas: Densidad, Grado medio, y Coeficiente de agrupación
 
-Topología de Redes: Dimensión Jerárquica de Heterarquía 
+Topología de Redes: Dimensión Jerárquica y Heterarquía 
 
   1. Centralización
   2. Medidas Alternativas
@@ -472,36 +472,36 @@ Resumen: Eficacia de la Red
 ## Dimensión Provincial-Cosmopolita
 ]
 
----
+<!-- --- -->
 
-# Fuerze de Lazos Débiles
+<!-- # Fuerze de Lazos Débiles -->
 
-Contactos Personales (lazos) y obteniendo un trabajo
-<small>
+<!-- Contactos Personales (lazos) y obteniendo un trabajo -->
+<!-- <small> -->
 
-  - 19% utilizaron medios formales
-  - 19% aplicaron directamente por el trabajo
-  - 56% utilizaron contactos personales
+<!--   - 19% utilizaron medios formales -->
+<!--   - 19% aplicaron directamente por el trabajo -->
+<!--   - 56% utilizaron contactos personales -->
 
-</small> 
+<!-- </small>  -->
 
-Débil vs. Fuerte (lazos personales)
-<small>
+<!-- Débil vs. Fuerte (lazos personales) -->
+<!-- <small> -->
 
-  - 17% cuentan que veían sus contactos con regularidad (lazo fuerte)
-  - 56% cuentan que veían sus contactos de vez en cuando (lazo débil)
-  - 28% cuentan que rara vez veían sus contactos (lazo débil)
+<!--   - 17% cuentan que veían sus contactos con regularidad (lazo fuerte) -->
+<!--   - 56% cuentan que veían sus contactos de vez en cuando (lazo débil) -->
+<!--   - 28% cuentan que rara vez veían sus contactos (lazo débil) -->
 
-</small>
+<!-- </small> -->
 
-Lazos Personales y Satisfacción Laboral
-<small>
+<!-- Lazos Personales y Satisfacción Laboral -->
+<!-- <small> -->
 
-  - Medios Formales – 76% tasa de satisfacción
-  - Aplicación Directa – 85% tasa de satisfacción
-  - Lazos Personales – 91% tasa de satisfacción
+<!--   - Medios Formales – 76% tasa de satisfacción -->
+<!--   - Aplicación Directa – 85% tasa de satisfacción -->
+<!--   - Lazos Personales – 91% tasa de satisfacción -->
 
-</small>  
+<!-- </small>   -->
 
 ---
 
@@ -517,25 +517,10 @@ Lazos Personales y Satisfacción Laboral
 
   - Actores con muchos lazos débiles generalmente encuentran más facilidad para acceder información (u otros tipos de recursos) de distintas partes de la estructura social.
 
-  - Actores que tienen pocos lazos débiles son más propensas a "limitarse a las noticias provinciales y las opiniones de sus amigos más cercanos” (Granovetter 1983)
+  - Actores que tienen pocos lazos débiles son más propensos a "limitarse a las noticias provinciales y las opiniones de sus amigos más cercanos” (Granovetter 1983)
 
----
 
-#Uzzi: La Industria del Vestido
 
-  - Las empresas examinados por Uzzi tenían la tendencia de dividir sus interacciones en el mercado en dos tipos: relaciones del "mercado" o "condiciones de plena competencia" (es decir, vínculos débiles) y "especiales" o relaciones "cerradas" (es decir, lazos fuerte), lo que se refiere a lazos "integrado”
-
-  - Vínculos incrustado fueron especialmente importantes en situaciones donde la confianza era importante, donde información detallada tuvo que ser pasado a otro grupo, y cuando ciertos formas para solucionar problemas estaban en la agenda (Uzzi 1996:677)
-
-  - Por su parte, Uzzi también descubrió que las empresas que están muy integrados sufren porque dejan de tener acceso a información de partes distantes del red que los hace vulnerables a situaciones que evolucionan rápidamente
-
----
-
-# Uzzi:La Industria del Vestido - Densidad de la Red
-
-.center[
-![](imgs/UzziU.png)
-]
 
 ---
 
@@ -548,13 +533,9 @@ Lazos Personales y Satisfacción Laboral
 ---
 
 # ¿Cómo medimos esto?
-  - Densidad de Red = Proporción de Lazos Actuales vs Lazos Posibles
-
-  - Densidad tiende a reducir cuando el tamaño de la red aumenta (es decir, el numero de nodos)
-
-  - Esto hace que sea difícil para nosotros usar la densidad para comparar las redes de diferentes tamaños
-
-  - Grado medio es una medida alternativa - la suma de las puntuaciones individuales de grado dividido por el número total de actores en la red
+  - Densidad de Red 
+  
+  - Grado medio es una medida alternativa 
 
   - Coeficiente de Agrupación Global
 
@@ -601,7 +582,7 @@ Topología de Redes: Dimensión Provincial-Cosmopolita
   2. Eficacia de Redes 
   3. Medidas: Densidad, Grado medio, y Coeficiente de agrupación
 
-**Topología de Redes: Dimensión Jerárquica de Heterarquía**
+**Topología de Redes: Dimensión Jerárquica y Heterarquía**
 
   1. Centralización
   2. Medidas Alternativas
@@ -613,7 +594,7 @@ Resumen: Eficacia de la Red
 <br/><br/>
 .center[
 # Topología de Redes
-## Dimensión Jerárquica de Heterarquía
+## Dimensión Jerárquica y Heterarquía
 ]
 
 ---
@@ -624,7 +605,7 @@ Resumen: Eficacia de la Red
 
   - Esta distinción es útil (y apropiado) en algunos contextos (véase, por ejemplo, Arquilla y Ronfeldt 2001; Castells 1996; Podolny y Página 1998; Powell y Smith-Doerr, 1994; Ronfeldt y Arquilla 2001), pero dentro de ARSo, todo es una red
   
-  - Algunos de cuales son altamente centralizadas y algunas de cuales no son
+  - Algunas redes son altamente centralizadas y otras no
 
   - (Para nuestros propósitos) es probable que sea mejor considerar estos dos tipos como extremos de un continuo (0 = decentralizada y 1 = centralizada)
 
@@ -634,7 +615,7 @@ Resumen: Eficacia de la Red
 
   - Stark (La Iglesia Mormona) – la centralización es buena pero…
 
-    - "Sería un error destacar sólo la naturaleza jerárquica de la autoridad mormona y sus aspectos autoritarios, porque los Santos de los Últimos Días muestran un sorprendente grado de participación de aficionados en todos los niveles de su estructura formal. Por otra parte, este cuerpo muy autoritario también muestra niveles extraordinarios de democracia participativa y en gran medida los miembros son la iglesia. Un aspecto central de esto es que entre los Santos de los Últimos Días, ser un sacerdote es una posición no remunerado que todos los hombres comprometidos se espera que cumplan "(Stark 2005:125)
+    - "Sería un error destacar sólo la naturaleza jerárquica de la autoridad mormona y sus aspectos autoritarios, porque los Santos de los Últimos Días muestran un sorprendente grado de participación de aficionados en todos los niveles de su estructura formal. Por otra parte, este cuerpo muy autoritario también muestra niveles extraordinarios de democracia participativa y en gran medida los miembros son la iglesia. Un aspecto central de esto es que entre los Santos de los Últimos Días, ser un sacerdote es una posición no remunerada"(Stark 2005:125)
 
   - David Tucker (Redes Terroristas)
 
@@ -697,7 +678,7 @@ Topología de Redes: Dimensión Provincial-Cosmopolita
   2. Eficacia de Redes 
   3. Medidas: Densidad, Grado medio, y Coeficiente de agrupación
 
-Topología de Redes: Dimensión Jerárquica de Heterarquía
+Topología de Redes: Dimensión Jerárquica y Heterarquía
 
   1. Centralización
   2. Medidas Alternativas

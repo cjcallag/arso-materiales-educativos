@@ -16,7 +16,7 @@ build_class_row <- function(.theme, .title, .file, .folder, .presentation, .url,
     Tema          = .theme,
     Título        = .title,
     Lectura       = as.character(glue("<a href='{.file}'> Leer </a>")),
-    Presentation  = as.character(glue("<a href='/arso-materiales-educativos/{.folder}/{.presentation}'> Leer </a>")),
+    Presentación  = as.character(glue("<a href='/arso-materiales-educativos/{.folder}/{.presentation}'> Leer </a>")),
     Video         = as.character(glue("<a href='{.url}'> Ver </a>")),
     Date          = .date
   )
@@ -76,8 +76,8 @@ materiales <- list(
     .file         = "https://cjcallag.github.io/arso/tipos-de-datos-de-redes-sociales.html",
     .folder       = "presentations",
     .presentation = "modo-uno.html",
-    .url          = "",
-    .date         = Sys.Date()
+    .url          = "https://www.youtube.com/watch?v=nRrw-JjRkAc",
+    .date         = as.Date("2020-12-06")
   ),
   build_class_row(
     .theme        = "Tecnicas",
@@ -85,8 +85,8 @@ materiales <- list(
     .file         = "https://cjcallag.github.io/arso/grabaci%C3%B3n-y-recopilaci%C3%B3n.html",
     .folder       = "presentations",
     .presentation = "modo-uno.html",
-    .url          = "",
-    .date         = Sys.Date()
+    .url          = "https://www.youtube.com/watch?v=nRrw-JjRkAc",
+    .date         = as.Date("2020-12-06")
   ),
   build_class_row(
     .theme        = "Tecnicas",
@@ -94,7 +94,7 @@ materiales <- list(
     .file         = "https://cjcallag.github.io/arso/derivando-datos-modo-uno-de-modo-dos.html",
     .folder       = "presentations",
     .presentation = "modo-dos.html",
-    .url          = "",
+    .url          = "https://www.youtube.com/watch?v=0V7tNTXxIYc",
     .date         = Sys.Date()
   ),
   build_class_row(
@@ -121,8 +121,8 @@ materiales <- list(
     .file         = "https://cjcallag.github.io/arso/topolog%C3%ADa-1.html",
     .folder       = "presentations",
     .presentation = "topologia",
-    .url          = "",
-    .date         = Sys.Date()
+    .url          = "https://www.youtube.com/watch?v=gxI0Xyhdfgk",
+    .date         = as.Date("2020-12-06")
   ),
   build_class_row(
     .theme        = "Medidas",

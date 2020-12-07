@@ -4,11 +4,11 @@
     <title>Topología</title>
     <meta charset="utf-8" />
     <meta name="author" content=" Christopher Callaghan" />
-    <meta name="date" content="2020-09-30" />
-    <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+    <meta name="date" content="2020-12-06" />
+    <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
     <script src="libs/jquery-1.12.4/jquery.min.js"></script>
     <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-    <script src="libs/datatables-binding-0.13/datatables.js"></script>
+    <script src="libs/datatables-binding-0.16/datatables.js"></script>
     <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
     <script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
@@ -23,7 +23,7 @@ class: center, middle, inverse, title-slide
 # Topología
 ### </br><small> Christopher Callaghan
 ### <img src = 'imgs/corelogo.png' height='60' width='120'>
-### 2020-09-30 </small>
+### 2020-12-06 </small>
 
 ---
 
@@ -74,7 +74,7 @@ Topología de Redes: Dimensión Provincial-Cosmopolita
   3. Eficacia de Redes 
   4. Medidas: Densidad, Grado medio, y Coeficiente de agrupación
 
-Topología de Redes: Dimensión Jerárquica de Heterarquía 
+Topología de Redes: Dimensión Jerárquica y Heterarquía 
 
   1. Centralización
   2. Medidas Alternativas
@@ -257,7 +257,7 @@ Entoces:
 &lt;img src="topologia_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
 
 .center[
-`\(\overline{C} =\)` 0.43222
+`\(\overline{C} =\)` 0.4092689
 ]
 
 ---
@@ -295,7 +295,7 @@ Entoces:
 `\(CD = \frac{\sum(Max(C_{Di} - C_{Di}))}{N^2 - 3N + 2}\)`
 
 Donde: 
-  - `\(Max(C_{Di})\)`: Grado de centralidad máxima
+  - `\(Max(C_{Di})\)`: Grado de centralidad máxima (N-1)
   - `\(C_{Di}\)`: Centralidad del nodo
   - `\(N\)`: Número de actores
 ]
@@ -304,14 +304,14 @@ Donde:
 # Centralización de grado
 
 .center[
-<div id="htmlwidget-35145bf6dc4d84c76eaf" style="width:100%;height:250px;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-35145bf6dc4d84c76eaf">{"x":{"filter":"none","data":[["1","2","3","4"],[2,2,3,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>grado<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8c4f63e4567690f5684c" style="width:100%;height:250px;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8c4f63e4567690f5684c">{"x":{"filter":"none","data":[["1","2","3","4"],[2,2,3,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>grado<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ]
 
 &lt;br/&gt;
 
 .center[
-`\(CD = \frac{(4-2) + (4-2) + (4-3) + (4-1)}{4^2 - 3(4) + 2} = 0.4\)`
+`\(CD = \frac{(3-2) + (3-2) + (3-3) + (3-1)}{3^2 - 3(3) + 2} = 0.5\)`
 ]
 
 
@@ -321,7 +321,7 @@ Donde:
 &lt;img src="topologia_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
 
 .center[
-¿Qué tan jerárquica es la red? `\(CD =\)` 0.020202]
+¿Qué tan jerárquica es la red? `\(CD =\)` 0.030303]
 
 ---
 
@@ -335,7 +335,7 @@ Medidas
   2. Eficacia de Redes 
   3. Medidas: Densidad, Grado medio, y Coeficiente de agrupación
 
-Topología de Redes: Dimensión Jerárquica de Heterarquía 
+Topología de Redes: Dimensión Jerárquica y Heterarquía 
 
   1. Centralización
   2. Medidas Alternativas
@@ -350,36 +350,36 @@ Resumen: Eficacia de la Red
 ## Dimensión Provincial-Cosmopolita
 ]
 
----
+&lt;!-- --- --&gt;
 
-# Fuerze de Lazos Débiles
+&lt;!-- # Fuerze de Lazos Débiles --&gt;
 
-Contactos Personales (lazos) y obteniendo un trabajo
-&lt;small&gt;
+&lt;!-- Contactos Personales (lazos) y obteniendo un trabajo --&gt;
+&lt;!-- &lt;small&gt; --&gt;
 
-  - 19% utilizaron medios formales
-  - 19% aplicaron directamente por el trabajo
-  - 56% utilizaron contactos personales
+&lt;!--   - 19% utilizaron medios formales --&gt;
+&lt;!--   - 19% aplicaron directamente por el trabajo --&gt;
+&lt;!--   - 56% utilizaron contactos personales --&gt;
 
-&lt;/small&gt; 
+&lt;!-- &lt;/small&gt;  --&gt;
 
-Débil vs. Fuerte (lazos personales)
-&lt;small&gt;
+&lt;!-- Débil vs. Fuerte (lazos personales) --&gt;
+&lt;!-- &lt;small&gt; --&gt;
 
-  - 17% cuentan que veían sus contactos con regularidad (lazo fuerte)
-  - 56% cuentan que veían sus contactos de vez en cuando (lazo débil)
-  - 28% cuentan que rara vez veían sus contactos (lazo débil)
+&lt;!--   - 17% cuentan que veían sus contactos con regularidad (lazo fuerte) --&gt;
+&lt;!--   - 56% cuentan que veían sus contactos de vez en cuando (lazo débil) --&gt;
+&lt;!--   - 28% cuentan que rara vez veían sus contactos (lazo débil) --&gt;
 
-&lt;/small&gt;
+&lt;!-- &lt;/small&gt; --&gt;
 
-Lazos Personales y Satisfacción Laboral
-&lt;small&gt;
+&lt;!-- Lazos Personales y Satisfacción Laboral --&gt;
+&lt;!-- &lt;small&gt; --&gt;
 
-  - Medios Formales – 76% tasa de satisfacción
-  - Aplicación Directa – 85% tasa de satisfacción
-  - Lazos Personales – 91% tasa de satisfacción
+&lt;!--   - Medios Formales – 76% tasa de satisfacción --&gt;
+&lt;!--   - Aplicación Directa – 85% tasa de satisfacción --&gt;
+&lt;!--   - Lazos Personales – 91% tasa de satisfacción --&gt;
 
-&lt;/small&gt;  
+&lt;!-- &lt;/small&gt;   --&gt;
 
 ---
 
@@ -395,25 +395,10 @@ Lazos Personales y Satisfacción Laboral
 
   - Actores con muchos lazos débiles generalmente encuentran más facilidad para acceder información (u otros tipos de recursos) de distintas partes de la estructura social.
 
-  - Actores que tienen pocos lazos débiles son más propensas a "limitarse a las noticias provinciales y las opiniones de sus amigos más cercanos” (Granovetter 1983)
+  - Actores que tienen pocos lazos débiles son más propensos a "limitarse a las noticias provinciales y las opiniones de sus amigos más cercanos” (Granovetter 1983)
 
----
 
-#Uzzi: La Industria del Vestido
 
-  - Las empresas examinados por Uzzi tenían la tendencia de dividir sus interacciones en el mercado en dos tipos: relaciones del "mercado" o "condiciones de plena competencia" (es decir, vínculos débiles) y "especiales" o relaciones "cerradas" (es decir, lazos fuerte), lo que se refiere a lazos "integrado”
-
-  - Vínculos incrustado fueron especialmente importantes en situaciones donde la confianza era importante, donde información detallada tuvo que ser pasado a otro grupo, y cuando ciertos formas para solucionar problemas estaban en la agenda (Uzzi 1996:677)
-
-  - Por su parte, Uzzi también descubrió que las empresas que están muy integrados sufren porque dejan de tener acceso a información de partes distantes del red que los hace vulnerables a situaciones que evolucionan rápidamente
-
----
-
-# Uzzi:La Industria del Vestido - Densidad de la Red
-
-.center[
-![](imgs/UzziU.png)
-]
 
 ---
 
@@ -426,13 +411,9 @@ Lazos Personales y Satisfacción Laboral
 ---
 
 # ¿Cómo medimos esto?
-  - Densidad de Red = Proporción de Lazos Actuales vs Lazos Posibles
-
-  - Densidad tiende a reducir cuando el tamaño de la red aumenta (es decir, el numero de nodos)
-
-  - Esto hace que sea difícil para nosotros usar la densidad para comparar las redes de diferentes tamaños
-
-  - Grado medio es una medida alternativa - la suma de las puntuaciones individuales de grado dividido por el número total de actores en la red
+  - Densidad de Red 
+  
+  - Grado medio es una medida alternativa 
 
   - Coeficiente de Agrupación Global
 
@@ -465,7 +446,7 @@ Topología de Redes: Dimensión Provincial-Cosmopolita
   2. Eficacia de Redes 
   3. Medidas: Densidad, Grado medio, y Coeficiente de agrupación
 
-**Topología de Redes: Dimensión Jerárquica de Heterarquía**
+**Topología de Redes: Dimensión Jerárquica y Heterarquía**
 
   1. Centralización
   2. Medidas Alternativas
@@ -477,7 +458,7 @@ Resumen: Eficacia de la Red
 &lt;br/&gt;&lt;br/&gt;
 .center[
 # Topología de Redes
-## Dimensión Jerárquica de Heterarquía
+## Dimensión Jerárquica y Heterarquía
 ]
 
 ---
@@ -488,7 +469,7 @@ Resumen: Eficacia de la Red
 
   - Esta distinción es útil (y apropiado) en algunos contextos (véase, por ejemplo, Arquilla y Ronfeldt 2001; Castells 1996; Podolny y Página 1998; Powell y Smith-Doerr, 1994; Ronfeldt y Arquilla 2001), pero dentro de ARSo, todo es una red
   
-  - Algunos de cuales son altamente centralizadas y algunas de cuales no son
+  - Algunas redes son altamente centralizadas y otras no
 
   - (Para nuestros propósitos) es probable que sea mejor considerar estos dos tipos como extremos de un continuo (0 = decentralizada y 1 = centralizada)
 
@@ -498,7 +479,7 @@ Resumen: Eficacia de la Red
 
   - Stark (La Iglesia Mormona) – la centralización es buena pero…
 
-    - "Sería un error destacar sólo la naturaleza jerárquica de la autoridad mormona y sus aspectos autoritarios, porque los Santos de los Últimos Días muestran un sorprendente grado de participación de aficionados en todos los niveles de su estructura formal. Por otra parte, este cuerpo muy autoritario también muestra niveles extraordinarios de democracia participativa y en gran medida los miembros son la iglesia. Un aspecto central de esto es que entre los Santos de los Últimos Días, ser un sacerdote es una posición no remunerado que todos los hombres comprometidos se espera que cumplan "(Stark 2005:125)
+    - "Sería un error destacar sólo la naturaleza jerárquica de la autoridad mormona y sus aspectos autoritarios, porque los Santos de los Últimos Días muestran un sorprendente grado de participación de aficionados en todos los niveles de su estructura formal. Por otra parte, este cuerpo muy autoritario también muestra niveles extraordinarios de democracia participativa y en gran medida los miembros son la iglesia. Un aspecto central de esto es que entre los Santos de los Últimos Días, ser un sacerdote es una posición no remunerada"(Stark 2005:125)
 
   - David Tucker (Redes Terroristas)
 
@@ -533,7 +514,7 @@ La centralizacion de grado es 0.6.
 &lt;img src="topologia_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
 
 
-La centralización de grado es 0.020202.
+La centralización de grado es 0.030303.
 
 ---
 
@@ -547,7 +528,7 @@ Topología de Redes: Dimensión Provincial-Cosmopolita
   2. Eficacia de Redes 
   3. Medidas: Densidad, Grado medio, y Coeficiente de agrupación
 
-Topología de Redes: Dimensión Jerárquica de Heterarquía
+Topología de Redes: Dimensión Jerárquica y Heterarquía
 
   1. Centralización
   2. Medidas Alternativas
