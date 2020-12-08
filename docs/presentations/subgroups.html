@@ -4,8 +4,7 @@
     <title>Subgrupos Cohesivos</title>
     <meta charset="utf-8" />
     <meta name="author" content=" Christopher Callaghan" />
-    <meta name="date" content="2020-08-20" />
-    <script src="libs/header-attrs-2.3/header-attrs.js"></script>
+    <meta name="date" content="2020-12-07" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -15,7 +14,7 @@ class: center, middle, inverse, title-slide
 # Subgrupos Cohesivos
 ### </br><small> Christopher Callaghan
 ### <img src = 'imgs/corelogo.png' height='60' width='120'>
-### 2020-08-20 </small>
+### 2020-12-07 </small>
 
 ---
 
@@ -26,9 +25,9 @@ class: center, middle, inverse, title-slide
 
 --
 
-- Una herramienta principal del análisis de redes sociales es identificar grupos densos de actores:
+- Grupos densos de actores:
 
-    "entre los cuales hay vínculos relativamente fuertes, directos, intensos y / o positivos"
+    "entre los cuales hay vínculos relativamente fuertes, directos, intensos y/o positivos"
 
 --
 
@@ -44,7 +43,7 @@ class: center, middle, inverse, title-slide
 3. Camarillas 
 4. K-Core
 5. Girvan-Newman
-6. Modularidad
+6. Louvain
 
 
 ---
@@ -108,7 +107,7 @@ Depende del tipo de datos (dirigidos | no-dirigidos)
 &lt;img src="subgroups_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
 
 .small[
-En las redes no dirigidas, los componentes están compuestos por todos los actores que pueden comunicarse entre sí a través de un camino, __ignorando la dirección de los enlaces__.
+En las redes no dirigidas, los componentes consisten de actores que pueden comunicarse entre sí a través de un camino, __ignorando la dirección de los enlaces__.
 ]
 
 
@@ -318,78 +317,36 @@ Enlaces en la red = 19
 &lt;br&gt;&lt;br&gt;
 
 .center[
-# Subgrupos: Modularidad
+# Subgrupos: Louvain
 ]
 
 
 ---
 
-# Modularidad
+# Louvain
 
+Un método de optimización codicioso que intenta optimizar la modularidad de las particiones de la red.
 
-Mide qué tan bien se descompone una red en comunidades modulares.
+Esencialmente, la optimización se lleva a cabo en dos pasos:
 
-- Las redes con alta modularidad tienen conexiones **densas** entre los nodos dentro de los módulos pero conexiones escasas entre nodos en diferentes módulo.
-- La modularidad es la fracción de los bordes que caen dentro de un subgrupo menos la fracción esperada si los bordes se distribuyen al azar.
+  1. Primero, el método encuentra pequeñas comunidades locales optimizando la modularidad
+  2. Luego, agrega nodos que pertenecen a las comunidades identificadas y construye una nueva red con esos nodos colapsados
+  
+El proceso continúa hasta que se identifique la máxima modularidad y se produzca una jerarquía de comunidades.
 
 
 ---
 
-# Modularidad
+# Louvain: Una Ronda
 
 &lt;img src="subgroups_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
 
-.center[
-Si tuviera que adivinar, ¿qué grupos parecen tener una densidad interna alta?
-]
 
 ---
 
-# Modularidad
+# Louvain: Producto
 
 &lt;img src="subgroups_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
-
-.center[Modularidad = 0.1666667]
-
-
----
-
-# Modularidad
-
-&lt;img src="subgroups_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
-
-.center[
-Si tuviera que adivinar, ¿qué grupos parecen tener una densidad interna alta?
-]
-
-
----
-
-# Modularidad
-
-&lt;img src="subgroups_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
-
-.center[Modularidad = 0.3571429]
-
-
----
-
-# Modularidad
-
-&lt;img src="subgroups_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
-
-.center[
-Si tuviera que adivinar, ¿qué grupos parecen tener una densidad interna alta?
-]
-
-
----
-
-# Modularidad
-
-&lt;img src="subgroups_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
-
-.center[Modularidad = 0.5]
 
 ---
 

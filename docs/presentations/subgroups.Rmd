@@ -48,9 +48,9 @@ library(dplyr)
 
 --
 
-- Una herramienta principal del análisis de redes sociales es identificar grupos densos de actores:
+- Grupos densos de actores:
 
-    "entre los cuales hay vínculos relativamente fuertes, directos, intensos y / o positivos"
+    "entre los cuales hay vínculos relativamente fuertes, directos, intensos y/o positivos"
 
 --
 
@@ -66,7 +66,7 @@ library(dplyr)
 3. Camarillas 
 4. K-Core
 5. Girvan-Newman
-6. Modularidad
+6. Louvain
 
 
 ---
@@ -187,7 +187,7 @@ plot(g,
 ```
 
 .small[
-En las redes no dirigidas, los componentes están compuestos por todos los actores que pueden comunicarse entre sí a través de un camino, __ignorando la dirección de los enlaces__.
+En las redes no dirigidas, los componentes consisten de actores que pueden comunicarse entre sí a través de un camino, __ignorando la dirección de los enlaces__.
 ]
 
 
@@ -546,132 +546,99 @@ plot(eb, g,
 <br><br>
 
 .center[
-# Subgrupos: Modularidad
+# Subgrupos: Louvain
 ]
 
 
 ---
 
-# Modularidad
+# Louvain
 
+Un método de optimización codicioso que intenta optimizar la modularidad de las particiones de la red.
 
-Mide qué tan bien se descompone una red en comunidades modulares.
+Esencialmente, la optimización se lleva a cabo en dos pasos:
 
-- Las redes con alta modularidad tienen conexiones **densas** entre los nodos dentro de los módulos pero conexiones escasas entre nodos en diferentes módulo.
-- La modularidad es la fracción de los bordes que caen dentro de un subgrupo menos la fracción esperada si los bordes se distribuyen al azar.
+  1. Primero, el método encuentra pequeñas comunidades locales optimizando la modularidad
+  2. Luego, agrega nodos que pertenecen a las comunidades identificadas y construye una nueva red con esos nodos colapsados
+  
+El proceso continúa hasta que se identifique la máxima modularidad y se produzca una jerarquía de comunidades.
 
 
 ---
 
-# Modularidad
+# Louvain: Una Ronda
 
-```{r, fig.height=5}
-el <- data.frame(from = c(1,1,6,5,5,5,2,3,2),
-                 to   = c(5,6,5,2,3,4,4,4,3))
-g <- graph_from_data_frame(el, directed = FALSE)
+```{r}
+g <- data.frame(from = c("A", "A", "A", "B", "B", "C",
+                         "E", "E", "E", "F", "F", "G",
+                         "I", "I", "I", "J", "J", "K",
+                         "M", "M", "M", "N", "N", "O",
+                         "B", "G", "L", "P"),
+                to   = c("B", "C", "D", "C", "D", "D",
+                         "F", "G", "H", "G", "H", "H",
+                         "J", "K", "L", "K", "L", "L",
+                         "N", "O", "P", "O", "P", "P",
+                         "F", "J", "N", "D")) %>%
+  graph_from_data_frame(directed = FALSE) %>%
+  set_vertex_attr(name  = "louvain_group",
+                  value = membership(cluster_louvain(.)))
+
 coords <- layout_with_kk(g)
-plot(g,
-     layout = coords,
-     vertex.color = "lightblue",
-     vertex.label.cex = 0.5,
-     edge.color = "slategrey",
-     edge.arrow.size = 0)
+
+par(mfrow=c(1,3))
+
+g %>%
+  igraph::plot.igraph(
+    layout       = coords,
+    vertex.color = "lightblue",
+    vertex.size  = 30,
+    edges.color  = "grey",
+    main         = "1")
+
+g %>%
+  igraph::plot.igraph(
+    layout       = coords,
+    vertex.color = V(.)$louvain_group,
+    vertex.size  = 30,
+    edges.color  = "grey",
+    main         = "2")
+
+contract(g, V(g)$louvain_group, vertex.attr.comb=toString) %>%
+  igraph::plot.igraph(
+    layout       = layout_with_fr,
+    vertex.color = as.factor(V(.)$louvain_group),
+    vertex.size  = 30,
+    edges.color  = "grey",
+    main         = "3")
 ```
 
-.center[
-Si tuviera que adivinar, ¿qué grupos parecen tener una densidad interna alta?
-]
 
 ---
 
-# Modularidad
+# Louvain: Producto
 
-```{r, fig.height=5}
-sg <- igraph::cluster_louvain(g)
-plot(sg, g,
-     layout = coords,
-     vertex.label.cex = 0.5,
-     edge.color = "slategrey",
-     edge.arrow.size = 0)
-```
+```{r}
+g <- sample_smallworld(dim = 1, size = 100, nei = 3, p = 0.05)
 
-.center[Modularidad = `r sg$modularity`]
-
-
----
-
-# Modularidad
-
-```{r, fig.height=5}
-g <- data.frame(from = c(1, 2, 3, 3, 5, 6, 6),
-                to   = c(2, 3, 1, 4, 4, 5, 4)) %>%
-  graph_from_data_frame(directed = FALSE)
+par(mfrow=c(1,2))
+louv   <- cluster_louvain(g)
 coords <- layout_with_kk(g)
-plot(g,
-     layout = coords,
-     vertex.color = "lightblue",
-     vertex.label.cex = 0.5,
-     edge.color = "slategrey",
-     edge.arrow.size = 0)
+
+g %>%
+  igraph::plot.igraph(
+    layout       = coords,
+    vertex.color = "lightblue",
+    vertex.label = NA,
+    vertex.size  = 10,
+    edges.color  = "grey")
+
+louv %>% plot(., g,
+              layout       = coords,
+              vertex.label = NA,
+              vertex.size  = 10,
+              edges.color  = "grey")
+
 ```
-
-.center[
-Si tuviera que adivinar, ¿qué grupos parecen tener una densidad interna alta?
-]
-
-
----
-
-# Modularidad
-
-```{r, fig.height=5}
-sg <- igraph::cluster_louvain(g)
-plot(sg, g,
-     layout = coords,
-     vertex.label.cex = 0.5,
-     edge.color = "slategrey",
-     edge.arrow.size = 0)
-```
-
-.center[Modularidad = `r sg$modularity`]
-
-
----
-
-# Modularidad
-
-```{r, fig.height=5}
-g <- data.frame(from = c(1, 2, 3, 5, 6, 6),
-                to   = c(2, 3, 1, 4, 5, 4)) %>%
-  graph_from_data_frame(directed = FALSE)
-coords <- layout_with_fr(g)
-plot(g,
-     layout = coords,
-     vertex.color = "lightblue",
-     vertex.label.cex = 0.5,
-     edge.color = "slategrey",
-     edge.arrow.size = 0)
-```
-
-.center[
-Si tuviera que adivinar, ¿qué grupos parecen tener una densidad interna alta?
-]
-
-
----
-
-# Modularidad
-
-```{r, fig.height=5}
-sg <- igraph::cluster_louvain(g)
-plot(sg, g,
-     layout = coords,
-     vertex.label.cex = 0.5,
-     edge.color = "slategrey",
-     edge.arrow.size = 0)
-```
-
-.center[Modularidad = `r sg$modularity`]
 
 ---
 

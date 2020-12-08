@@ -53,15 +53,15 @@ library(dplyr)
 ```
 
 
-# Relaciones Multiples
+# Multiples Relaciones
 
 - Los actores suelen estar involucrados en más de un tipo de relación
 - Los diferentes vínculos a menudo empujan y arrastran a los actores en diferentes direcciones (los vínculos pueden ser interrelacionados entre sí)
-- Cuantas más redes podamos mapear, más clara es la imagen que tenemos de la red en general.
-- Cuatro enfoques para trabajar con relaciones múltiples:
-  - Plegado: Bimodal a monomodo `r emo::ji("check")`
+- Cuantas más relaciones podemos agregar, más clara y comprensiva sera la red resultante.
+- Enfoques para trabajar con relaciones múltiples:
   - Apilar: Agregar relaciones a una red
   - Extracción: Aislando nodos y enlaces en base a atributos
+  - Plegado: Bimodal a monomodo `r emo::ji("check")`
 
    
 ---
@@ -384,7 +384,7 @@ Amistad + Familiares
 
 ---
 
-# Relaciones Apiladas: Red Formal
+# Relaciones Apiladas: Red Informal
 
 ```{r, fig.height = 6}
 igraph::union(friendship, familial) %>%
@@ -620,7 +620,7 @@ g %>%
 
 ---
 
-# Extraer: Attibutos
+# Extraer: Ejemplo
 
 ```{r, fig.height = 6}
 anabaptists <- COREnets::get_data("anabaptists")
@@ -646,7 +646,7 @@ plot.igraph(g,
 1. Crear una visualización eficaz de la sub-red de alemanes 
 2. Determinar aquellos involucrados en el movimiento Anabautista
 3. Calcular medidas de centralidad
-4. Presentar un gráfico de los mas importantes 
+4. Presentar un gráfico conciso con los nodos centrales
 
 
 ---
@@ -788,6 +788,23 @@ plot.igraph(sub,
             vertex.size = 7.5)
 ```
 
+
+
+---
+
+<center>
+
+# Ahora nosotros
+
+<br/>
+
+```{r}
+knitr::include_graphics(path = "imgs/gephi.png")
+```
+
+<center/>
+
+
 ---
 
 # Resumen
@@ -796,6 +813,7 @@ plot.igraph(sub,
 |--------|-------------| ----------------|
 |**Apilar** | Visuales (es decir, color por tipo de relación) y gestión de datos. | No se pueden ejecutar métricas para más de una red a la vez. |
 |**Extraer** | Centrarse en la red de actores con un atributo específico, o relaciones específicas. | Manejo de datos. |
+
 
 ---
 <br>

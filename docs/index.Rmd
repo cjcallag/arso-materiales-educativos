@@ -95,25 +95,25 @@ materiales <- list(
     .folder       = "presentations",
     .presentation = "modo-dos.html",
     .url          = "https://www.youtube.com/watch?v=0V7tNTXxIYc",
-    .date         = Sys.Date()
+    .date         = as.Date("2020-12-06")
   ),
   build_class_row(
     .theme        = "Tecnicas",
-    .title        = "Multiples Relaciones",
+    .title        = "Multiples Relaciones: Apilar",
     .file         = "https://cjcallag.github.io/arso/multiples-relaciones.html",
     .folder       = "presentations",
     .presentation = "multiples-relaciones",
-    .url          = "",
-    .date         = Sys.Date()
+    .url          = "https://youtu.be/oqYJ7u03Sqo",
+    .date         = as.Date("2020-12-07")
   ),
   build_class_row(
     .theme        = "Tecnicas",
-    .title        = "Extraer y Simplificar",
+    .title        = "Multiples Relaciones: Extraer",
     .file         = "https://cjcallag.github.io/arso/extraer-y-simplificar-redes.html",
     .folder       = "presentations",
     .presentation = "multiples-relaciones",
-    .url          = "",
-    .date         = Sys.Date()
+    .url          = "https://youtu.be/oqYJ7u03Sqo",
+    .date         = as.Date("2020-12-07")
   ),
   build_class_row(
     .theme        = "Medidas",
@@ -130,7 +130,7 @@ materiales <- list(
     .file         = "https://cjcallag.github.io/arso/subgrupos-cohesivos.html",
     .folder       = "presentations",
     .presentation = "subgroups",
-    .url          = "",
+    .url          = "https://youtu.be/IVba40dMoKQ",
     .date         = Sys.Date()
   ),
   build_class_row(
