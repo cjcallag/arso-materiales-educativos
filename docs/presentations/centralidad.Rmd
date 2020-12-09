@@ -51,7 +51,7 @@ library(dplyr)
 
 .pull-left[
 - El enfoque en los actores de la red.
-- Las personas centrales a menudo ocupan posiciones importantes de prestigio y visibilidad, pueden influir en la difusión de ideas y comportarse (Valente, 2010).
+- Las personas centrales a menudo ocupan posiciones importantes de prestigio y visibilidad, pueden influir en la difusión de ideas y comportamiento (Valente, 2010).
 
 .center[**¿Quién es importante?**]
 ]
@@ -220,7 +220,7 @@ g %>%
 
 $$C_j^{bet} = \sum\limits_{i \neq j \neq k}\frac{\sigma_{ik}(j)}{\sigma_{ik}}$$
 
-- Los actores que son potencialmente influyentes caundo se encuentran entre grupos y pueden actuar como un portero entre estos
+- Los actores que son potencialmente influyentes cuando se encuentran entre grupos y pueden actuar como un portero entre estos
 - Pero...
 ]
 
