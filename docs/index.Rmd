@@ -109,9 +109,9 @@ materiales <- list(
   build_class_row(
     .theme        = "Tecnicas",
     .title        = "Multiples Relaciones: Extraer",
-    .file         = "https://cjcallag.github.io/arso-materiales-educativos/presentations/multiples-relaciones#25",
+    .file         = "https://cjcallag.github.io/arso/extraer-y-simplificar-redes.html",
     .folder       = "presentations",
-    .presentation = "multiples-relaciones",
+    .presentation = "multiples-relaciones#25",
     .url          = "https://youtu.be/oqYJ7u03Sqo?t=850",
     .date         = as.Date("2020-12-07")
   ),
