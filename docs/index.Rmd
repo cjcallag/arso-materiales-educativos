@@ -131,7 +131,7 @@ materiales <- list(
     .folder       = "presentations",
     .presentation = "subgroups",
     .url          = "https://youtu.be/IVba40dMoKQ",
-    .date         = Sys.Date()
+    .date         = as.Date("2020-12-07")
   ),
   build_class_row(
     .theme        = "Medidas",
@@ -140,7 +140,7 @@ materiales <- list(
     .folder       = "presentations",
     .presentation = "centralidad",
     .url          = "https://www.youtube.com/watch?v=zJJOyoKDaKM",
-    .date         = Sys.Date()
+    .date         = as.Date("2020-12-08")
   )#,
   # build_class_row(
   #   .theme        = "Medidas",
@@ -169,21 +169,21 @@ laboratorios <- list(
     .file   = "Laboratorio_1_Redes_Modo_Uno.pdf",
     .folder = "labs",
     .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/recording_data.zip?raw=true",
-    .url    = ""
+    .url    = "https://www.youtube.com/watch?v=uvF-TlleZrA"
   ),
   build_lab_row(
     .title  = "Datos de Modo-Dos",
     .file   = "Laboratorio_2_Redes_Modo_Dos.pdf",
     .folder = "labs",
     .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/two_mode.zip?raw=true",
-    .url    = ""
+    .url    = "https://youtu.be/EF9PzXRimuE"
   ),
   build_lab_row(
     .title  = "Simplificar Redes",
     .file   = "Laboratorio_3_Simplificar_Redes.pdf",
     .folder = "labs",
     .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/simplifying.zip?raw=true",
-    .url    = ""
+    .url    = "https://youtu.be/BgIqIrDStjI"
   ),
   build_lab_row(
     .title  = "Multiples Redes",
