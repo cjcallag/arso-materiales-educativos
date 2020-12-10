@@ -190,7 +190,7 @@ laboratorios <- list(
     .file   = "Laboratorio_4_Multiples_Redes.pdf",
     .folder = "labs",
     .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/multiple_networks.zip?raw=true",
-    .url    = ""
+    .url    = "https://www.youtube.com/watch?v=LQp2RAEsBxM"
   ),
   build_lab_row(
     .title  = "Topología",
