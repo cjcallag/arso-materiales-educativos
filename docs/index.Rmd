@@ -197,21 +197,21 @@ laboratorios <- list(
     .file   = "Laboratorio_5_Topologia.pdf",
     .folder = "labs",
     .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/topology.zip?raw=true",
-    .url    = ""
+    .url    = "https://www.youtube.com/watch?v=wqQmC5jJImM"
   ),
   build_lab_row(
     .title  = "Subgrupos",
     .file   = "Laboratorio_6_Identificando_Subredes.pdf",
     .folder = "labs",
     .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/subgroups.zip?raw=true",
-    .url    = ""
+    .url    = "https://www.youtube.com/watch?v=vDDJ7pZHags"
   ),
   build_lab_row(
     .title  = "Centralidad",
     .file   = "Laboratorio_7_Centralidad.pdf",
     .folder = "labs",
     .data   = "https://github.com/cjcallag/arso-materiales-educativos/blob/main/docs/labs/data/centrality.zip?raw=true",
-    .url    = ""
+    .url    = "https://www.youtube.com/watch?v=hpAKwWFKzkg"
   ) #,
   # build_lab_row(
   #   .title  = "Puentes y Corredores",
